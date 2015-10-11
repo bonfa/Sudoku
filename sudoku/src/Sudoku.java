@@ -31,10 +31,16 @@ public class Sudoku {
 
 
     /**
-     * Check the consistency of the input
+     * Check the consistency of the input by checking that all the rows and the columns have the correct number of boxes,
+     * that the values inserted are all between 0 (the undefined value) and 9, and that the number the user inserted
+     * are consistent.
+     * A row is consistent if and only if it does not contain repeated defined values
+     * A column is consistent if and only if it does not contain repeated defined values
+     * A square is consistent if and only if it does not contain repeated defined values
      *
-     * @param matrix
-     * @throws IllegalStateException
+     * @param matrix the sudoku matrix
+     * @throws IndexOutOfBoundsException if the input row and the columns have lenght different from 9
+     * @throws IllegalStateException if the input matrix in not consistent
      */
     private void checkConsistency(int[][] matrix) throws IllegalStateException, IndexOutOfBoundsException {
 
@@ -52,7 +58,7 @@ public class Sudoku {
     /**
      * Check that all the numbers inserted are between the undefined value and the max value
      *
-     * @param matrix
+     * @param matrix the sudoku matrix
      */
     private void checkValues(int[][] matrix) throws IllegalStateException {
 
@@ -178,103 +184,27 @@ public class Sudoku {
         }
     }
 
-//    public int getValue() {
-//
-//
-//    }
+    public int[][] getMatrix() {
 
-//
-//        if (columnIndex < 0 || columnIndex >= MAX_VALUE) {
-//            throw new IndexOutOfBoundsException("'columnIndex' can't be less than 0 nor more than " + MAX_VALUE);
-//        }
+        return matrix;
+    }
 
+    /**
+     * A sudoku is complete if and only if it has all the boxes filled consistently
+     *
+     * @return true if the sudoku is complete, false otherwise
+     */
+    public boolean isComplete() {
 
-//    public void updatePossibleValues(Cell[][] matrix) {
-//
-//        updatePossibleValuesByRow(matrix);
-//        updatePossibleValuesByColumn(matrix);
-//        updatePossibleValuesBySquare(matrix);
-//    }
-//
-//    private void updatePossibleValuesByRow(Cell[][] matrix) {
-//
-//        for (int j = 0; j < (MAX_VALUE - 1); j++) {
-//
-//            if (j == columnIndex) {
-//                continue;
-//            }
-//
-//            updatePossibleValue(matrix, rowIndex, j);
-//        }
-//    }
-//
-//    private void updatePossibleValuesByColumn(Cell[][] matrix) {
-//
-//        for (int i = 0; i < (MAX_VALUE - 1); i++) {
-//
-//            if (i == rowIndex) {
-//
-//                continue;
-//            }
-//
-//            updatePossibleValue(matrix, i, columnIndex);
-//        }
-//    }
-//
-//    private void updatePossibleValuesBySquare(Cell[][] matrix) {
-//
-//        int columnIndexOfTheCenterOfTheSquare;
-//        int rowIndexOfTheCenterOfTheSquare;
-//
-//        if (rowIndex % SQUARE_LATE == 0) {
-//
-//            rowIndexOfTheCenterOfTheSquare = rowIndex + 1;
-//        } else if (rowIndex % SQUARE_LATE == 2) {
-//
-//            rowIndexOfTheCenterOfTheSquare = rowIndex - 1;
-//        } else {
-//
-//            rowIndexOfTheCenterOfTheSquare = rowIndex;
-//        }
-//
-//        if (columnIndex % SQUARE_LATE == 0) {
-//
-//            columnIndexOfTheCenterOfTheSquare = columnIndex + 1;
-//        } else if (columnIndex % SQUARE_LATE == 2) {
-//
-//            columnIndexOfTheCenterOfTheSquare = columnIndex - 1;
-//        }
-//        else {
-//
-//            columnIndexOfTheCenterOfTheSquare = columnIndex;
-//        }
-//
-//        for (int i=rowIndexOfTheCenterOfTheSquare-1; i<rowIndexOfTheCenterOfTheSquare+SQUARE_LATE; i++) {
-//            for(int j=columnIndexOfTheCenterOfTheSquare-1; j<columnIndexOfTheCenterOfTheSquare+SQUARE_LATE; j++) {
-//
-//                if(i==rowIndex && j==columnIndex) {
-//                    continue;
-//                }
-//
-//                updatePossibleValue(matrix, i, j);
-//            }
-//        }
-//
-//    }
-//
-//    private void updatePossibleValue(Cell[][] matrix, int rowIndex, int columnIndex) {
-//
-//        Cell cell = matrix[rowIndex][columnIndex];
-//
-//        if(cell.getValue() != UNASSIGNED_VALUE) {
-//
-//            int value = cell.getValue();
-//
-//            if (possibleValues[value - 1]){
-//
-//                possibleValues[value - 1] = false;
-//            }
-//        }
-//    }
-//
+        for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
+            for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
+
+                if (matrix[rowCount][columnCount] == UNASSIGNED_VALUE) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }

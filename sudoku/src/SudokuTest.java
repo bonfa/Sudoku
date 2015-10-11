@@ -1106,5 +1106,4 @@ public class SudokuTest {
         new Sudoku(matrix);
     }
 
-
 }
