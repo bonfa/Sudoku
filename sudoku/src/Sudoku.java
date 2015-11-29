@@ -39,7 +39,7 @@ public class Sudoku {
      * A square is consistent if and only if it does not contain repeated defined values
      *
      * @param matrix the sudoku matrix
-     * @throws IndexOutOfBoundsException if the input row and the columns have lenght different from 9
+     * @throws IndexOutOfBoundsException if the input row and the columns have length different from 9
      * @throws IllegalStateException if the input matrix in not consistent
      */
     private void checkConsistency(int[][] matrix) throws IllegalStateException, IndexOutOfBoundsException {
@@ -191,6 +191,7 @@ public class Sudoku {
 
     /**
      * A sudoku is complete if and only if it has all the boxes filled consistently
+     * The consinstency is guaranteed by the algorithm
      *
      * @return true if the sudoku is complete, false otherwise
      */
