@@ -1133,12 +1133,13 @@ public class SudokuTest {
                 assert(sudoku.getMatrix()[i][j].hasValue() == false);
             }
         }
+        assert(sudoku.isComplete() == false);
     }
 
     //-------------------------- Possible cases -----------------------------------
 
     @Test
-    public void testSudokuSecondCreatorWithSomeValues() throws ValueOutOfBoundsException {
+    public void testSudokuWithSomeValues() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
                 {0, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -1184,7 +1185,6 @@ public class SudokuTest {
                     assert(sudoku.getMatrix()[i][j].hasValue() == true);
                     assert(sudoku.getMatrix()[i][j].getValue() == 9);
                 }
-
                 else if (j==7 && i==4) {
 
                     assert(sudoku.getMatrix()[i][j].hasValue() == true);
@@ -1216,5 +1216,32 @@ public class SudokuTest {
                 }
             }
         }
+        assert(sudoku.isComplete() == false);
+    }
+
+    @Test
+    public void testSudokuComplete() throws ValueOutOfBoundsException {
+
+        final int[][] matrix = {
+                {8, 2, 7, 1, 5, 4, 3, 9, 6},
+                {9, 6, 5, 3, 2, 7, 1, 4, 8},
+                {3, 4, 1, 6, 8, 9, 7, 5, 2},
+                {5, 9, 3, 4, 6, 8, 2, 7, 1},
+                {4, 7, 2, 5, 1, 3, 6, 8, 9},
+                {6, 1, 8, 9, 7, 2, 4, 3, 5},
+                {7, 8, 6, 2, 3, 5, 9, 1, 4},
+                {1, 5, 4, 7, 9, 6, 8, 2, 3},
+                {2, 3, 9, 8, 4, 1, 5, 6, 7},
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        for (int i=0;i<sudoku.getMatrix().length;i++) {
+            for (int j=0;j<sudoku.getMatrix()[i].length;j++) {
+
+                assert(sudoku.getMatrix()[i][j].hasValue() == true);
+                assert(sudoku.getMatrix()[i][j].getValue() == matrix[i][j]);
+            }
+        }
+        assert (sudoku.isComplete() == true);
     }
 }
