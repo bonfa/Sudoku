@@ -1,10 +1,10 @@
 package sudoku;
 
 import org.junit.Test;
+import sudoku.exception.OperationNotAllowedException;
+import sudoku.exception.ValueOutOfBoundsException;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Objects;
 
 /**
  * Created by bonfa on 05/10/15.

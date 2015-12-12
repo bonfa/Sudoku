@@ -1,9 +1,10 @@
 package sudoku;
 
 import helper.Log;
+import sudoku.exception.OperationNotAllowedException;
+import sudoku.exception.ValueOutOfBoundsException;
 
 import java.security.InvalidParameterException;
-import java.util.BitSet;
 
 /**
  * Created by bonfa on 07/12/15.
@@ -123,7 +124,7 @@ public final class Cell {
      * Sets the value of the cell.
      * <p>
      * If the value of the cell has already been set, it is necessary call the method reset before attempting to call
-     * this method, otherwise the method throws an sudoku.OperationNotAllowedException
+     * this method, otherwise the method throws an sudoku.exception.OperationNotAllowedException
      */
     public void setValue(final int value) throws OperationNotAllowedException, ValueOutOfBoundsException {
 
@@ -167,7 +168,7 @@ public final class Cell {
      * Set one of the possible values of the cell.
      * <p>
      * If the value of the cell has already been set, it is necessary call the method reset before attempting to call
-     * this method, otherwise the method throws an sudoku.OperationNotAllowedException
+     * this method, otherwise the method throws an sudoku.exception.OperationNotAllowedException
      */
     public void setPossibleValue(final int value, final boolean allowed) throws InvalidParameterException, OperationNotAllowedException {
 

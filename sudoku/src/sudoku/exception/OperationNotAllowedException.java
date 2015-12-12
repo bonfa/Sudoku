@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.exception;
 
 /**
  * Created by bonfa on 07/12/15.
