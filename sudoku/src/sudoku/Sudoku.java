@@ -1,10 +1,11 @@
 package sudoku;
 
+import helper.Log;
+import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
 
 /**
  * Created by bonfa on 05/10/15.
- *
  */
 public final class Sudoku {
 
@@ -12,6 +13,8 @@ public final class Sudoku {
     public static final int MAX_VALUE = 9;
     public static final int SQUARE_LATE = 3;
     public static final int UNASSIGNED_VALUE = 0;
+
+    private static final String TAG = Sudoku.class.getSimpleName();
 
     private final Cell[][] mMatrix;
 
@@ -30,6 +33,8 @@ public final class Sudoku {
         checkConsistency(sudoku);
 
         this.mMatrix = sudoku;
+
+        updateCellsPossibleValues();
     }
 
     /**
@@ -44,6 +49,8 @@ public final class Sudoku {
         checkConsistency(sudoku);
 
         this.mMatrix = sudoku;
+
+        updateCellsPossibleValues();
     }
 
     /**
@@ -79,7 +86,6 @@ public final class Sudoku {
         return cellMatrix;
     }
 
-
     /**
      * Check the consistency of the input by checking that all the rows and the columns have the correct number of boxes,
      * that the values inserted are all between 0 (the undefined value) and 9, and that the number the user inserted
@@ -102,6 +108,7 @@ public final class Sudoku {
 
         checkSquaresConsistency(matrix);
     }
+
 
     /**
      * Check that the mMatrix has MAX_VALUE rows and each one has MAX_VALUE columns
@@ -204,7 +211,7 @@ public final class Sudoku {
                 for (int i = rowIndex; i < rowIndex + SQUARE_LATE; i++) {
                     for (int j = columnIndex; j < columnIndex + SQUARE_LATE; j++) {
 
-                        if ((rowCount != i  || columnCount != j) && matrix[i][j].hasValue() && matrix[rowCount][columnCount].getValue() == matrix[i][j].getValue()) {
+                        if ((rowCount != i || columnCount != j) && matrix[i][j].hasValue() && matrix[rowCount][columnCount].getValue() == matrix[i][j].getValue()) {
                             throw new IllegalStateException("Box [" + rowCount + "][" + columnCount + "] and [" + i + "][" + j + "] has the same value but are in the same square");
                         }
                     }
@@ -237,4 +244,155 @@ public final class Sudoku {
 
         return true;
     }
+
+    /**
+     * Updates the possible values of the cells of the sudoku
+     */
+    private void updateCellsPossibleValues() {
+
+        for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
+            for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
+
+                final Cell cell = mMatrix[rowCount][columnCount];
+
+                updateMatrixPossibleValues(cell);
+            }
+        }
+    }
+
+    /**
+     * Updates the matrix starting from the value of the cell
+     *
+     * @param cell
+     */
+    private void updateMatrixPossibleValues(final Cell cell) {
+
+        if (cell.hasValue()) {
+
+            try {
+
+                updateMatrixPossibleValuesForRow(cell);
+                updateMatrixPossibleValuesForColumn(cell);
+                updateMatrixPossibleValuesForSquare(cell);
+
+            } catch (OperationNotAllowedException e) {
+
+                e.printStackTrace();
+            }
+
+        } else {
+
+            Log.d(TAG, "cell [" + cell.getRowIndex() + "][" + cell.getColumnIndex() + "] has no value");
+        }
+    }
+
+
+    /**
+     * Updates the possible values of the cells on the same row of the input cell
+     *
+     * @Precondition cell.hasValue()
+     */
+    private void updateMatrixPossibleValuesForRow(final Cell cell) throws OperationNotAllowedException {
+
+        assert cell.hasValue();
+
+        for (int columnIndex = 0; columnIndex < MAX_VALUE; columnIndex++) {
+
+            final Cell rowCell = mMatrix[cell.getRowIndex()][columnIndex];
+
+            if (!rowCell.hasValue() && rowCell.getColumnIndex() != cell.getColumnIndex()) {
+
+                rowCell.setPossibleValue(cell.getValue(), false);
+            }
+        }
+    }
+
+    /**
+     * Updates the possible values of the cells on the same column of the input cell
+     *
+     * @Precondition cell.hasValue()
+     */
+    private void updateMatrixPossibleValuesForColumn(final Cell cell) throws OperationNotAllowedException {
+
+        assert cell.hasValue();
+
+        for (int rowIndex = 0; rowIndex < MAX_VALUE; rowIndex++) {
+
+            final Cell columnCell = mMatrix[rowIndex][cell.getColumnIndex()];
+
+            if (!columnCell.hasValue() && columnCell.getRowIndex() != cell.getRowIndex()) {
+                columnCell.setPossibleValue(cell.getValue(), false);
+            }
+        }
+    }
+
+    /**
+     * Updates the possible values of the cells on the same column of the input cell
+     *
+     * @Precondition cell.hasValue()
+     */
+    private void updateMatrixPossibleValuesForSquare(final Cell cell) throws OperationNotAllowedException {
+
+        assert cell.hasValue();
+
+        final int rowIndexOfTheCenterOfTheSquare = getRowIndexOfTheCenterOfTheSquare(cell);
+        final int columnIndexOfTheCenterOfTheSquare = getColumnIndexOfTheCenterOfTheSquare(cell);
+
+        for (int i = rowIndexOfTheCenterOfTheSquare - 1; i < rowIndexOfTheCenterOfTheSquare + SQUARE_LATE - 1; i++) {
+            for (int j = columnIndexOfTheCenterOfTheSquare - 1; j < columnIndexOfTheCenterOfTheSquare + SQUARE_LATE - 1; j++) {
+
+                final Cell squareCell = mMatrix[i][j];
+
+                if (!squareCell.hasValue() && i != cell.getRowIndex() && j != cell.getColumnIndex()) {
+
+                    squareCell.setPossibleValue(cell.getValue(), false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the column index of the center of square (of late SQUARE_LATE) the cell belongs to
+     *
+     * @param cell
+     * @return
+     */
+    private int getColumnIndexOfTheCenterOfTheSquare(final Cell cell) {
+
+        int columnIndexOfTheCenterOfTheSquare;
+        if (cell.getColumnIndex() % SQUARE_LATE == 0) {
+
+            columnIndexOfTheCenterOfTheSquare = cell.getColumnIndex() + 1;
+        } else if (cell.getColumnIndex() % SQUARE_LATE == 2) {
+
+            columnIndexOfTheCenterOfTheSquare = cell.getColumnIndex() - 1;
+        } else {
+
+            columnIndexOfTheCenterOfTheSquare = cell.getColumnIndex();
+        }
+        return columnIndexOfTheCenterOfTheSquare;
+    }
+
+    /**
+     * Gets the row index of the center of square (of late SQUARE_LATE) the cell belongs to
+     *
+     * @param cell
+     * @return
+     */
+    private int getRowIndexOfTheCenterOfTheSquare(final Cell cell) {
+
+        int rowIndexOfTheCenterOfTheSquare;
+        if (cell.getRowIndex() % SQUARE_LATE == 0) {
+
+            rowIndexOfTheCenterOfTheSquare = cell.getRowIndex() + 1;
+        } else if (cell.getRowIndex() % SQUARE_LATE == 2) {
+
+            rowIndexOfTheCenterOfTheSquare = cell.getRowIndex() - 1;
+        } else {
+
+            rowIndexOfTheCenterOfTheSquare = cell.getRowIndex();
+        }
+        return rowIndexOfTheCenterOfTheSquare;
+    }
+
 }

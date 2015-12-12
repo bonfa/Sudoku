@@ -1,5 +1,6 @@
 package sudoku;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -227,6 +228,17 @@ public final class Cell {
 
             mPossibleValues[i] = true;
         }
+    }
+
+    public static String possibleValuesToString(final boolean[] possibleValues){
+
+        String mex = "Possible Values: {";
+        for (final boolean b : possibleValues) {
+            mex += Boolean.toString(b) + ", ";
+        }
+        mex += "}";
+
+        return mex;
     }
 }
 
