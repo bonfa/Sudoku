@@ -1,6 +1,7 @@
-import org.junit.Before;
+package sudoku;
+
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import sudoku.Sudoku;
 
 /**
  * Created by bonfa on 05/10/15.

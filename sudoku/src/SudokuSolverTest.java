@@ -23,7 +23,7 @@ public class SudokuSolverTest {
 //                {0, 0, 0, 0, 0, 0, 0, 0, 0},
 //        };
 //
-//        Sudoku sudoku = new Sudoku(matrix);
+//        sudoku.Sudoku sudoku = new sudoku.Sudoku(matrix);
 //
 //        SudokuSolver solver = new SudokuSolver(sudoku);
 //        if (!sudoku.isComplete()) {

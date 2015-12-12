@@ -1,3 +1,7 @@
+package sudoku;
+
+import tree.SolvableTreeNodeData;
+
 import javax.activation.UnsupportedDataTypeException;
 
 /**
@@ -6,6 +10,7 @@ import javax.activation.UnsupportedDataTypeException;
  */
 public class Sudoku {
 
+    public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 9;
     public static final int UNASSIGNED_VALUE = 0;
     public static final int SQUARE_LATE = 3;
