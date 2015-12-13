@@ -1,6 +1,5 @@
 package sudoku;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;

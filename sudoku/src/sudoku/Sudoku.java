@@ -6,7 +6,11 @@ import sudoku.exception.ValueOutOfBoundsException;
 
 /**
  * Created by bonfa on 05/10/15.
- */
+ *
+ * The sudoku game to be solved.
+ * It is a matrix of {@see Cell} Cell.
+ * The matrix keeps update the values of the matrix as well as the possible values that each cell can have.
+  */
 public final class Sudoku {
 
     public static final int MIN_VALUE = 1;
@@ -26,7 +30,7 @@ public final class Sudoku {
     /**
      * Constructor
      *
-     * @param sudoku the sudoku to solve
+     * @param sudoku the cell matrix which represents the sudoku to be solved
      */
     public Sudoku(final Cell[][] sudoku) throws ValueOutOfBoundsException {
 
@@ -40,7 +44,7 @@ public final class Sudoku {
     /**
      * Constructor
      *
-     * @param intMatrix the matrix of integer to be converted to sudoku and solved
+     * @param intMatrix the matrix of integer to be converted in cell matrix which represents the sudoku to be solved
      */
     public Sudoku(final int[][] intMatrix) throws ValueOutOfBoundsException {
 
@@ -87,9 +91,9 @@ public final class Sudoku {
     }
 
     /**
-     * Check the consistency of the input by checking that all the rows and the columns have the correct number of boxes,
-     * that the values inserted are all between 0 (the undefined value) and 9, and that the number the user inserted
-     * are consistent.
+     * Checks the consistency of the input sudoku matrix by checking that all the rows and the columns have the correct
+     * number of boxes, that the values inserted are all between 0 (the undefined value) and 9, and that the number
+     * the user inserted are consistent.
      * A row is consistent if and only if it does not contain repeated defined values
      * A column is consistent if and only if it does not contain repeated defined values
      * A square is consistent if and only if it does not contain repeated defined values
@@ -111,12 +115,12 @@ public final class Sudoku {
 
 
     /**
-     * Check that the mMatrix has MAX_VALUE rows and each one has MAX_VALUE columns
+     * Checks that the sudoku matrix has MAX_VALUE rows and each one has MAX_VALUE columns
      *
-     * @param matrix
+     * @param matrix the sudoku matrix
      * @throws ValueOutOfBoundsException
      */
-    private void checkRowAndColumnCount(final Cell[][] matrix) throws ValueOutOfBoundsException {
+    private static void checkRowAndColumnCount(final Cell[][] matrix) throws ValueOutOfBoundsException {
 
         if (matrix.length != MAX_VALUE) {
             throw new ValueOutOfBoundsException("input mMatrix must have '" + MAX_VALUE + "' rows ");
@@ -131,12 +135,12 @@ public final class Sudoku {
     }
 
     /**
-     * Check that each row does not contain more than once the same value
+     * Checks that each row of the sudoku matrix in input does not contain more than once the same value
      *
-     * @param matrix
+     * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private void checkRowsConsistency(final Cell[][] matrix) throws IllegalStateException {
+    private static void checkRowsConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int rowIndex = 0; rowIndex < MAX_VALUE; rowIndex++) {
 
@@ -157,12 +161,12 @@ public final class Sudoku {
     }
 
     /**
-     * Check that each column does not contain more than once the same value
+     * Checks that each column of the sudoku matrix in input does not contain more than once the same value
      *
-     * @param matrix
+     * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private void checkColumnsConsistency(final Cell[][] matrix) throws IllegalStateException {
+    private static void checkColumnsConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int columnIndex = 0; columnIndex < MAX_VALUE; columnIndex++) {
 
@@ -181,12 +185,12 @@ public final class Sudoku {
     }
 
     /**
-     * Check that each square of the sudoku does not contain the same value more than once
+     * Checks that each square of the sudoku matrix in input does not contain the same value more than once
      *
-     * @param matrix
+     * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private void checkSquaresConsistency(final Cell[][] matrix) throws IllegalStateException {
+    private static void checkSquaresConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int rowIndex = 0; rowIndex < MAX_VALUE - 1; rowIndex += SQUARE_LATE) {
             for (int columnIndex = 0; columnIndex < MAX_VALUE; columnIndex += SQUARE_LATE) {
@@ -197,13 +201,13 @@ public final class Sudoku {
     }
 
     /**
-     * Check that a square does not contain the same value for more than once
+     * Checks that a square does not contain the same value for more than once
      *
      * @param rowIndex    index of the row of the upper-left box of the square
      * @param columnIndex index of the column of the upper-left box of the square
-     * @param matrix      the sudoku mMatrix
+     * @param matrix      the sudoku matrix
      */
-    private void checkSingleSquareConsistency(final int rowIndex, final int columnIndex, final Cell[][] matrix) {
+    private static void checkSingleSquareConsistency(final int rowIndex, final int columnIndex, final Cell[][] matrix) {
 
         for (int rowCount = rowIndex; rowCount < rowIndex + SQUARE_LATE; rowCount++) {
             for (int columnCount = columnIndex; columnCount < columnIndex + SQUARE_LATE; columnCount++) {
@@ -220,14 +224,21 @@ public final class Sudoku {
         }
     }
 
+    /**
+     * Gets the sudoku matrix
+     *
+     * @return the sudoku matrix
+     */
     public Cell[][] getMatrix() {
 
         return mMatrix;
     }
 
     /**
+     * Gets the completeness of the sudoku
+     *
      * A sudoku is complete if and only if it has all the boxes filled consistently
-     * The consinstency is guaranteed by the algorithm
+     * The consistency is guaranteed a priori by the structure and the algorithm
      *
      * @return true if the sudoku is complete, false otherwise
      */
@@ -261,9 +272,10 @@ public final class Sudoku {
     }
 
     /**
-     * Updates the matrix starting from the value of the cell
+     * Updates the matrix possible values starting from the value of the cell
      *
-     * @param cell
+     * @param cell the cell whose value is removed from the possible values of the row, the column and the square the
+     *             cell belongs to
      */
     private void updateMatrixPossibleValues(final Cell cell) {
 
@@ -327,7 +339,7 @@ public final class Sudoku {
     }
 
     /**
-     * Updates the possible values of the cells on the same column of the input cell
+     * Updates the possible values of the cells on the same square of the input cell
      *
      * @Precondition cell.hasValue()
      */
@@ -354,8 +366,8 @@ public final class Sudoku {
     /**
      * Gets the column index of the center of square (of late SQUARE_LATE) the cell belongs to
      *
-     * @param cell
-     * @return
+     * @param cell the cell the identifies the square
+     * @return the column index of the center of the square of late SQUARE_LATE the cell belongs to
      */
     private int getColumnIndexOfTheCenterOfTheSquare(final Cell cell) {
 
@@ -376,8 +388,8 @@ public final class Sudoku {
     /**
      * Gets the row index of the center of square (of late SQUARE_LATE) the cell belongs to
      *
-     * @param cell
-     * @return
+     * @param cell the cell the identifies the square
+     * @return the row index of the center of the square of late SQUARE_LATE the cell belongs to
      */
     private int getRowIndexOfTheCenterOfTheSquare(final Cell cell) {
 
@@ -396,9 +408,15 @@ public final class Sudoku {
     }
 
     /**
-     * Sets the value a cell of the sudoku
+     * Sets the value a cell of the sudoku.
      *
-     * @param cellWithValue the cell with the value to set
+     * The method can work in two ways: the first one throws an {@see OperationNotAllowedException} if the value of the
+     * cell is already present; the second one overrides the value and re-calculates the possible values of the whole matrix
+     *
+     * @param cellWithValue the cell to be update. It must contain the new value, otherwise the method fires an {@see OperationNotAllowedException}
+     * @param resetIfValueAlreadyPresent specifies if the value must be overridden or not
+     * @throws OperationNotAllowedException
+     * @throws ValueOutOfBoundsException
      */
     public void setCellValue(final Cell cellWithValue, final boolean resetIfValueAlreadyPresent) throws OperationNotAllowedException, ValueOutOfBoundsException {
 
@@ -420,6 +438,10 @@ public final class Sudoku {
         updateMatrixPossibleValues(cellToUpdate);
     }
 
+    /**
+     * Resets the matrix possible values and re-calculates each array of possible values starting from the values
+     * of the cells of the sudoku
+     */
     private void resetMatrixPossibleValues() {
 
         for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
