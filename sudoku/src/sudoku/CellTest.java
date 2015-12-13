@@ -234,7 +234,7 @@ public class CellTest {
         assert (cell.getNumberOfPossibleValues() == 1);
     }
 
-    //---------------------------------- Operations -------------------------------
+    //---------------------------------- getPossibleValues -------------------------------
 
     @Test(expected = OperationNotAllowedException.class)
     public void testCellWriteAlreadyDefinedValueWithoutReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
@@ -315,6 +315,63 @@ public class CellTest {
         assert (cell.getPossibleValues()[7] == true);
         assert (cell.getPossibleValues()[8] == true);
         assert (cell.getNumberOfPossibleValues() == 7);
+    }
+
+    @Test()
+    public void testCellGetFirstPossibleValueNotPresent() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+
+        final Cell cell = new Cell(rowIndex, columnIndex);
+        cell.setPossibleValue(1, false);
+        cell.setPossibleValue(2, false);
+        cell.setPossibleValue(3, false);
+        cell.setPossibleValue(4, false);
+        cell.setPossibleValue(5, false);
+        cell.setPossibleValue(6, false);
+        cell.setPossibleValue(7, false);
+        cell.setPossibleValue(8, false);
+        cell.setPossibleValue(9, false);
+        assert (cell.getFirstPossibleValue() == Cell.NO_POSSIBLE_VALUES);
+    }
+
+    @Test()
+    public void testCellGetFirstPossibleValueOnlyOnePresent() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+
+        final Cell cell = new Cell(rowIndex, columnIndex);
+        cell.setPossibleValue(1, false);
+        cell.setPossibleValue(2, false);
+        cell.setPossibleValue(3, false);
+        cell.setPossibleValue(4, true);
+        cell.setPossibleValue(5, false);
+        cell.setPossibleValue(6, false);
+        cell.setPossibleValue(7, false);
+        cell.setPossibleValue(8, false);
+        cell.setPossibleValue(9, false);
+        assert (cell.getFirstPossibleValue() == 4);
+    }
+
+    @Test()
+    public void testCellGetFirstPossibleValueManyPresent() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+
+        final Cell cell = new Cell(rowIndex, columnIndex);
+        cell.setPossibleValue(1, false);
+        cell.setPossibleValue(2, true);
+        cell.setPossibleValue(3, false);
+        cell.setPossibleValue(4, true);
+        cell.setPossibleValue(5, false);
+        cell.setPossibleValue(6, true);
+        cell.setPossibleValue(7, false);
+        cell.setPossibleValue(8, false);
+        cell.setPossibleValue(9, false);
+        assert (cell.getFirstPossibleValue() == 2);
     }
 
 }

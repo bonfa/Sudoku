@@ -462,6 +462,16 @@ public final class Sudoku {
     }
 
     /**
+     * Returns true if the sudoku has at least one cell without value and with only one possible value, false otherwise;
+     *
+     * @return true if the sudoku has at least one cell without value and with only one possible value, false otherwise;
+     */
+    public boolean hasCellWithoutValueAndOnlyOnePossibleValue() {
+
+        return getFirstCellWithoutValueAndOnlyOnePossibleValue() != null;
+    }
+
+    /**
      * Returns the first cell found without value and with only one possible value, if present, otherwise returns null
      *
      * @return the first cell found without value and with only one possible value, if present; otherwise null
@@ -481,4 +491,26 @@ public final class Sudoku {
         }
         return null;
     }
+
+    /**
+     * Set the value of the first cell without value and only one possible value, if present; it there are not cell in
+     * this state, it fires {@see OperationNotAllowedException}.
+     *
+     * @throws OperationNotAllowedException
+     * @throws ValueOutOfBoundsException
+     */
+    public void setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue() throws OperationNotAllowedException, ValueOutOfBoundsException {
+
+        final Cell cell = getFirstCellWithoutValueAndOnlyOnePossibleValue();
+
+        if (cell == null) {
+
+            throw new OperationNotAllowedException("no cell with only one possible value present");
+        }
+
+        final Cell newCell = new Cell(cell.getRowIndex(), cell.getColumnIndex());
+        newCell.setValue(cell.getFirstPossibleValue());
+        setCellValue(newCell, false);
+    }
+
 }

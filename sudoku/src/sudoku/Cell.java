@@ -23,12 +23,13 @@ import java.security.InvalidParameterException;
  */
 public final class Cell {
 
+    public final static int NO_POSSIBLE_VALUES = -1;
     private final static int VALUE_UNSET = -1;
     private final static String TAG = Cell.class.getSimpleName();
 
     private final int mRowIndex;
     private final int mColumnIndex;
-    private final boolean [] mPossibleValues;
+    private final boolean[] mPossibleValues;
     private int mValue;
 
     //hide default constructor
@@ -43,7 +44,7 @@ public final class Cell {
     /**
      * Constructor
      *
-     * @param rowIndex the index of the row of the cell
+     * @param rowIndex    the index of the row of the cell
      * @param columnIndex the index of the column of the cell
      * @throws ValueOutOfBoundsException
      */
@@ -60,9 +61,9 @@ public final class Cell {
     /**
      * Constructor
      *
-     * @param rowIndex the index of the row of the cell
+     * @param rowIndex    the index of the row of the cell
      * @param columnIndex the index of the column of the cell
-     * @param value the value of the cell
+     * @param value       the value of the cell
      * @throws ValueOutOfBoundsException
      */
     public Cell(final int rowIndex, final int columnIndex, final int value) throws ValueOutOfBoundsException {
@@ -96,7 +97,7 @@ public final class Cell {
     /**
      * Checks that the row and the column index of the cell are >= {@see MIN_VALUE} - 1 and <= {@see MAX_VALUE} - 1
      *
-     * @param rowIndex the index of the row of the cell
+     * @param rowIndex    the index of the row of the cell
      * @param columnIndex the index of the column of the cell
      * @throws ValueOutOfBoundsException
      */
@@ -118,11 +119,13 @@ public final class Cell {
      *
      * @return the possible values array in the initial state
      */
-    private @NotNull boolean[] getInitializedPossibleValues() {
+    private
+    @NotNull
+    boolean[] getInitializedPossibleValues() {
 
         final boolean[] possibleValues = new boolean[Sudoku.MAX_VALUE];
 
-        for (int i=0; i<possibleValues.length; i++) {
+        for (int i = 0; i < possibleValues.length; i++) {
 
             possibleValues[i] = true;
         }
@@ -164,7 +167,7 @@ public final class Cell {
 
         if (mValue != VALUE_UNSET) {
 
-            throw new OperationNotAllowedException();
+            throw new OperationNotAllowedException("trying to set an already set variable - cell [" + mRowIndex + "][" + mColumnIndex + "]");
         }
 
         if (value < Sudoku.MIN_VALUE && value > Sudoku.MAX_VALUE) {
@@ -271,7 +274,7 @@ public final class Cell {
      */
     public void resetPossibleValues() {
 
-        for (int i=0; i<mPossibleValues.length; i++) {
+        for (int i = 0; i < mPossibleValues.length; i++) {
 
             mPossibleValues[i] = true;
         }
@@ -292,7 +295,7 @@ public final class Cell {
      */
     public int getNumberOfPossibleValues() {
 
-        int numberOfTrueValues=0;
+        int numberOfTrueValues = 0;
         for (final boolean possibleValue : mPossibleValues) {
 
             if (possibleValue) {
@@ -303,12 +306,32 @@ public final class Cell {
     }
 
     /**
+     * Returns the first possible value, if present, -1 otherwise
+     *
+     * @return the number of possible values
+     */
+    public int getFirstPossibleValue() {
+
+        for (int i = 0; i < mPossibleValues.length; i++) {
+
+            if (mPossibleValues[i]) {
+
+                return i + 1;
+            }
+        }
+
+        return NO_POSSIBLE_VALUES;
+    }
+
+    /**
      * Gives a fast string representation of the possible values
      *
      * @param possibleValues the possible values of the cell
      * @return a string representation of the possible values
      */
-    public static @NotNull String possibleValuesToString(final @NotNull boolean[] possibleValues){
+    public static
+    @NotNull
+    String possibleValuesToString(final @NotNull boolean[] possibleValues) {
 
         String mex = "Possible Values: {";
         for (final boolean b : possibleValues) {

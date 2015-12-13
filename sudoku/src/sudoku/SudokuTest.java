@@ -7,7 +7,7 @@ import sudoku.exception.ValueOutOfBoundsException;
 
 /**
  * Created by bonfa on 05/10/15.
- * 
+ *
  */
 public class SudokuTest {
 
@@ -1644,13 +1644,14 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == true);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 0);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 8);
     }
 
     @Test()
-    public void testSudokuPossibleValuesTwo() throws ValueOutOfBoundsException {
+    public void testSudokuPossibleValuesTwo() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int[][] matrix = {
                 {1, 2, 3, 4, 5, 6, 7, 8, 0},
@@ -1665,8 +1666,74 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == true);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 0);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 8);
+
+        sudoku.setCellValue(new Cell(0, 8, 9), false);
+
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == true);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 8);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 0);
+
+        sudoku.setCellValue(new Cell(8, 0, 9), false);
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == false);
+    }
+
+    @Test()
+    public void testSudokuSetVariableWithOnlyOnePossibleValue() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int[][] matrix = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 8, 7, 5, 6, 4, 3, 2, 1}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == true);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 0);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 8);
+
+        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == true);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 8);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 0);
+
+        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == false);
+    }
+
+    @Test(expected = OperationNotAllowedException.class)
+    public void testSudokuSetVariableWithOnlyOnePossibleValueError() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int[][] matrix = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {9, 8, 7, 5, 6, 4, 3, 2, 1}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == false);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() == null);
+
+        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
     }
 }

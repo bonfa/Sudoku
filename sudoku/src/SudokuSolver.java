@@ -1,5 +1,7 @@
+import helper.Log;
 import sudoku.Cell;
 import sudoku.Sudoku;
+import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
 
 
@@ -23,7 +25,7 @@ public class SudokuSolver {
         this.mSudoku = sudoku;
     }
 
-    public static void main(final String[] args) throws ValueOutOfBoundsException {
+    public static void main(final String[] args) throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final Sudoku sudoku = getSudoku();
         final SudokuSolver solver = new SudokuSolver(sudoku);
@@ -42,21 +44,16 @@ public class SudokuSolver {
         }
     }
 
-    private Sudoku solve() {
+    private Sudoku solve() throws OperationNotAllowedException, ValueOutOfBoundsException {
+
+        while (!mSudoku.isComplete() && mSudoku.hasCellWithoutValueAndOnlyOnePossibleValue()) {
+
+            printSudoku(mSudoku);
+
+            mSudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+        }
 
         return mSudoku;
-//        while (mSudoku.hasCellWithOnlyOnePossibleValue()) {
-//            final Cell cell = mSudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue();
-//            mSudoku.setCellValue(cell.setValue());
-//
-//            if (mSudoku.isComplete()) {
-//
-//                return mSudoku;
-//            }
-//        }
-//
-//        Log.d(TAG, "TODO");
-//        return null;
     }
 
 
