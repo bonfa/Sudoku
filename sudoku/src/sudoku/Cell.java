@@ -118,7 +118,7 @@ public final class Cell {
      *
      * @return the possible values array in the initial state
      */
-    private boolean[] getInitializedPossibleValues() {
+    private @NotNull boolean[] getInitializedPossibleValues() {
 
         final boolean[] possibleValues = new boolean[Sudoku.MAX_VALUE];
 
@@ -292,7 +292,7 @@ public final class Cell {
      * @param possibleValues the possible values of the cell
      * @return a string representation of the possible values
      */
-    public static String possibleValuesToString(final @NotNull boolean[] possibleValues){
+    public static @NotNull String possibleValuesToString(final @NotNull boolean[] possibleValues){
 
         String mex = "Possible Values: {";
         for (final boolean b : possibleValues) {
