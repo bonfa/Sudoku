@@ -92,6 +92,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == true);
         assert (cell.getPossibleValues()[7] == true);
         assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 9);
     }
 
     @Test()
@@ -120,6 +121,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == true);
         assert (cell.getPossibleValues()[7] == true);
         assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 9);
     }
 
     @Test()
@@ -148,6 +150,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == true);
         assert (cell.getPossibleValues()[7] == true);
         assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 9);
     }
 
     @Test()
@@ -174,6 +177,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == false);
         assert (cell.getPossibleValues()[7] == false);
         assert (cell.getPossibleValues()[8] == false);
+        assert (cell.getNumberOfPossibleValues() == 1);
     }
 
     @Test()
@@ -200,6 +204,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == false);
         assert (cell.getPossibleValues()[7] == false);
         assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 1);
     }
 
     @Test()
@@ -226,6 +231,7 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == false);
         assert (cell.getPossibleValues()[7] == false);
         assert (cell.getPossibleValues()[8] == false);
+        assert (cell.getNumberOfPossibleValues() == 1);
     }
 
     //---------------------------------- Operations -------------------------------
@@ -261,10 +267,11 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == true);
         assert (cell.getPossibleValues()[7] == true);
         assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 9);
     }
 
     @Test()
-    public void testCellWriteAndReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
+     public void testCellWriteAndReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int rowIndex = 3;
         final int columnIndex = 8;
@@ -284,5 +291,30 @@ public class CellTest {
         assert (cell.getPossibleValues()[6] == false);
         assert (cell.getPossibleValues()[7] == false);
         assert (cell.getPossibleValues()[8] == false);
+        assert (cell.getNumberOfPossibleValues() == 1);
     }
+
+    @Test()
+    public void testCellUpdatePossibleValues() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+
+        final Cell cell = new Cell(rowIndex, columnIndex);
+        cell.setPossibleValue(2, false);
+        cell.setPossibleValue(3, false);
+        assert (cell.hasValue() == false);
+        assert (cell.getPossibleValues().length == Sudoku.MAX_VALUE);
+        assert (cell.getPossibleValues()[0] == true);
+        assert (cell.getPossibleValues()[1] == false);
+        assert (cell.getPossibleValues()[2] == false);
+        assert (cell.getPossibleValues()[3] == true);
+        assert (cell.getPossibleValues()[4] == true);
+        assert (cell.getPossibleValues()[5] == true);
+        assert (cell.getPossibleValues()[6] == true);
+        assert (cell.getPossibleValues()[7] == true);
+        assert (cell.getPossibleValues()[8] == true);
+        assert (cell.getNumberOfPossibleValues() == 7);
+    }
+
 }

@@ -1,4 +1,4 @@
-package tree;
+package iterativeProcess.tree;
 
 import java.util.ArrayList;
 import java.util.List;

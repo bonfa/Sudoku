@@ -7,6 +7,7 @@ import sudoku.exception.ValueOutOfBoundsException;
 
 /**
  * Created by bonfa on 05/10/15.
+ * 
  */
 public class SudokuTest {
 
@@ -1604,5 +1605,68 @@ public class SudokuTest {
                 }
             }
         }
+    }
+
+    //-------------------------- get first cell with one possible value -----------------------------------
+
+    @Test()
+    public void testSudokuPossibleValuesNotPresent() throws ValueOutOfBoundsException {
+
+        final int[][] matrix = {
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() == null);
+    }
+
+    @Test()
+    public void testSudokuPossibleValuesOne() throws ValueOutOfBoundsException {
+
+        final int[][] matrix = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 0);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 8);
+    }
+
+    @Test()
+    public void testSudokuPossibleValuesTwo() throws ValueOutOfBoundsException {
+
+        final int[][] matrix = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 8, 7, 5, 6, 4, 3, 2, 1}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() != null);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex() == 0);
+        assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex() == 8);
     }
 }

@@ -1,6 +1,7 @@
 package sudoku;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -154,7 +155,7 @@ public final class Sudoku {
                     // I can have more than one unassigned value
                     if (matrix[rowIndex][columnIndex].hasValue() && matrix[rowIndex][columnIndex].getValue() == matrix[rowIndex][i].getValue()) {
 
-                        throw new IllegalStateException("Row number " + (rowIndex + 1) + " contains more than one box with value " + matrix[rowIndex][columnIndex]);
+                        throw new IllegalStateException("Row number " + (rowIndex + 1) + " contains more than one box with value " + matrix[rowIndex][columnIndex].getValue());
                     }
                 }
             }
@@ -178,7 +179,7 @@ public final class Sudoku {
 
                     if (matrix[rowIndex][columnIndex].hasValue() && matrix[rowIndex][columnIndex].getValue() == matrix[j][columnIndex].getValue()) {
 
-                        throw new IllegalStateException("Column number " + (rowIndex + 1) + " contains more than one box with value " + matrix[rowIndex][columnIndex]);
+                        throw new IllegalStateException("Column number " + (columnIndex + 1) + " contains more than one box with value " + matrix[rowIndex][columnIndex].getValue());
                     }
                 }
             }
@@ -460,4 +461,24 @@ public final class Sudoku {
         updateCellsPossibleValues();
     }
 
+    /**
+     * Returns the first cell found without value and with only one possible value, if present, otherwise returns null
+     *
+     * @return the first cell found without value and with only one possible value, if present; otherwise null
+     */
+    public @Nullable Cell getFirstCellWithoutValueAndOnlyOnePossibleValue() {
+
+        for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
+            for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
+
+                final Cell cell = mMatrix[rowCount][columnCount];
+
+                if (!cell.hasValue() && cell.getNumberOfPossibleValues() == 1) {
+
+                    return cell;
+                }
+            }
+        }
+        return null;
+    }
 }

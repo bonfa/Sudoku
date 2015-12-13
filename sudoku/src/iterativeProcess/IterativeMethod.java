@@ -1,9 +1,5 @@
 package iterativeProcess;
 
-import tree.SolutionNode;
-import tree.SolutionTree;
-import tree.SolvableTreeNodeData;
-
 /**
  *
  * Created by bonfa on 29/11/15.

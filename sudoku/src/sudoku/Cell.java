@@ -228,7 +228,6 @@ public final class Cell {
 
             mPossibleValues[index] = false;
 
-            setValueIfPossible();
         }
     }
 
@@ -236,26 +235,26 @@ public final class Cell {
      * If the array of the possible values contains only one value set to 'true', sets the value of the cell to the
      * suggested by the possible values array
      */
-    private void setValueIfPossible() {
-
-        int numberOfPossibleValues = 0;
-        int indexOfSetValue = -1;
-        for (int i = 0; i < mPossibleValues.length; i++) {
-
-            if (mPossibleValues[i]) {
-
-                numberOfPossibleValues++;
-                indexOfSetValue = i;
-            }
-        }
-
-        if (numberOfPossibleValues == 1) {
-
-            mValue = indexOfSetValue + 1;
-
-            Log.d(TAG, "Only one possible value, setting mValue to " + mValue);
-        }
-    }
+//    private void setValueIfPossible() {
+//
+//        int numberOfPossibleValues = 0;
+//        int indexOfSetValue = -1;
+//        for (int i = 0; i < mPossibleValues.length; i++) {
+//
+//            if (mPossibleValues[i]) {
+//
+//                numberOfPossibleValues++;
+//                indexOfSetValue = i;
+//            }
+//        }
+//
+//        if (numberOfPossibleValues == 1) {
+//
+//            mValue = indexOfSetValue + 1;
+//
+//            Log.d(TAG, "Only one possible value, setting mValue to " + mValue);
+//        }
+//    }
 
     /**
      * Resets both the value and the possible values of the cell.
@@ -284,6 +283,23 @@ public final class Cell {
     private void resetValue() {
 
         mValue = VALUE_UNSET;
+    }
+
+    /**
+     * Returns the number of possible values
+     *
+     * @return the number of possible values
+     */
+    public int getNumberOfPossibleValues() {
+
+        int numberOfTrueValues=0;
+        for (final boolean possibleValue : mPossibleValues) {
+
+            if (possibleValue) {
+                numberOfTrueValues++;
+            }
+        }
+        return numberOfTrueValues;
     }
 
     /**
