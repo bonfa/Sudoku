@@ -27,45 +27,6 @@
 //        this.mPossibleValues = initPossibleValues();
 //    }
 //
-//    public List[][] initPossibleValues() {
-//
-//        final List[][] possibleValues = new List[Sudoku.MAX_VALUE][Sudoku.MAX_VALUE];
-//
-//        for (int i = 0; i < Sudoku.MAX_VALUE; i++) {
-//
-//            for (int j = 0; j < Sudoku.MAX_VALUE; j++) {
-//
-//                possibleValues[i][j] = getAllPossibleValuesList();
-//            }
-//        }
-//
-//        //TODO fix
-//        return possibleValues;
-//    }
-//
-//    private List getAllPossibleValuesList() {
-//
-//        final List<Integer> integerList = new ArrayList<>(Sudoku.MAX_VALUE);
-//        for (int i = 0; i < Sudoku.MAX_VALUE; i++) {
-//
-//            integerList.set(i, i);
-//        }
-//
-//        return integerList;
-//    }
-//
-//    public void updatePossibleValues(sudoku.Cell[][] matrix) {
-//
-//        updatePossibleValuesBySquare(matrix);
-//        updatePossibleValuesByColumn(matrix);
-//        updatePossibleValuesByRow(matrix);
-//    }
-//
-//
-//
-//
-
-//
 //    public static void main(final String[][] args) {
 //
 //        final Sudoku sudoku = getSudoku();

@@ -222,12 +222,25 @@ public final class Cell {
      */
     public void reset() {
 
-        mValue = VALUE_UNSET;
+        resetValue();
+
+        resetPossibleValues();
+    }
+
+    /**
+     * Resets the possible values of the cell
+     */
+    public void resetPossibleValues() {
 
         for (int i=0; i<mPossibleValues.length; i++) {
 
             mPossibleValues[i] = true;
         }
+    }
+
+    private void resetValue() {
+
+        mValue = VALUE_UNSET;
     }
 
     public static String possibleValuesToString(final boolean[] possibleValues){

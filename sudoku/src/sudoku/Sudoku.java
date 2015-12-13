@@ -395,4 +395,46 @@ public final class Sudoku {
         return rowIndexOfTheCenterOfTheSquare;
     }
 
+    /**
+     * Sets the value a cell of the sudoku
+     *
+     * @param cellWithValue the cell with the value to set
+     */
+    public void setCellValue(final Cell cellWithValue, final boolean resetIfValueAlreadyPresent) throws OperationNotAllowedException, ValueOutOfBoundsException {
+
+        if (!cellWithValue.hasValue()) {
+
+            throw new OperationNotAllowedException("cellWithValue must have a value");
+        }
+
+        final Cell cellToUpdate = mMatrix[cellWithValue.getRowIndex()][cellWithValue.getColumnIndex()];
+
+        if (resetIfValueAlreadyPresent && cellToUpdate.hasValue()) {
+
+            cellToUpdate.reset();
+
+            resetMatrixPossibleValues();
+        }
+
+        cellToUpdate.setValue(cellWithValue.getValue());
+        updateMatrixPossibleValues(cellToUpdate);
+    }
+
+    private void resetMatrixPossibleValues() {
+
+        for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
+            for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
+
+                final Cell cell = mMatrix[rowCount][columnCount];
+
+                if (!cell.hasValue()) {
+
+                    cell.resetPossibleValues();
+                }
+            }
+        }
+
+        updateCellsPossibleValues();
+    }
+
 }
