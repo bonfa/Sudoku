@@ -1,5 +1,6 @@
 package sudoku;
 
+import com.sun.istack.internal.NotNull;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -39,6 +40,13 @@ public final class Cell {
         mPossibleValues = null;
     }
 
+    /**
+     * Constructor
+     *
+     * @param rowIndex the index of the row of the cell
+     * @param columnIndex the index of the column of the cell
+     * @throws ValueOutOfBoundsException
+     */
     public Cell(final int rowIndex, final int columnIndex) throws ValueOutOfBoundsException {
 
         validateRowAndColumnIndex(rowIndex, columnIndex);
@@ -49,6 +57,14 @@ public final class Cell {
         this.mPossibleValues = getInitializedPossibleValues();
     }
 
+    /**
+     * Constructor
+     *
+     * @param rowIndex the index of the row of the cell
+     * @param columnIndex the index of the column of the cell
+     * @param value the value of the cell
+     * @throws ValueOutOfBoundsException
+     */
     public Cell(final int rowIndex, final int columnIndex, final int value) throws ValueOutOfBoundsException {
 
         validateRowAndColumnIndex(rowIndex, columnIndex);
@@ -63,7 +79,13 @@ public final class Cell {
         updatePossibleValues();
     }
 
-    private static void validateValue(int value) throws ValueOutOfBoundsException {
+    /**
+     * Checks that the value is >= than {@see MIN_VALUE} and >= {@see MAX_VALUE}
+     *
+     * @param value the value of the cell
+     * @throws ValueOutOfBoundsException
+     */
+    private static void validateValue(final int value) throws ValueOutOfBoundsException {
 
         if (value < Sudoku.MIN_VALUE || value > Sudoku.MAX_VALUE) {
 
@@ -71,7 +93,14 @@ public final class Cell {
         }
     }
 
-    private static void validateRowAndColumnIndex(int rowIndex, int columnIndex) throws ValueOutOfBoundsException {
+    /**
+     * Checks that the row and the column index of the cell are >= {@see MIN_VALUE} - 1 and <= {@see MAX_VALUE} - 1
+     *
+     * @param rowIndex the index of the row of the cell
+     * @param columnIndex the index of the column of the cell
+     * @throws ValueOutOfBoundsException
+     */
+    private static void validateRowAndColumnIndex(final int rowIndex, final int columnIndex) throws ValueOutOfBoundsException {
 
         if (rowIndex < Sudoku.MIN_VALUE - 1 || rowIndex >= Sudoku.MAX_VALUE) {
 
@@ -84,6 +113,11 @@ public final class Cell {
         }
     }
 
+    /**
+     * Initializes the possible values array of the cell to an array of all true values
+     *
+     * @return the possible values array in the initial state
+     */
     private boolean[] getInitializedPossibleValues() {
 
         final boolean[] possibleValues = new boolean[Sudoku.MAX_VALUE];
@@ -123,8 +157,8 @@ public final class Cell {
     /**
      * Sets the value of the cell.
      * <p>
-     * If the value of the cell has already been set, it is necessary call the method reset before attempting to call
-     * this method, otherwise the method throws an sudoku.exception.OperationNotAllowedException
+     * If the value of the cell has already been set, it is necessary to call the method {@see #reset()} before
+     * attempting to call this method, otherwise the method throws an {@see OperationNotAllowedException}
      */
     public void setValue(final int value) throws OperationNotAllowedException, ValueOutOfBoundsException {
 
@@ -144,6 +178,9 @@ public final class Cell {
     }
 
     /**
+     * Updates the possible values array of a set cell, that is sets to false all the value except the one which
+     * represents the value of the cell
+     *
      * @Precondition mValue != VALUE_UNSET
      */
     private void updatePossibleValues() {
@@ -195,6 +232,10 @@ public final class Cell {
         }
     }
 
+    /**
+     * If the array of the possible values contains only one value set to 'true', sets the value of the cell to the
+     * suggested by the possible values array
+     */
     private void setValueIfPossible() {
 
         int numberOfPossibleValues = 0;
@@ -237,12 +278,21 @@ public final class Cell {
         }
     }
 
+    /**
+     * Resets the value of the cell
+     */
     private void resetValue() {
 
         mValue = VALUE_UNSET;
     }
 
-    public static String possibleValuesToString(final boolean[] possibleValues){
+    /**
+     * Gives a fast string representation of the possible values
+     *
+     * @param possibleValues the possible values of the cell
+     * @return a string representation of the possible values
+     */
+    public static String possibleValuesToString(final @NotNull boolean[] possibleValues){
 
         String mex = "Possible Values: {";
         for (final boolean b : possibleValues) {
