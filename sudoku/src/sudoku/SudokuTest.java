@@ -1,6 +1,7 @@
 package sudoku;
 
 import helper.Log;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -1736,4 +1737,42 @@ public class SudokuTest {
 
         sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
     }
+
+    //-------------------------- Constructor for cloning -----------------------------------
+    @Test()
+    public void testCloneConstructor() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int[][] matrix = {
+                {1, 2, 3, 4, 5, 6, 7, 8, 9},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {9, 8, 7, 5, 6, 4, 3, 2, 1}
+        };
+
+        final Sudoku sudoku = new Sudoku(matrix);
+        final Sudoku copy = new Sudoku(sudoku);
+
+        assert(sudoku != copy);
+        assert(sudoku.getMatrix() != copy.getMatrix());
+        for (int i = 0; i < sudoku.getMatrix().length; i++) {
+            for (int j = 0; j < sudoku.getMatrix()[i].length; j++) {
+
+                final Cell sudokuCell = sudoku.getMatrix()[i][j];
+                final Cell copyCell = copy.getMatrix()[i][j];
+
+                assert(sudokuCell != copyCell);
+                assert(sudokuCell.getRowIndex() == copyCell.getRowIndex());
+                assert(sudokuCell.getColumnIndex() == copyCell.getColumnIndex());
+                assert(sudokuCell.getValue() == copyCell.getValue());
+                assert(sudokuCell.getPossibleValues() != copyCell.getPossibleValues());
+                assert(ArrayUtils.isEquals(sudokuCell.getPossibleValues(), copyCell.getPossibleValues()));
+            }
+        }
+    }
+
 }

@@ -8,11 +8,11 @@ import sudoku.exception.ValueOutOfBoundsException;
 
 /**
  * Created by bonfa on 05/10/15.
- *
+ * <p>
  * The sudoku game to be solved.
  * It is a matrix of {@see Cell} Cell.
  * The matrix keeps update the values of the matrix as well as the possible values that each cell can have.
-  */
+ */
 public final class Sudoku {
 
     public static final int MIN_VALUE = 1;
@@ -60,6 +60,26 @@ public final class Sudoku {
     }
 
     /**
+     * Constructor
+     *
+     * @param another the sudoku to copy
+     */
+    public Sudoku(final @NotNull Sudoku another) throws ValueOutOfBoundsException {
+
+        checkConsistency(another.getMatrix());
+
+        this.mMatrix = new Cell[another.getMatrix().length][another.getMatrix()[0].length];
+        for (int rowIndex = 0; rowIndex < mMatrix.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < mMatrix[0].length; columnIndex++) {
+
+                this.mMatrix[rowIndex][columnIndex] = new Cell(another.getMatrix()[rowIndex][columnIndex]);
+            }
+        }
+
+        updateCellsPossibleValues();
+    }
+
+    /**
      * Creates a Cell matrix starting from an integer matrix
      *
      * @param intMatrix the integer matrix to be converted into a cell matrix
@@ -67,7 +87,10 @@ public final class Sudoku {
      * @throws ValueOutOfBoundsException if the indexes of the row or the column are out of the bounds or the value of
      *                                   the cell is out of bounds
      */
-    private static @NotNull Cell[][] intMatrixToCellMatrix(final @NotNull int[][] intMatrix) throws ValueOutOfBoundsException {
+    private static
+    @NotNull
+    Cell[][] intMatrixToCellMatrix(final @NotNull int[][] intMatrix) throws
+            ValueOutOfBoundsException {
 
         if (intMatrix.length == 0) {
             throw new ValueOutOfBoundsException("the matrix og integer must have at least lenght 1");
@@ -104,6 +127,7 @@ public final class Sudoku {
      * @throws ValueOutOfBoundsException if the input row and the columns have length different from MAX_VALUE
      * @throws IllegalStateException     if the input mMatrix in not consistent
      */
+
     private void checkConsistency(final @NotNull Cell[][] matrix) throws IllegalStateException, ValueOutOfBoundsException {
 
         checkRowAndColumnCount(matrix);
@@ -231,14 +255,16 @@ public final class Sudoku {
      *
      * @return the sudoku matrix
      */
-    public @NotNull Cell[][] getMatrix() {
+    public
+    @NotNull
+    Cell[][] getMatrix() {
 
         return mMatrix;
     }
 
     /**
      * Gets the completeness of the sudoku
-     *
+     * <p>
      * A sudoku is complete if and only if it has all the boxes filled consistently
      * The consistency is guaranteed a priori by the structure and the algorithm
      *
@@ -411,11 +437,11 @@ public final class Sudoku {
 
     /**
      * Sets the value a cell of the sudoku.
-     *
+     * <p>
      * The method can work in two ways: the first one throws an {@see OperationNotAllowedException} if the value of the
      * cell is already present; the second one overrides the value and re-calculates the possible values of the whole matrix
      *
-     * @param cellWithValue the cell to be update. It must contain the new value, otherwise the method fires an {@see OperationNotAllowedException}
+     * @param cellWithValue              the cell to be update. It must contain the new value, otherwise the method fires an {@see OperationNotAllowedException}
      * @param resetIfValueAlreadyPresent specifies if the value must be overridden or not
      * @throws OperationNotAllowedException
      * @throws ValueOutOfBoundsException
@@ -476,7 +502,9 @@ public final class Sudoku {
      *
      * @return the first cell found without value and with only one possible value, if present; otherwise null
      */
-    public @Nullable Cell getFirstCellWithoutValueAndOnlyOnePossibleValue() {
+    public
+    @Nullable
+    Cell getFirstCellWithoutValueAndOnlyOnePossibleValue() {
 
         for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
             for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
@@ -512,5 +540,7 @@ public final class Sudoku {
         newCell.setValue(cell.getFirstPossibleValue());
         setCellValue(newCell, false);
     }
+
+    //TODO make equals method
 
 }

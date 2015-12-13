@@ -1,5 +1,6 @@
 package sudoku;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -374,4 +375,70 @@ public class CellTest {
         assert (cell.getFirstPossibleValue() == 2);
     }
 
+    //---------------------------------- Constructor for cloning -------------------------------
+
+    @Test()
+    public void testCloneConstructorNoValue() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+        final Cell cell = new Cell(rowIndex, columnIndex);
+
+        final Cell copy = new Cell(cell);
+
+        assert(cell != copy);
+        assert(cell.getColumnIndex() == copy.getColumnIndex());
+        assert(cell.getRowIndex() == copy.getRowIndex());
+        assert(cell.getValue() == copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+        cell.setValue(5);
+
+        assert(cell.getValue() != copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+        copy.setValue(5);
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+    }
+
+    @Test()
+    public void testCloneConstructor() throws ValueOutOfBoundsException, OperationNotAllowedException {
+
+        final int rowIndex = 3;
+        final int columnIndex = 8;
+        final int value = 4;
+        final Cell cell = new Cell(rowIndex, columnIndex, value);
+        final Cell copy = new Cell(cell);
+
+        assert(cell != copy);
+        assert(cell.getColumnIndex() == copy.getColumnIndex());
+        assert(cell.getRowIndex() == copy.getRowIndex());
+        assert(cell.getValue() == copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+        cell.reset();
+        assert(cell.getColumnIndex() == copy.getColumnIndex());
+        assert(cell.getRowIndex() == copy.getRowIndex());
+        assert(cell.getValue() != copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+        cell.setValue(5);
+        assert(cell.getValue() != copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+        cell.reset();
+        cell.setValue(4);
+        assert(cell.getColumnIndex() == copy.getColumnIndex());
+        assert(cell.getRowIndex() == copy.getRowIndex());
+        assert(cell.getValue() == copy.getValue());
+        assert(cell.getPossibleValues() != copy.getPossibleValues());
+        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+
+    }
 }

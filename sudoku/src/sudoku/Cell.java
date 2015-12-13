@@ -81,6 +81,21 @@ public final class Cell {
     }
 
     /**
+     * Constructor
+     *
+     * @param cell the cell to copy
+     */
+    public Cell(final @NotNull Cell cell) {
+
+        mRowIndex = cell.getRowIndex();
+        mColumnIndex = cell.getColumnIndex();
+        mValue = cell.getValue();
+        mPossibleValues = getInitializedPossibleValues();
+        System.arraycopy(cell.getPossibleValues(), 0, mPossibleValues, 0, cell.getPossibleValues().length);
+
+    }
+
+    /**
      * Checks that the value is >= than {@see MIN_VALUE} and >= {@see MAX_VALUE}
      *
      * @param value the value of the cell
@@ -341,5 +356,7 @@ public final class Cell {
 
         return mex;
     }
+
+    //TODO make equals method
 }
 

@@ -4,9 +4,12 @@ import sudoku.Sudoku;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
 
+import java.util.Stack;
+
 
 /**
  * Created by bonfa on 11/10/15.
+ *
  */
 public class SudokuSolver {
 
@@ -32,9 +35,12 @@ public class SudokuSolver {
 
         try {
 
-            final Sudoku solution = solver.solve();
+            Stack<Sudoku> solutionStack = solver.solve();
 
-            printSudoku(solution);
+            for (Sudoku s : solutionStack) {
+
+                printSudoku(s);
+            }
 
         } catch (final Exception e) {
 
@@ -44,16 +50,20 @@ public class SudokuSolver {
         }
     }
 
-    private Sudoku solve() throws OperationNotAllowedException, ValueOutOfBoundsException {
+    private Stack<Sudoku> solve() throws OperationNotAllowedException, ValueOutOfBoundsException {
+
+        final Stack<Sudoku> solutionStack = new Stack<>();
+
+        solutionStack.add(new Sudoku(mSudoku));
 
         while (!mSudoku.isComplete() && mSudoku.hasCellWithoutValueAndOnlyOnePossibleValue()) {
 
-            printSudoku(mSudoku);
-
             mSudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+
+            solutionStack.add(new Sudoku(mSudoku));
         }
 
-        return mSudoku;
+        return solutionStack;
     }
 
 
@@ -62,6 +72,7 @@ public class SudokuSolver {
         final Cell[][] solutionMatrix = solution.getMatrix();
 
         System.out.print("Solution:\n");
+
         for (int i = 0; i < Sudoku.MAX_VALUE; i++) {
 
             for (int j = 0; j < Sudoku.MAX_VALUE; j++) {
