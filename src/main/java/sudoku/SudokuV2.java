@@ -1,18 +1,25 @@
 package sudoku;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SudokuV2 {
-    private final int numberOfRows;
-    private final int numberOfColumns;
+    private final List<List<CellV2>> cells;
 
-    public SudokuV2(int numberOfRows, int numberOfColumns) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
+    public SudokuV2(List<List<CellV2>> cells) {
+        this.cells = cells;
     }
 
-    public List<List<CellV2>> getCells() {
-        return Collections.nCopies(numberOfRows, Collections.nCopies(numberOfColumns, CellV2.emptyCell()));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuV2 sudokuV2 = (SudokuV2) o;
+        return Objects.equals(cells, sudokuV2.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cells);
     }
 }
