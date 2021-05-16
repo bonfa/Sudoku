@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -1765,7 +1767,7 @@ public class SudokuTest {
                 assertEquals (sudokuCell.getColumnIndex(), copyCell.getColumnIndex());
                 assertEquals (sudokuCell.getValue(), copyCell.getValue());
                 assertNotEquals (sudokuCell.getPossibleValues(), copyCell.getPossibleValues());
-                assertNotEquals (sudokuCell.getPossibleValues(), copyCell.getPossibleValues());
+                assertTrue (Objects.deepEquals(sudokuCell.getPossibleValues(), copyCell.getPossibleValues()));
             }
         }
     }
