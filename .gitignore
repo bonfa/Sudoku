@@ -22,3 +22,6 @@ proguard/
 .gradle
 build/
 out/
+
+#MAC
+.DS_Store
