@@ -8,3 +8,7 @@ Actually not working - still to finish
 - Sudoku (complete game)
 - Cell (building block)
 - Raw, Columns, Squares (something used to solve the game)
+
+
+## Possible evolutions
+- arbitrary number of raw - columns

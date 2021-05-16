@@ -1,8 +1,9 @@
-import helper.Log;
-import sudoku.Cell;
-import sudoku.Sudoku;
-import sudoku.exception.OperationNotAllowedException;
-import sudoku.exception.ValueOutOfBoundsException;
+package old;
+
+import old.sudoku.Cell;
+import old.sudoku.Sudoku;
+import old.sudoku.exception.OperationNotAllowedException;
+import old.sudoku.exception.ValueOutOfBoundsException;
 
 import java.util.Stack;
 
@@ -46,7 +47,7 @@ public class SudokuSolver {
 
             e.printStackTrace();
 
-            System.out.println("Impossibile risolvere il sudoku");
+            System.out.println("Impossibile risolvere il old.sudoku");
         }
     }
 

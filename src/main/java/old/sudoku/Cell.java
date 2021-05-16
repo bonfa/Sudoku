@@ -1,17 +1,16 @@
-package sudoku;
+package old.sudoku;
 
-import helper.Log;
-import sudoku.exception.OperationNotAllowedException;
-import sudoku.exception.ValueOutOfBoundsException;
+import old.sudoku.exception.OperationNotAllowedException;
+import old.sudoku.exception.ValueOutOfBoundsException;
 
 import java.security.InvalidParameterException;
 
 /**
  * Created by bonfa on 07/12/15.
  * <p>
- * This is the building block of the sudoku. It represents a single cell of the sudoku.
+ * This is the building block of the old.sudoku. It represents a single cell of the old.sudoku.
  * As such, it has a row index, a column index, a value and a set of the possible values.
- * The index of the row and the column in the matrix of the sudoku are immutable and can
+ * The index of the row and the column in the matrix of the old.sudoku are immutable and can
  * be defined only at construction time. The value and the possible values, instead, can be updated
  * after the cell has been created.
  * Tha value of the cell can be update by either explicitly calling the proper set method (setValue())
@@ -220,7 +219,7 @@ public final class Cell {
      * Set one of the possible values of the cell.
      * <p>
      * If the value of the cell has already been set, it is necessary call the method reset before attempting to call
-     * this method, otherwise the method throws an sudoku.exception.OperationNotAllowedException
+     * this method, otherwise the method throws an old.sudoku.exception.OperationNotAllowedException
      */
     public void setPossibleValue(final int value, final boolean allowed) throws InvalidParameterException, OperationNotAllowedException {
 

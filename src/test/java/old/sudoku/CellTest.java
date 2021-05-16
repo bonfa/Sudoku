@@ -1,8 +1,8 @@
-package sudoku;
+package old.sudoku;
 
 import org.junit.jupiter.api.Test;
-import sudoku.exception.OperationNotAllowedException;
-import sudoku.exception.ValueOutOfBoundsException;
+import old.sudoku.exception.OperationNotAllowedException;
+import old.sudoku.exception.ValueOutOfBoundsException;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
