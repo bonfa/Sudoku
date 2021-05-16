@@ -9,51 +9,52 @@ import static sudoku.CellV2.*;
 
 class SudokuFactoryTest {
 
+    private final SudokuFactory sudokuFactory = new SudokuFactory();
+
     @Test
     void singleCell() {
-        SudokuFactory sudokuFactory = new SudokuFactory();
-
         List<List<CellV2>> expectedCells = List.of(List.of(emptyCell()));
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudokuFactory.emptySudoku(1, 1));
+        SudokuV2 sudoku = sudokuFactory.emptySudoku(1, 1);
+
+        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
     }
 
     @Test
     void twoCells() {
-        SudokuFactory sudokuFactory = new SudokuFactory();
-
         List<List<CellV2>> expectedCells =
                 List.of(
                         List.of(emptyCell(), emptyCell())
                 );
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudokuFactory.emptySudoku(1, 2));
+        SudokuV2 sudoku = sudokuFactory.emptySudoku(1, 2);
+
+        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
     }
 
     @Test
     void twoVerticalCells() {
-        SudokuFactory sudokuFactory = new SudokuFactory();
-
         List<List<CellV2>> expectedCells =
                 List.of(
                         List.of(emptyCell()),
                         List.of(emptyCell())
                 );
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudokuFactory.emptySudoku(2,1));
+        SudokuV2 sudoku = sudokuFactory.emptySudoku(2, 1);
+
+        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
     }
 
     @Test
     void moreComplexCase() {
-        SudokuFactory sudokuFactory = new SudokuFactory();
-
         List<List<CellV2>> expectedCells =
                 List.of(
                         List.of(emptyCell(), emptyCell(), emptyCell()),
                         List.of(emptyCell(), emptyCell(), emptyCell())
                 );
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudokuFactory.emptySudoku(2,3));
-    }
+        SudokuV2 sudoku = sudokuFactory.emptySudoku(2, 3);
 
+        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
+    }
 }
