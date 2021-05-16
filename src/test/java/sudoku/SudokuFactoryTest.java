@@ -17,7 +17,7 @@ class SudokuFactoryTest {
 
         SudokuV2 sudoku = sudokuFactory.emptySudoku(1, 1);
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
+        Assertions.assertEquals(expectedCells, sudoku.getCells());
     }
 
     @Test
@@ -29,7 +29,7 @@ class SudokuFactoryTest {
 
         SudokuV2 sudoku = sudokuFactory.emptySudoku(1, 2);
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
+        Assertions.assertEquals(expectedCells, sudoku.getCells());
     }
 
     @Test
@@ -42,7 +42,7 @@ class SudokuFactoryTest {
 
         SudokuV2 sudoku = sudokuFactory.emptySudoku(2, 1);
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
+        Assertions.assertEquals(expectedCells, sudoku.getCells());
     }
 
     @Test
@@ -55,6 +55,6 @@ class SudokuFactoryTest {
 
         SudokuV2 sudoku = sudokuFactory.emptySudoku(2, 3);
 
-        Assertions.assertEquals(new SudokuV2(expectedCells), sudoku);
+        Assertions.assertEquals(expectedCells, sudoku.getCells());
     }
 }

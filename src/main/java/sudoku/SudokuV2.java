@@ -10,16 +10,7 @@ public class SudokuV2 {
         this.cells = cells;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SudokuV2 sudokuV2 = (SudokuV2) o;
-        return Objects.equals(cells, sudokuV2.cells);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(cells);
+    public List<List<CellV2>> getCells() {
+        return List.copyOf(cells);
     }
 }
