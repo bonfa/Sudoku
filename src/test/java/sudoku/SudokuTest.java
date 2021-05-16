@@ -13,18 +13,16 @@ import static org.junit.Assert.assertThrows;
  */
 public class SudokuTest {
 
-    private static final String TAG = SudokuTest.class.getSimpleName();
-
     //-------------------------- Dimensions-----------------------------------
 
     @Test
-    public void testSudokuErrorRowTooLowValues() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowTooLowValues() {
 
         assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(new int[][]{}));
     }
 
     @Test
-    public void testSudokuErrorRowTooManyValues() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowTooManyValues() {
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> new Sudoku(new int[][]{
                 {1},
@@ -41,7 +39,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorTooLowColumns() throws ValueOutOfBoundsException {
+    public void testSudokuErrorTooLowColumns() {
 
         final int[][] matrix = {
                 {1},
@@ -59,7 +57,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorTooManyColumns() throws ValueOutOfBoundsException {
+    public void testSudokuErrorTooManyColumns() {
 
         final int[][] matrix = {
                 {1},
@@ -80,7 +78,7 @@ public class SudokuTest {
     //-------------------------- Values --------------------------------------------
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_1() {
 
         final int[][] matrix = {
                 {-1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -98,7 +96,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, -1},
@@ -116,7 +114,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -134,7 +132,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -152,7 +150,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -170,7 +168,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_6() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_6() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -188,7 +186,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesNegative_7() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesNegative_7() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -206,7 +204,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_1() {
 
         final int[][] matrix = {
                 {10, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -224,7 +222,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 10},
@@ -242,7 +240,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -260,7 +258,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -278,7 +276,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -296,7 +294,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_6() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_6() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -314,7 +312,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorCheckValuesUpper_7() throws ValueOutOfBoundsException {
+    public void testSudokuErrorCheckValuesUpper_7() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -334,7 +332,7 @@ public class SudokuTest {
     //-------------------------- Row Consistency -----------------------------------
 
     @Test
-    public void testSudokuErrorRowNotConsistentFirst_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentFirst_1() {
 
         final int[][] matrix = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -352,7 +350,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentFirst_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentFirst_2() {
 
         final int[][] matrix = {
                 {1, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -370,7 +368,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentFirst_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentFirst_3() {
 
         final int[][] matrix = {
                 {1, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -388,7 +386,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentFirst_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentFirst_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -406,7 +404,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentFirst_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentFirst_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 1, 0, 0, 1, 0, 0},
@@ -425,7 +423,7 @@ public class SudokuTest {
 
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -443,7 +441,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -461,7 +459,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -479,7 +477,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -497,7 +495,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -515,7 +513,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentLast() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentLast() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -533,7 +531,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentMiddle_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentMiddle_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -551,7 +549,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentMiddle_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentMiddle_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -569,7 +567,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentMiddle_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentMiddle_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -587,7 +585,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentMiddle_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentMiddle_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -605,7 +603,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorRowNotConsistentMiddle_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorRowNotConsistentMiddle_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -625,7 +623,7 @@ public class SudokuTest {
     //-------------------------- Column Consistency -----------------------------------
 
     @Test
-    public void testSudokuErrorColumnNotConsistentFirst_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentFirst_1() {
 
         final int[][] matrix = {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -643,7 +641,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentFirst_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentFirst_2() {
 
         final int[][] matrix = {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -661,7 +659,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentFirst_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentFirst_3() {
 
         final int[][] matrix = {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -679,7 +677,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentFirst_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentFirst_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -697,7 +695,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentFirst_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentFirst_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -715,7 +713,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentLast_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentLast_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
@@ -733,7 +731,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentLast_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentLast_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
@@ -751,7 +749,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentLast_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentLast_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
@@ -769,7 +767,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentLast_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentLast_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -787,7 +785,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentLast_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentLast_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -805,7 +803,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentMiddle_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentMiddle_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
@@ -823,7 +821,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentMiddle_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentMiddle_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
@@ -842,7 +840,7 @@ public class SudokuTest {
 
 
     @Test
-    public void testSudokuErrorColumnNotConsistentMiddle_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentMiddle_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
@@ -860,7 +858,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentMiddle_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentMiddle_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -878,7 +876,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorColumnNotConsistentMiddle_5() throws ValueOutOfBoundsException {
+    public void testSudokuErrorColumnNotConsistentMiddle_5() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -898,7 +896,7 @@ public class SudokuTest {
     //-------------------------- Square Consistency -----------------------------------
 
     @Test
-    public void testSudokuErrorSquareNotConsistentFirst_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentFirst_1() {
 
         final int[][] matrix = {
                 {1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -916,7 +914,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentFirst_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentFirst_2() {
 
         final int[][] matrix = {
                 {1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -934,7 +932,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentFirst_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentFirst_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -952,7 +950,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentFirst_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentFirst_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -970,7 +968,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentLast_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentLast_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -988,7 +986,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentLast_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentLast_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1006,7 +1004,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentLast_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentLast_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1024,7 +1022,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentLast_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentLast_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1042,7 +1040,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentMiddle_1() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentMiddle_1() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1060,7 +1058,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentMiddle_2() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentMiddle_2() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1078,7 +1076,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentMiddle_3() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentMiddle_3() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1096,7 +1094,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuErrorSquareNotConsistentMiddle_4() throws ValueOutOfBoundsException {
+    public void testSudokuErrorSquareNotConsistentMiddle_4() {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1334,7 +1332,7 @@ public class SudokuTest {
     //-------------------------- Update Values -----------------------------------
 
     @Test
-    public void testSudokuUpdateCellValueErrorCellAlreadyHasValue() throws ValueOutOfBoundsException, OperationNotAllowedException {
+    public void testSudokuUpdateCellValueErrorCellAlreadyHasValue() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -1356,7 +1354,7 @@ public class SudokuTest {
     }
 
     @Test
-    public void testSudokuUpdateCellValueErrorCellNewCellWithoutVale() throws ValueOutOfBoundsException, OperationNotAllowedException {
+    public void testSudokuUpdateCellValueErrorCellNewCellWithoutVale() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
