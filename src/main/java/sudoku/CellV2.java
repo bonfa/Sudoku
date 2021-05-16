@@ -1,16 +1,33 @@
 package sudoku;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class CellV2 {
-    private final Integer value;
+    private Integer value;
 
     private CellV2(Integer value) {
         this.value = value;
     }
 
+    public boolean hasValue() {
+        return value != null;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Optional<Integer> getValue() {
+        return Optional.ofNullable(value);
+    }
+
     public static CellV2 emptyCell() {
         return new CellV2(null);
+    }
+
+    public static CellV2 cellWithValue(Integer value) {
+        return new CellV2(value);
     }
 
     @Override
