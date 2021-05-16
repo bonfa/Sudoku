@@ -1,7 +1,5 @@
 package sudoku;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -34,7 +32,7 @@ public final class Sudoku {
      *
      * @param sudoku the cell matrix which represents the sudoku to be solved
      */
-    public Sudoku(final @NotNull Cell[][] sudoku) throws ValueOutOfBoundsException {
+    public Sudoku(final Cell[][] sudoku) throws ValueOutOfBoundsException {
 
         checkConsistency(sudoku);
 
@@ -48,7 +46,7 @@ public final class Sudoku {
      *
      * @param intMatrix the matrix of integer to be converted in cell matrix which represents the sudoku to be solved
      */
-    public Sudoku(final @NotNull int[][] intMatrix) throws ValueOutOfBoundsException {
+    public Sudoku(final int[][] intMatrix) throws ValueOutOfBoundsException {
 
         final Cell[][] sudoku = intMatrixToCellMatrix(intMatrix);
 
@@ -64,7 +62,7 @@ public final class Sudoku {
      *
      * @param another the sudoku to copy
      */
-    public Sudoku(final @NotNull Sudoku another) throws ValueOutOfBoundsException {
+    public Sudoku(final Sudoku another) throws ValueOutOfBoundsException {
 
         checkConsistency(another.getMatrix());
 
@@ -87,9 +85,7 @@ public final class Sudoku {
      * @throws ValueOutOfBoundsException if the indexes of the row or the column are out of the bounds or the value of
      *                                   the cell is out of bounds
      */
-    private static
-    @NotNull
-    Cell[][] intMatrixToCellMatrix(final @NotNull int[][] intMatrix) throws
+    private static Cell[][] intMatrixToCellMatrix(final int[][] intMatrix) throws
             ValueOutOfBoundsException {
 
         if (intMatrix.length == 0) {
@@ -128,7 +124,7 @@ public final class Sudoku {
      * @throws IllegalStateException     if the input mMatrix in not consistent
      */
 
-    private void checkConsistency(final @NotNull Cell[][] matrix) throws IllegalStateException, ValueOutOfBoundsException {
+    private void checkConsistency(final Cell[][] matrix) throws IllegalStateException, ValueOutOfBoundsException {
 
         checkRowAndColumnCount(matrix);
 
@@ -146,7 +142,7 @@ public final class Sudoku {
      * @param matrix the sudoku matrix
      * @throws ValueOutOfBoundsException
      */
-    private static void checkRowAndColumnCount(final @NotNull Cell[][] matrix) throws ValueOutOfBoundsException {
+    private static void checkRowAndColumnCount(final Cell[][] matrix) throws ValueOutOfBoundsException {
 
         if (matrix.length != MAX_VALUE) {
             throw new ValueOutOfBoundsException("input mMatrix must have '" + MAX_VALUE + "' rows ");
@@ -166,7 +162,7 @@ public final class Sudoku {
      * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private static void checkRowsConsistency(final @NotNull Cell[][] matrix) throws IllegalStateException {
+    private static void checkRowsConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int rowIndex = 0; rowIndex < MAX_VALUE; rowIndex++) {
 
@@ -192,7 +188,7 @@ public final class Sudoku {
      * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private static void checkColumnsConsistency(final @NotNull Cell[][] matrix) throws IllegalStateException {
+    private static void checkColumnsConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int columnIndex = 0; columnIndex < MAX_VALUE; columnIndex++) {
 
@@ -216,7 +212,7 @@ public final class Sudoku {
      * @param matrix the sudoku matrix
      * @throws IllegalStateException
      */
-    private static void checkSquaresConsistency(final @NotNull Cell[][] matrix) throws IllegalStateException {
+    private static void checkSquaresConsistency(final Cell[][] matrix) throws IllegalStateException {
 
         for (int rowIndex = 0; rowIndex < MAX_VALUE - 1; rowIndex += SQUARE_LATE) {
             for (int columnIndex = 0; columnIndex < MAX_VALUE; columnIndex += SQUARE_LATE) {
@@ -233,7 +229,7 @@ public final class Sudoku {
      * @param columnIndex index of the column of the upper-left box of the square
      * @param matrix      the sudoku matrix
      */
-    private static void checkSingleSquareConsistency(final int rowIndex, final int columnIndex, final @NotNull Cell[][] matrix) {
+    private static void checkSingleSquareConsistency(final int rowIndex, final int columnIndex, final Cell[][] matrix) {
 
         for (int rowCount = rowIndex; rowCount < rowIndex + SQUARE_LATE; rowCount++) {
             for (int columnCount = columnIndex; columnCount < columnIndex + SQUARE_LATE; columnCount++) {
@@ -255,9 +251,7 @@ public final class Sudoku {
      *
      * @return the sudoku matrix
      */
-    public
-    @NotNull
-    Cell[][] getMatrix() {
+    public Cell[][] getMatrix() {
 
         return mMatrix;
     }
@@ -305,7 +299,7 @@ public final class Sudoku {
      * @param cell the cell whose value is removed from the possible values of the row, the column and the square the
      *             cell belongs to
      */
-    private void updateMatrixPossibleValues(final @NotNull Cell cell) {
+    private void updateMatrixPossibleValues(final Cell cell) {
 
         if (cell.hasValue()) {
 
@@ -332,7 +326,7 @@ public final class Sudoku {
      *
      * @Precondition cell.hasValue()
      */
-    private void updateMatrixPossibleValuesForRow(final @NotNull Cell cell) throws OperationNotAllowedException {
+    private void updateMatrixPossibleValuesForRow(final Cell cell) throws OperationNotAllowedException {
 
         assert cell.hasValue();
 
@@ -352,7 +346,7 @@ public final class Sudoku {
      *
      * @Precondition cell.hasValue()
      */
-    private void updateMatrixPossibleValuesForColumn(final @NotNull Cell cell) throws OperationNotAllowedException {
+    private void updateMatrixPossibleValuesForColumn(final Cell cell) throws OperationNotAllowedException {
 
         assert cell.hasValue();
 
@@ -371,7 +365,7 @@ public final class Sudoku {
      *
      * @Precondition cell.hasValue()
      */
-    private void updateMatrixPossibleValuesForSquare(final @NotNull Cell cell) throws OperationNotAllowedException {
+    private void updateMatrixPossibleValuesForSquare(final Cell cell) throws OperationNotAllowedException {
 
         assert cell.hasValue();
 
@@ -397,7 +391,7 @@ public final class Sudoku {
      * @param cell the cell the identifies the square
      * @return the column index of the center of the square of late SQUARE_LATE the cell belongs to
      */
-    private int getColumnIndexOfTheCenterOfTheSquare(final @NotNull Cell cell) {
+    private int getColumnIndexOfTheCenterOfTheSquare(final Cell cell) {
 
         int columnIndexOfTheCenterOfTheSquare;
         if (cell.getColumnIndex() % SQUARE_LATE == 0) {
@@ -419,7 +413,7 @@ public final class Sudoku {
      * @param cell the cell the identifies the square
      * @return the row index of the center of the square of late SQUARE_LATE the cell belongs to
      */
-    private int getRowIndexOfTheCenterOfTheSquare(final @NotNull Cell cell) {
+    private int getRowIndexOfTheCenterOfTheSquare(final Cell cell) {
 
         int rowIndexOfTheCenterOfTheSquare;
         if (cell.getRowIndex() % SQUARE_LATE == 0) {
@@ -446,7 +440,7 @@ public final class Sudoku {
      * @throws OperationNotAllowedException
      * @throws ValueOutOfBoundsException
      */
-    public void setCellValue(final @NotNull Cell cellWithValue, final boolean resetIfValueAlreadyPresent) throws OperationNotAllowedException, ValueOutOfBoundsException {
+    public void setCellValue(final Cell cellWithValue, final boolean resetIfValueAlreadyPresent) throws OperationNotAllowedException, ValueOutOfBoundsException {
 
         if (!cellWithValue.hasValue()) {
 
@@ -502,9 +496,7 @@ public final class Sudoku {
      *
      * @return the first cell found without value and with only one possible value, if present; otherwise null
      */
-    public
-    @Nullable
-    Cell getFirstCellWithoutValueAndOnlyOnePossibleValue() {
+    public Cell getFirstCellWithoutValueAndOnlyOnePossibleValue() {
 
         for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
             for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {

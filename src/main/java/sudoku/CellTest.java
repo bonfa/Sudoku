@@ -1,68 +1,69 @@
 package sudoku;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
 
 import java.lang.reflect.Field;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 /**
  * Created by bonfa on 05/10/15.
- *
  */
 public class CellTest {
 
     //------------------------------ Row/Column Index out of bound in constructor --------------------
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellErrorRowIndexLowerThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellErrorRowIndexLowerThanExpected() {
 
-        new Cell(-1, 5);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(-1, 5));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellErrorRowIndexHigherThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellErrorRowIndexHigherThanExpected() {
 
-        new Cell(9, 5);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(9, 5));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellErrorColumnIndexLowerThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellErrorColumnIndexLowerThanExpected() {
 
-        new Cell(4, -1);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, -1));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellErrorColumnIndexHigherThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellErrorColumnIndexHigherThanExpected() {
 
-        new Cell(4, 9);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, 9));
     }
 
     //---------------------------------- Value out of bounds in constructor ---------------------------
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellValueMuchLowerThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellValueMuchLowerThanExpected() {
 
-        new Cell(4, 5, -1);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, 5, -1));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellValueLowerThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellValueLowerThanExpected() {
 
-        new Cell(4, 5, 0);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, 5, 0));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellValueMuchHigherThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellValueMuchHigherThanExpected() {
 
-        new Cell(4, 5, 10);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, 5, 10));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
-    public void testCellValueHigherThanExpected() throws ValueOutOfBoundsException {
+    @Test
+    public void testCellValueHigherThanExpected() {
 
-        new Cell(4, 5, 11);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Cell(4, 5, 11));
     }
 
     //---------------------------------- Constructors ok -------------------------------
@@ -81,7 +82,7 @@ public class CellTest {
         assert (cell.getRowIndex() == rowIndex);
         assert (cell.getColumnIndex() == columnIndex);
         assert (cell.hasValue() == false);
-        assert (cell.getValue() == (Integer)field.get(cell));
+        assert (cell.getValue() == (Integer) field.get(cell));
         assert (cell.getPossibleValues() != null);
         assert (cell.getPossibleValues().length == Sudoku.MAX_VALUE);
         assert (cell.getPossibleValues()[0] == true);
@@ -110,7 +111,7 @@ public class CellTest {
         assert (cell.getRowIndex() == rowIndex);
         assert (cell.getColumnIndex() == columnIndex);
         assert (cell.hasValue() == false);
-        assert (cell.getValue() == (Integer)field.get(cell));
+        assert (cell.getValue() == (Integer) field.get(cell));
         assert (cell.getPossibleValues() != null);
         assert (cell.getPossibleValues().length == Sudoku.MAX_VALUE);
         assert (cell.getPossibleValues()[0] == true);
@@ -139,7 +140,7 @@ public class CellTest {
         assert (cell.getRowIndex() == rowIndex);
         assert (cell.getColumnIndex() == columnIndex);
         assert (cell.hasValue() == false);
-        assert (cell.getValue() == (Integer)field.get(cell));
+        assert (cell.getValue() == (Integer) field.get(cell));
         assert (cell.getPossibleValues() != null);
         assert (cell.getPossibleValues().length == Sudoku.MAX_VALUE);
         assert (cell.getPossibleValues()[0] == true);
@@ -237,15 +238,16 @@ public class CellTest {
 
     //---------------------------------- getPossibleValues -------------------------------
 
-    @Test(expected = OperationNotAllowedException.class)
-    public void testCellWriteAlreadyDefinedValueWithoutReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
+    @Test
+    public void testCellWriteAlreadyDefinedValueWithoutReset() throws ValueOutOfBoundsException {
 
         final int rowIndex = 3;
         final int columnIndex = 8;
         final int value = 4;
 
         final Cell cell = new Cell(rowIndex, columnIndex, value);
-        cell.setValue(3);
+
+        assertThrows(OperationNotAllowedException.class, () -> cell.setValue(3));
     }
 
     @Test()
@@ -272,7 +274,7 @@ public class CellTest {
     }
 
     @Test()
-     public void testCellWriteAndReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
+    public void testCellWriteAndReset() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int rowIndex = 3;
         final int columnIndex = 8;
@@ -386,22 +388,22 @@ public class CellTest {
 
         final Cell copy = new Cell(cell);
 
-        assert(cell != copy);
-        assert(cell.getColumnIndex() == copy.getColumnIndex());
-        assert(cell.getRowIndex() == copy.getRowIndex());
-        assert(cell.getValue() == copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell != copy);
+        assert (cell.getColumnIndex() == copy.getColumnIndex());
+        assert (cell.getRowIndex() == copy.getRowIndex());
+        assert (cell.getValue() == copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
         cell.setValue(5);
 
-        assert(cell.getValue() != copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell.getValue() != copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
         copy.setValue(5);
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
     }
 
     @Test()
@@ -413,32 +415,32 @@ public class CellTest {
         final Cell cell = new Cell(rowIndex, columnIndex, value);
         final Cell copy = new Cell(cell);
 
-        assert(cell != copy);
-        assert(cell.getColumnIndex() == copy.getColumnIndex());
-        assert(cell.getRowIndex() == copy.getRowIndex());
-        assert(cell.getValue() == copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell != copy);
+        assert (cell.getColumnIndex() == copy.getColumnIndex());
+        assert (cell.getRowIndex() == copy.getRowIndex());
+        assert (cell.getValue() == copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
         cell.reset();
-        assert(cell.getColumnIndex() == copy.getColumnIndex());
-        assert(cell.getRowIndex() == copy.getRowIndex());
-        assert(cell.getValue() != copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell.getColumnIndex() == copy.getColumnIndex());
+        assert (cell.getRowIndex() == copy.getRowIndex());
+        assert (cell.getValue() != copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
         cell.setValue(5);
-        assert(cell.getValue() != copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell.getValue() != copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (!ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
         cell.reset();
         cell.setValue(4);
-        assert(cell.getColumnIndex() == copy.getColumnIndex());
-        assert(cell.getRowIndex() == copy.getRowIndex());
-        assert(cell.getValue() == copy.getValue());
-        assert(cell.getPossibleValues() != copy.getPossibleValues());
-        assert(ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assert (cell.getColumnIndex() == copy.getColumnIndex());
+        assert (cell.getRowIndex() == copy.getRowIndex());
+        assert (cell.getValue() == copy.getValue());
+        assert (cell.getPossibleValues() != copy.getPossibleValues());
+        assert (ArrayUtils.isEquals(cell.getPossibleValues(), copy.getPossibleValues()));
 
     }
 }

@@ -1,7 +1,5 @@
 package iterativeProcess.tree;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  */
 public interface SolvableTreeNodeData {
 
-    @NotNull List<SolvableTreeNodeData> getChildren();
+    List<SolvableTreeNodeData> getChildren();
 
     boolean isComplete();
 

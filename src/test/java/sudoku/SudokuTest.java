@@ -1,10 +1,11 @@
 package sudoku;
 
-import helper.Log;
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
+
+import static org.junit.Assert.assertThrows;
 
 /**
  * Created by bonfa on 05/10/15.
@@ -16,16 +17,16 @@ public class SudokuTest {
 
     //-------------------------- Dimensions-----------------------------------
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorRowTooLowValues() throws ValueOutOfBoundsException {
 
-        new Sudoku(new int[][]{});
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(new int[][]{}));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorRowTooManyValues() throws ValueOutOfBoundsException {
 
-        new Sudoku(new int[][]{
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new Sudoku(new int[][]{
                 {1},
                 {2},
                 {3},
@@ -36,10 +37,10 @@ public class SudokuTest {
                 {8},
                 {9},
                 {10}
-        });
+        }));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorTooLowColumns() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -54,10 +55,10 @@ public class SudokuTest {
                 {9}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IndexOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorTooManyColumns() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -73,12 +74,12 @@ public class SudokuTest {
                 {10}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IndexOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
     //-------------------------- Values --------------------------------------------
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -93,10 +94,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -111,10 +112,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -129,10 +130,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -147,10 +148,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -165,10 +166,10 @@ public class SudokuTest {
                 {-1, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_6() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -183,10 +184,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, -1}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesNegative_7() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -201,10 +202,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -219,10 +220,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -237,10 +238,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -255,10 +256,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -273,10 +274,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -291,10 +292,10 @@ public class SudokuTest {
                 {10, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_6() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -309,10 +310,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 10}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = ValueOutOfBoundsException.class)
+    @Test
     public void testSudokuErrorCheckValuesUpper_7() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -327,12 +328,12 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(ValueOutOfBoundsException.class, () -> new Sudoku(matrix));
     }
 
     //-------------------------- Row Consistency -----------------------------------
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentFirst_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -347,10 +348,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentFirst_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -365,10 +366,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentFirst_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -383,10 +384,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentFirst_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -401,10 +402,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentFirst_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -419,11 +420,11 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -438,10 +439,10 @@ public class SudokuTest {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -456,10 +457,10 @@ public class SudokuTest {
                 {1, 0, 0, 0, 0, 0, 0, 0, 1}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -474,10 +475,10 @@ public class SudokuTest {
                 {1, 1, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -492,10 +493,10 @@ public class SudokuTest {
                 {0, 1, 0, 0, 0, 0, 0, 0, 1}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -510,10 +511,10 @@ public class SudokuTest {
                 {0, 1, 0, 0, 0, 0, 1, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentLast() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -528,10 +529,10 @@ public class SudokuTest {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentMiddle_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -546,10 +547,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentMiddle_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -564,10 +565,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentMiddle_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -582,10 +583,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentMiddle_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -600,10 +601,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorRowNotConsistentMiddle_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -618,12 +619,12 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
     //-------------------------- Column Consistency -----------------------------------
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentFirst_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -638,10 +639,10 @@ public class SudokuTest {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentFirst_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -656,10 +657,10 @@ public class SudokuTest {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentFirst_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -674,10 +675,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentFirst_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -692,10 +693,10 @@ public class SudokuTest {
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentFirst_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -710,10 +711,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentLast_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -728,10 +729,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentLast_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -746,10 +747,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentLast_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -764,10 +765,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentLast_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -782,10 +783,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 8},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentLast_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -800,10 +801,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentMiddle_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -818,10 +819,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentMiddle_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -836,11 +837,11 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentMiddle_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -855,10 +856,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentMiddle_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -873,10 +874,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 8, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorColumnNotConsistentMiddle_5() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -891,12 +892,12 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
     //-------------------------- Square Consistency -----------------------------------
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentFirst_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -911,10 +912,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentFirst_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -929,10 +930,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentFirst_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -947,10 +948,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentFirst_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -965,10 +966,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentLast_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -983,10 +984,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentLast_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1001,10 +1002,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 1},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentLast_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1019,10 +1020,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 1},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentLast_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1037,10 +1038,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentMiddle_1() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1055,10 +1056,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentMiddle_2() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1073,10 +1074,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentMiddle_3() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1091,10 +1092,10 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void testSudokuErrorSquareNotConsistentMiddle_4() throws ValueOutOfBoundsException {
 
         final int[][] matrix = {
@@ -1109,7 +1110,7 @@ public class SudokuTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
 
-        new Sudoku(matrix);
+        assertThrows(IllegalStateException.class, () -> new Sudoku(matrix));
     }
 
 
@@ -1332,7 +1333,7 @@ public class SudokuTest {
 
     //-------------------------- Update Values -----------------------------------
 
-    @Test(expected = OperationNotAllowedException.class)
+    @Test
     public void testSudokuUpdateCellValueErrorCellAlreadyHasValue() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int[][] matrix = {
@@ -1351,10 +1352,10 @@ public class SudokuTest {
         final int rowIndex = 3;
         final int columnIndex = 2;
 
-        sudoku.setCellValue(new Cell(rowIndex, columnIndex, 4), false);
+        assertThrows(OperationNotAllowedException.class, () -> sudoku.setCellValue(new Cell(rowIndex, columnIndex, 4), false));
     }
 
-    @Test(expected = OperationNotAllowedException.class)
+    @Test
     public void testSudokuUpdateCellValueErrorCellNewCellWithoutVale() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int[][] matrix = {
@@ -1373,7 +1374,7 @@ public class SudokuTest {
         final int rowIndex = 3;
         final int columnIndex = 2;
 
-        sudoku.setCellValue(new Cell(rowIndex, columnIndex), false);
+        assertThrows(OperationNotAllowedException.class, () -> sudoku.setCellValue(new Cell(rowIndex, columnIndex), false));
     }
 
     @Test()
@@ -1716,7 +1717,7 @@ public class SudokuTest {
         assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == false);
     }
 
-    @Test(expected = OperationNotAllowedException.class)
+    @Test
     public void testSudokuSetVariableWithOnlyOnePossibleValueError() throws ValueOutOfBoundsException, OperationNotAllowedException {
 
         final int[][] matrix = {
@@ -1735,7 +1736,7 @@ public class SudokuTest {
         assert (sudoku.hasCellWithoutValueAndOnlyOnePossibleValue() == false);
         assert (sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue() == null);
 
-        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+        assertThrows(OperationNotAllowedException.class, () -> sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue());
     }
 
     //-------------------------- Constructor for cloning -----------------------------------

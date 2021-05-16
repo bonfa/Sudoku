@@ -1,6 +1,5 @@
 package sudoku;
 
-import com.sun.istack.internal.NotNull;
 import helper.Log;
 import sudoku.exception.OperationNotAllowedException;
 import sudoku.exception.ValueOutOfBoundsException;
@@ -85,7 +84,7 @@ public final class Cell {
      *
      * @param cell the cell to copy
      */
-    public Cell(final @NotNull Cell cell) {
+    public Cell(final Cell cell) {
 
         mRowIndex = cell.getRowIndex();
         mColumnIndex = cell.getColumnIndex();
@@ -134,9 +133,7 @@ public final class Cell {
      *
      * @return the possible values array in the initial state
      */
-    private
-    @NotNull
-    boolean[] getInitializedPossibleValues() {
+    private boolean[] getInitializedPossibleValues() {
 
         final boolean[] possibleValues = new boolean[Sudoku.MAX_VALUE];
 
@@ -344,9 +341,7 @@ public final class Cell {
      * @param possibleValues the possible values of the cell
      * @return a string representation of the possible values
      */
-    public static
-    @NotNull
-    String possibleValuesToString(final @NotNull boolean[] possibleValues) {
+    public static String possibleValuesToString(final boolean[] possibleValues) {
 
         String mex = "Possible Values: {";
         for (final boolean b : possibleValues) {

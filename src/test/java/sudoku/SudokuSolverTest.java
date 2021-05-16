@@ -1,4 +1,4 @@
-import org.junit.Test;
+package sudoku;
 
 /**
  * Created by bonfa on 11/10/15.
