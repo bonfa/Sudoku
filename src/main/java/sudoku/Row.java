@@ -1,5 +1,6 @@
 package sudoku;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -27,16 +28,16 @@ public class Row {
 
     public boolean setOneNumber() {
         if (isThereOnlyAnEmptyCell()) {
-            CellV2 theSingleEmptyCell = emptyCells().stream().findFirst().get();
-            Set<Integer> values = allPossibleValues();
-            values.removeAll(valuesAlreadyPresent());
-            theSingleEmptyCell.setValue(values.stream().findFirst().get());
-            return true;
+            return emptyCells().stream().findFirst().map(tsec -> {
+                Set<Integer> all = difference(allThePossibleValues(), valuesAlreadyPresent());
+                tsec.setValue(all.stream().findFirst().get());
+                return true;
+            }).orElse(false);
         }
         return false;
     }
 
-    private Set<Integer> allPossibleValues() {
+    private Set<Integer> allThePossibleValues() {
         return IntStream.range(1, size() + 1).boxed().collect(Collectors.toSet());
     }
 
@@ -56,5 +57,11 @@ public class Row {
 
     private boolean isThereOnlyAnEmptyCell() {
         return size() == valuesAlreadyPresent().size() + 1;
+    }
+
+    private static Set<Integer> difference(Set<Integer> first, Set<Integer> second) {
+        Set<Integer> difference = new HashSet<>(first);
+        difference.removeAll(second);
+        return difference;
     }
 }
