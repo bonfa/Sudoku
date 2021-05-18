@@ -30,7 +30,7 @@ class SudokuV2Test {
                 List.of(
                         rowWith(emptyCell(), cellWithValue(1)),
                         rowWith(cellWithValue(1), cellWithValue(2))
-                        )
+                )
         );
 
         assertFalse(sudokuV2.isSolved());
@@ -99,7 +99,40 @@ class SudokuV2Test {
         assertEquals(sudokuV2.getCells().get(1), List.of(cellWithValue(1), emptyCell()));
     }
 
-    private Row rowWith(CellV2 ... cells) {
+    @Test
+    void solveSimpleColumn() {
+        SudokuV2 sudokuV2 = new SudokuV2(
+                List.of(
+                        rowWith(cellWithValue(1), cellWithValue(2)),
+                        rowWith(emptyCell(), cellWithValue(1))
+                )
+        );
+
+        sudokuV2.setOneNumber();
+
+        assertTrue(sudokuV2.isSolved());
+        assertEquals(sudokuV2.getCells(), List.of(List.of(cellWithValue(1), cellWithValue(2)),
+                                                  List.of(cellWithValue(2), cellWithValue(1))));
+    }
+
+    @Test
+    void solveColumnTwoSteps() {
+        SudokuV2 sudokuV2 = new SudokuV2(
+                List.of(
+                        rowWith(cellWithValue(1), cellWithValue(2)),
+                        rowWith(emptyCell(), emptyCell())
+                )
+        );
+
+        sudokuV2.setOneNumber();
+
+        assertFalse(sudokuV2.isSolved());
+        assertEquals(sudokuV2.getCells(), List.of(List.of(cellWithValue(1), cellWithValue(2)),
+                                                  List.of(cellWithValue(2), emptyCell())));
+    }
+
+    private Row rowWith(CellV2... cells) {
         return new Row(List.of(cells));
     }
+
 }
