@@ -26,18 +26,17 @@ public class Row {
     }
 
     public boolean findOneNumber() {
-        Set<Integer> valuesAlreadyPresent = getCells().stream()
-                .filter(CellV2::hasValue)
-                .map(CellV2::getValue)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
+        Set<Integer> valuesAlreadyPresent = cells.stream()
+                                                 .filter(CellV2::hasValue)
+                                                 .map(CellV2::getValue)
+                                                 .map(Optional::get)
+                                                 .collect(Collectors.toSet());
 
         if (onlyAnEmptyCell(valuesAlreadyPresent)) {
-            CellV2 emptyCell = getCells()
-                    .stream()
-                    .filter(cellV2 -> !cellV2.hasValue())
-                    .findFirst()
-                    .get();
+            CellV2 emptyCell = cells.stream()
+                                    .filter(cellV2 -> !cellV2.hasValue())
+                                    .findFirst()
+                                    .get();
 
             Set<Integer> allPossibleValues = IntStream.range(1, size() + 1).boxed().collect(Collectors.toSet());
 
