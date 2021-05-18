@@ -52,7 +52,7 @@ class SudokuV2Test {
     void singleCellSolve() {
         SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(emptyCell())));
 
-        sudokuV2.findOneNumber();
+        sudokuV2.setOneNumber();
 
         assertTrue(sudokuV2.isSolved());
         assertEquals(sudokuV2.getCells(), List.of(List.of(cellWithValue(1))));
@@ -62,7 +62,7 @@ class SudokuV2Test {
     void solveSimpleRow() {
         SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(emptyCell(), cellWithValue(1))));
 
-        sudokuV2.findOneNumber();
+        sudokuV2.setOneNumber();
 
         assertTrue(sudokuV2.isSolved());
         assertEquals(sudokuV2.getCells(), List.of(List.of(cellWithValue(2), cellWithValue(1))));
@@ -77,7 +77,7 @@ class SudokuV2Test {
                 )
         );
 
-        sudokuV2.findOneNumber();
+        sudokuV2.setOneNumber();
 
         assertFalse(sudokuV2.isSolved());
         assertEquals(sudokuV2.getCells().get(1), List.of(cellWithValue(1), cellWithValue(2)));
@@ -92,7 +92,7 @@ class SudokuV2Test {
                 )
         );
 
-        sudokuV2.findOneNumber();
+        sudokuV2.setOneNumber();
 
         assertFalse(sudokuV2.isSolved());
         assertEquals(sudokuV2.getCells().get(0), List.of(cellWithValue(1), cellWithValue(2)));

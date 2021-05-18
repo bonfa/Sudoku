@@ -20,7 +20,7 @@ public class SudokuV2 {
         return rows.stream().allMatch(Row::isSolved);
     }
 
-    public void findOneNumber() {
+    public void setOneNumber() {
         for (Row row : rows) {
             if (row.setOneNumber())
                 return;
