@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Row {
+public class Cells {
     private final List<CellV2> cells;
 
-    public Row(List<CellV2> cells) {
+    public Cells(List<CellV2> cells) {
         this.cells = cells;
     }
 

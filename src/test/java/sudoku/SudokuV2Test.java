@@ -131,8 +131,8 @@ class SudokuV2Test {
                                                   List.of(cellWithValue(2), emptyCell())));
     }
 
-    private Row rowWith(CellV2... cells) {
-        return new Row(List.of(cells));
+    private Cells rowWith(CellV2... cells) {
+        return new Cells(List.of(cells));
     }
 
 }
