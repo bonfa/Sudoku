@@ -28,12 +28,17 @@ public class Row {
 
     public boolean setOneNumber() {
         if (isThereOnlyAnEmptyCell()) {
-            return emptyCells().stream().findFirst().map(theSingleEmptyCell -> {
-                theSingleEmptyCell.setValue(missingValues().stream().findFirst().get());
-                return true;
-            }).orElse(false);
+            return emptyCells().stream()
+                               .findFirst()
+                               .map(this::update)
+                               .orElse(false);
         }
         return false;
+    }
+
+    private boolean update(CellV2 theSingleEmptyCell) {
+        theSingleEmptyCell.setValue(missingValues().stream().findFirst().get());
+        return true;
     }
 
     private Set<Integer> missingValues() {
