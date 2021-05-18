@@ -29,7 +29,7 @@ public class Row {
         if (isThereOnlyAnEmptyCell()) {
             CellV2 theSingleEmptyCell = emptyCells().stream().findFirst().get();
             Set<Integer> values = allPossibleValues();
-            values.removeAll(getValuesAlreadyPresent());
+            values.removeAll(valuesAlreadyPresent());
             theSingleEmptyCell.setValue(values.stream().findFirst().get());
             return true;
         }
@@ -46,7 +46,7 @@ public class Row {
                     .collect(Collectors.toList());
     }
 
-    private Set<Integer> getValuesAlreadyPresent() {
+    private Set<Integer> valuesAlreadyPresent() {
         return cells.stream()
                     .filter(CellV2::hasValue)
                     .map(CellV2::getValue)
@@ -55,6 +55,6 @@ public class Row {
     }
 
     private boolean isThereOnlyAnEmptyCell() {
-        return size() == getValuesAlreadyPresent().size() + 1;
+        return size() == valuesAlreadyPresent().size() + 1;
     }
 }
