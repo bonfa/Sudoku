@@ -25,32 +25,36 @@ public class Row {
         return cells.stream().allMatch(CellV2::hasValue);
     }
 
-    public boolean findOneNumber() {
-        Set<Integer> valuesAlreadyPresent = cells.stream()
-                                                 .filter(CellV2::hasValue)
-                                                 .map(CellV2::getValue)
-                                                 .map(Optional::get)
-                                                 .collect(Collectors.toSet());
-
-        if (onlyAnEmptyCell(valuesAlreadyPresent)) {
-            CellV2 emptyCell = cells.stream()
-                                    .filter(cellV2 -> !cellV2.hasValue())
-                                    .findFirst()
-                                    .get();
-
-            Set<Integer> allPossibleValues = IntStream.range(1, size() + 1).boxed().collect(Collectors.toSet());
-
-            allPossibleValues.removeAll(valuesAlreadyPresent);
-
-            emptyCell.setValue(allPossibleValues.stream().findFirst().get());
-
+    public boolean setOneNumber() {
+        if (isThereOnlyAnEmptyCell()) {
+            CellV2 theSingleEmptyCell = emptyCells().stream().findFirst().get();
+            Set<Integer> values = allPossibleValues();
+            values.removeAll(getValuesAlreadyPresent());
+            theSingleEmptyCell.setValue(values.stream().findFirst().get());
             return true;
         }
-
         return false;
     }
 
-    private boolean onlyAnEmptyCell(Set<Integer> valuesAlreadyPresent) {
-        return size() == valuesAlreadyPresent.size() + 1;
+    private Set<Integer> allPossibleValues() {
+        return IntStream.range(1, size() + 1).boxed().collect(Collectors.toSet());
+    }
+
+    private List<CellV2> emptyCells() {
+        return cells.stream()
+                    .filter(cellV2 -> !cellV2.hasValue())
+                    .collect(Collectors.toList());
+    }
+
+    private Set<Integer> getValuesAlreadyPresent() {
+        return cells.stream()
+                    .filter(CellV2::hasValue)
+                    .map(CellV2::getValue)
+                    .map(Optional::get)
+                    .collect(Collectors.toSet());
+    }
+
+    private boolean isThereOnlyAnEmptyCell() {
+        return size() == getValuesAlreadyPresent().size() + 1;
     }
 }

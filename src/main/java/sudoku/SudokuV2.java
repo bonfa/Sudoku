@@ -22,7 +22,7 @@ public class SudokuV2 {
 
     public void findOneNumber() {
         for (Row row : rows) {
-            if (row.findOneNumber())
+            if (row.setOneNumber())
                 return;
         }
     }
