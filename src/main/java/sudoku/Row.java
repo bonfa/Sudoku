@@ -28,13 +28,16 @@ public class Row {
 
     public boolean setOneNumber() {
         if (isThereOnlyAnEmptyCell()) {
-            return emptyCells().stream().findFirst().map(tsec -> {
-                Set<Integer> all = difference(allThePossibleValues(), valuesAlreadyPresent());
-                tsec.setValue(all.stream().findFirst().get());
+            return emptyCells().stream().findFirst().map(theSingleEmptyCell -> {
+                theSingleEmptyCell.setValue(missingValues().stream().findFirst().get());
                 return true;
             }).orElse(false);
         }
         return false;
+    }
+
+    private Set<Integer> missingValues() {
+        return difference(allThePossibleValues(), valuesAlreadyPresent());
     }
 
     private Set<Integer> allThePossibleValues() {
