@@ -32,21 +32,21 @@ public class SudokuV2 {
         }
     }
 
-    private boolean solveSingleRow(List<CellV2> firstRow) {
-        Set<Integer> valuesAlreadyPresent = firstRow.stream()
+    private boolean solveSingleRow(List<CellV2> row) {
+        Set<Integer> valuesAlreadyPresent = row.stream()
                                                     .filter(CellV2::hasValue)
                                                     .map(CellV2::getValue)
                                                     .map(Optional::get)
                                                     .collect(Collectors.toSet());
 
-        if (onlyAnEmptyCell(firstRow, valuesAlreadyPresent))
+        if (onlyAnEmptyCell(row, valuesAlreadyPresent))
         {
-            CellV2 emptyCell = firstRow.stream()
+            CellV2 emptyCell = row.stream()
                                        .filter(cellV2 -> !cellV2.hasValue())
                                        .findFirst()
                                        .get();
 
-            Set<Integer> allPossibleValues = IntStream.range(1, firstRow.size() + 1).boxed().collect(Collectors.toSet());
+            Set<Integer> allPossibleValues = IntStream.range(1, row.size() + 1).boxed().collect(Collectors.toSet());
 
             allPossibleValues.removeAll(valuesAlreadyPresent);
 
@@ -58,7 +58,7 @@ public class SudokuV2 {
         return false;
     }
 
-    private boolean onlyAnEmptyCell(List<CellV2> firstRow, Set<Integer> valuesAlreadyPresent) {
-        return firstRow.size() == valuesAlreadyPresent.size() + 1;
+    private boolean onlyAnEmptyCell(List<CellV2> row, Set<Integer> valuesAlreadyPresent) {
+        return row.size() == valuesAlreadyPresent.size() + 1;
     }
 }
