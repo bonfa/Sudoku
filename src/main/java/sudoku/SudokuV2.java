@@ -1,64 +1,29 @@
 package sudoku;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class SudokuV2 {
-    private List<List<CellV2>> cells;
+    private final List<Row> rows;
 
-    public SudokuV2(List<List<CellV2>> cells) {
-        this.cells = cells;
+    public SudokuV2(List<Row> rows) {
+        this.rows = rows;
     }
 
     public List<List<CellV2>> getCells() {
-        return List.copyOf(cells);
+        return List.copyOf(rows.stream()
+                               .map(Row::getCells)
+                               .collect(Collectors.toList()));
     }
 
     public boolean isSolved() {
-        return cells.stream().allMatch(c -> c.stream().allMatch(CellV2::hasValue));
+        return rows.stream().allMatch(Row::isSolved);
     }
 
     public void findOneNumber() {
-        if (cells.size() == 1 && cells.get(0).size() == 1) {
-            cells = List.of(List.of(CellV2.cellWithValue(1)));
-        }
-
-        for (List<CellV2> row: cells) {
-            if (solveSingleRow(row))
+        for (Row row : rows) {
+            if (row.findOneNumber())
                 return;
         }
-    }
-
-    private boolean solveSingleRow(List<CellV2> row) {
-        Set<Integer> valuesAlreadyPresent = row.stream()
-                                                    .filter(CellV2::hasValue)
-                                                    .map(CellV2::getValue)
-                                                    .map(Optional::get)
-                                                    .collect(Collectors.toSet());
-
-        if (onlyAnEmptyCell(row, valuesAlreadyPresent))
-        {
-            CellV2 emptyCell = row.stream()
-                                       .filter(cellV2 -> !cellV2.hasValue())
-                                       .findFirst()
-                                       .get();
-
-            Set<Integer> allPossibleValues = IntStream.range(1, row.size() + 1).boxed().collect(Collectors.toSet());
-
-            allPossibleValues.removeAll(valuesAlreadyPresent);
-
-            emptyCell.setValue(allPossibleValues.stream().findFirst().get());
-
-            return true;
-        }
-
-        return false;
-    }
-
-    private boolean onlyAnEmptyCell(List<CellV2> row, Set<Integer> valuesAlreadyPresent) {
-        return row.size() == valuesAlreadyPresent.size() + 1;
     }
 }

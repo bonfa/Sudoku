@@ -12,14 +12,14 @@ class SudokuV2Test {
 
     @Test
     void singleCellNotSolved() {
-        SudokuV2 sudokuV2 = new SudokuV2(List.of(List.of(emptyCell())));
+        SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(emptyCell())));
 
         assertFalse(sudokuV2.isSolved());
     }
 
     @Test
     void singleCellSolved() {
-        SudokuV2 sudokuV2 = new SudokuV2(List.of(List.of(cellWithValue(1))));
+        SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(cellWithValue(1))));
 
         assertTrue(sudokuV2.isSolved());
     }
@@ -28,8 +28,8 @@ class SudokuV2Test {
     void manyCellsNotSolved() {
         SudokuV2 sudokuV2 = new SudokuV2(
                 List.of(
-                        List.of(emptyCell(), cellWithValue(1)),
-                        List.of(cellWithValue(1), cellWithValue(2))
+                        rowWith(emptyCell(), cellWithValue(1)),
+                        rowWith(cellWithValue(1), cellWithValue(2))
                         )
         );
 
@@ -40,8 +40,8 @@ class SudokuV2Test {
     void manyCellsSolved() {
         SudokuV2 sudokuV2 = new SudokuV2(
                 List.of(
-                        List.of(cellWithValue(2), cellWithValue(1)),
-                        List.of(cellWithValue(1), cellWithValue(2))
+                        rowWith(cellWithValue(2), cellWithValue(1)),
+                        rowWith(cellWithValue(1), cellWithValue(2))
                 )
         );
 
@@ -50,7 +50,7 @@ class SudokuV2Test {
 
     @Test
     void singleCellSolve() {
-        SudokuV2 sudokuV2 = new SudokuV2(List.of(List.of(emptyCell())));
+        SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(emptyCell())));
 
         sudokuV2.findOneNumber();
 
@@ -60,7 +60,7 @@ class SudokuV2Test {
 
     @Test
     void solveSimpleRow() {
-        SudokuV2 sudokuV2 = new SudokuV2(List.of(List.of(emptyCell(), cellWithValue(1))));
+        SudokuV2 sudokuV2 = new SudokuV2(List.of(rowWith(emptyCell(), cellWithValue(1))));
 
         sudokuV2.findOneNumber();
 
@@ -72,8 +72,8 @@ class SudokuV2Test {
     void solveSecondRow() {
         SudokuV2 sudokuV2 = new SudokuV2(
                 List.of(
-                        List.of(emptyCell(), emptyCell()),
-                        List.of(cellWithValue(1), emptyCell())
+                        rowWith(emptyCell(), emptyCell()),
+                        rowWith(cellWithValue(1), emptyCell())
                 )
         );
 
@@ -87,8 +87,8 @@ class SudokuV2Test {
     void oneStepSolveJustOneRow() {
         SudokuV2 sudokuV2 = new SudokuV2(
                 List.of(
-                        List.of(cellWithValue(1), emptyCell()),
-                        List.of(cellWithValue(1), emptyCell())
+                        rowWith(cellWithValue(1), emptyCell()),
+                        rowWith(cellWithValue(1), emptyCell())
                 )
         );
 
@@ -97,5 +97,9 @@ class SudokuV2Test {
         assertFalse(sudokuV2.isSolved());
         assertEquals(sudokuV2.getCells().get(0), List.of(cellWithValue(1), cellWithValue(2)));
         assertEquals(sudokuV2.getCells().get(1), List.of(cellWithValue(1), emptyCell()));
+    }
+
+    private Row rowWith(CellV2 ... cells) {
+        return new Row(List.of(cells));
     }
 }
