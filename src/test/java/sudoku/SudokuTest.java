@@ -14,7 +14,7 @@ class SudokuTest {
     void creation() {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
 
         assertEquals(cells, sudoku.getCells());
     }
@@ -23,7 +23,7 @@ class SudokuTest {
     void notSolved() {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
 
         assertFalse(sudoku.isSolved());
     }
@@ -32,7 +32,7 @@ class SudokuTest {
     void solved() {
         List<List<Cell>> cells = List.of(List.of(cellWithValue(0, 0, 4)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
 
         assertTrue(sudoku.isSolved());
     }
@@ -41,7 +41,7 @@ class SudokuTest {
     void oneCellSolve() {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -52,7 +52,7 @@ class SudokuTest {
     void twoCellsSolveByRow() {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0), cellWithValue(0, 1, 1)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -64,7 +64,7 @@ class SudokuTest {
     void twoCellsSolveByRow_2() {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0), cellWithValue(0, 1, 2)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -76,7 +76,7 @@ class SudokuTest {
     void twoCellsSolveByRow_3() {
         List<List<Cell>> cells = List.of(List.of(cellWithValue(0, 0, 1), emptyCell(0, 1)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -88,7 +88,7 @@ class SudokuTest {
     void twoCellsSolveByRow_4() {
         List<List<Cell>> cells = List.of(List.of(cellWithValue(0, 0, 2), emptyCell(0, 1)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -104,7 +104,7 @@ class SudokuTest {
                                                  cellWithValue(0, 3, 4),
                                                  emptyCell(0, 4)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -122,7 +122,7 @@ class SudokuTest {
                                                  cellWithValue(0, 2, 3),
                                                  cellWithValue(0, 3, 4)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertTrue(sudoku.isSolved());
@@ -139,7 +139,7 @@ class SudokuTest {
                                                  cellWithValue(0, 2, 3),
                                                  cellWithValue(0, 3, 4)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertFalse(sudoku.isSolved());
@@ -154,7 +154,7 @@ class SudokuTest {
         List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0), emptyCell(0, 1)),
                                          List.of(cellWithValue(1, 0, 1), emptyCell(1, 1)));
 
-        Sudoku sudoku = new Sudoku(cells);
+        Sudoku sudoku = new Sudoku(new Grid(cells));
         sudoku.setOneNumber();
 
         assertFalse(sudoku.isSolved());
