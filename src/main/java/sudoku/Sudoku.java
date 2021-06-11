@@ -3,27 +3,16 @@ package sudoku;
 import java.util.List;
 
 public class Sudoku {
-    private final Grid grid;
+    private final List<SolutionStrategy> strategies;
 
-    public Sudoku(Grid grid) {
-        this.grid = grid;
+    public Sudoku(List<SolutionStrategy> strategies) {
+        this.strategies = strategies;
     }
 
-    public List<List<Cell>> getCells() {
-        return grid.getCells();
-    }
-
-    public boolean isSolved() {
-        return grid.getCells().stream().allMatch(cols -> cols.stream().allMatch(cell -> cell.getValue().isPresent()));
-    }
-
-    public void setOneNumber() {
-        if (isSolved()) return;
-
-        grid.getRows()
-            .stream()
-            .filter(Cells::canSolve)
-            .findFirst()
-            .ifPresent(Cells::solve);
+    public void setOneNumber(Grid grid) {
+        strategies.stream()
+                  .filter(s -> s.canSolve(grid))
+                  .findFirst()
+                  .ifPresent(s -> s.execute(grid));
     }
 }
