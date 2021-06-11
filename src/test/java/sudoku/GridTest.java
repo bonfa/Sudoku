@@ -8,19 +8,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static sudoku.Cell.*;
 
 class GridTest {
-    private static final Cell CELL_0_1 = cellWithValue(0, 0, 1);
-    private static final Cell CELL_0_2 = cellWithValue(0, 1, 2);
-    private static final Cell CELL_0_3 = cellWithValue(0, 2, 3);
+
+    private static final Cell CELL_0_0 = cellWithValue(0, 0, 1);
+    private static final Cell CELL_0_1 = cellWithValue(0, 1, 2);
+    private static final Cell CELL_0_2 = cellWithValue(0, 2, 3);
+    private static final Cell CELL_1_0 = cellWithValue(1, 0, 4);
+    private static final Cell CELL_1_1 = cellWithValue(1, 1, 5);
+    private static final Cell CELL_1_2 = cellWithValue(1, 2, 6);
+    private static final Cell CELL_2_0 = cellWithValue(2, 0, 7);
+    private static final Cell CELL_2_1 = cellWithValue(2, 1, 8);
+    private static final Cell CELL_2_2 = cellWithValue(2, 2, 9);
 
     @Test
     void getRows() {
-        Grid grid = new Grid(List.of(List.of(CELL_0_1, CELL_0_2, CELL_0_3)));
+        Grid grid = new Grid(List.of(List.of(CELL_0_0, CELL_0_1, CELL_0_2),
+                                     List.of(CELL_1_0, CELL_1_1, CELL_1_2),
+                                     List.of(CELL_2_0, CELL_2_1, CELL_2_2)));
 
-        List<Row> rows = grid.getRows();
+        List<Cells> cells = grid.getRows();
 
-        assertEquals(1, rows.size());
-        assertEquals(CELL_0_1, rows.get(0).getCells().get(0));
-        assertEquals(CELL_0_2, rows.get(0).getCells().get(1));
-        assertEquals(CELL_0_3, rows.get(0).getCells().get(2));
+        assertEquals(3, cells.size());
+        assertEquals(List.of(CELL_0_0, CELL_0_1, CELL_0_2), cells.get(0).getCells());
+        assertEquals(List.of(CELL_1_0, CELL_1_1, CELL_1_2), cells.get(1).getCells());
+        assertEquals(List.of(CELL_2_0, CELL_2_1, CELL_2_2), cells.get(2).getCells());
     }
+
+    @Test
+    void getColumns() {
+        Grid grid = new Grid(List.of(List.of(CELL_0_0, CELL_0_1, CELL_0_2),
+                                     List.of(CELL_1_0, CELL_1_1, CELL_1_2),
+                                     List.of(CELL_2_0, CELL_2_1, CELL_2_2)));
+
+        List<Cells> columns = grid.getColumns();
+
+        assertEquals(3, columns.size());
+
+        assertEquals(List.of(CELL_0_0, CELL_1_0, CELL_2_0), columns.get(0).getCells());
+        assertEquals(List.of(CELL_0_1, CELL_1_1, CELL_2_1), columns.get(1).getCells());
+        assertEquals(List.of(CELL_0_2, CELL_1_2, CELL_2_2), columns.get(2).getCells());
+    }
+
 }

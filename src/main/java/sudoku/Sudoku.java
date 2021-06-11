@@ -22,8 +22,8 @@ public class Sudoku {
 
         grid.getRows()
             .stream()
-            .filter(Row::canSolve)
+            .filter(Cells::canSolve)
             .findFirst()
-            .ifPresent(Row::solve);
+            .ifPresent(Cells::solve);
     }
 }

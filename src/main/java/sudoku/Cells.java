@@ -6,11 +6,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Row {
+public class Cells {
 
     private final List<Cell> cells;
 
-    public Row(List<Cell> cells) {
+    public Cells(List<Cell> cells) {
         this.cells = cells;
     }
 
