@@ -1,9 +1,12 @@
 package sudoku;
 
+import java.util.List;
+import java.util.Optional;
+
 public class Cell {
     private final int rowIndex;
     private final int columnIndex;
-    private final Integer value;
+    private Integer value;
 
     private Cell(int rowIndex, int columnIndex, Integer value) {
         this.rowIndex = rowIndex;
@@ -19,7 +22,11 @@ public class Cell {
         return new Cell(rowIndex, columnIndex, value);
     }
 
-    public boolean hasValue() {
-        return value != null;
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Optional<Integer> getValue() {
+        return Optional.ofNullable(value);
     }
 }

@@ -35,4 +35,15 @@ class SudokuTest {
 
         assertTrue(sudoku.isSolved());
     }
+
+    @Test
+    void oneCellSolve() {
+        List<List<Cell>> cells = List.of(List.of(emptyCell(0, 0)));
+
+        Sudoku sudoku = new Sudoku(cells);
+        sudoku.setOneNumber();
+
+        assertTrue(sudoku.isSolved());
+        assertEquals(1, sudoku.getCells().get(0).get(0).getValue().get());
+    }
 }

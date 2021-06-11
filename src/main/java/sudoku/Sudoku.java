@@ -14,6 +14,10 @@ public class Sudoku {
     }
 
     public boolean isSolved() {
-        return grid.stream().allMatch(cols -> cols.stream().allMatch(Cell::hasValue));
+        return grid.stream().allMatch(cols -> cols.stream().allMatch(cell -> cell.getValue().isPresent()));
+    }
+
+    public void setOneNumber() {
+        grid.get(0).get(0).setValue(1);
     }
 }
