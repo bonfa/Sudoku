@@ -1,12 +1,12 @@
 package sudoku;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static sudoku.Cell.*;
+import static sudoku.Cell.cellWithValue;
+import static sudoku.Cell.emptyCell;
 
 class SudokuTest {
 
