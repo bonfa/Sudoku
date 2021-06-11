@@ -14,11 +14,11 @@ public class Cells {
         this.cells = cells;
     }
 
-    public boolean canSolve() {
+    public boolean canAddOneNumber() {
         return valuesNotYetPresent().size() == 1;
     }
 
-    public void solve() {
+    public void addOneNumber() {
         emptyCells().get(0).setValue(valuesNotYetPresent().stream().findFirst().get());
     }
 

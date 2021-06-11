@@ -1,5 +1,7 @@
 package sudoku;
 
+import sudoku.strategy.SolutionStrategy;
+
 import java.util.List;
 
 public class Sudoku {

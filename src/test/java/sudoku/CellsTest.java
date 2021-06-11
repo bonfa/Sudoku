@@ -14,28 +14,28 @@ class CellsTest {
     void canBeSolved() {
         Cells cells = new Cells(List.of(emptyCell(0, 0), cellWithValue(0, 1, 1)));
 
-        assertTrue(cells.canSolve());
+        assertTrue(cells.canAddOneNumber());
     }
 
     @Test
     void tooFewCellsToSolve() {
         Cells cells = new Cells(List.of(emptyCell(0, 0), emptyCell(0, 1)));
 
-        assertFalse(cells.canSolve());
+        assertFalse(cells.canAddOneNumber());
     }
 
     @Test
     void alreadySolved() {
         Cells cells = new Cells(List.of(cellWithValue(0, 0, 1), cellWithValue(0, 1, 2)));
 
-        assertFalse(cells.canSolve());
+        assertFalse(cells.canAddOneNumber());
     }
 
     @Test
     void solveSingleCell() {
         Cells cells = new Cells(List.of(emptyCell(0, 0)));
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(1, cells.getCells().get(0).getValue().get());
     }
@@ -44,7 +44,7 @@ class CellsTest {
     void solveTwoCells() {
         Cells cells = new Cells(List.of(emptyCell(0, 0), cellWithValue(0, 1, 2)));
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(1, cells.getCells().get(0).getValue().get());
         assertEquals(2, cells.getCells().get(1).getValue().get());
@@ -54,7 +54,7 @@ class CellsTest {
     void solveTwoCells_2() {
         Cells cells = new Cells(List.of(emptyCell(0, 0), cellWithValue(0, 1, 1)));
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(2, cells.getCells().get(0).getValue().get());
         assertEquals(1, cells.getCells().get(1).getValue().get());
@@ -64,7 +64,7 @@ class CellsTest {
     void solveTwoCells_3() {
         Cells cells = new Cells(List.of(cellWithValue(0, 0, 1), emptyCell(0, 1)));
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(1, cells.getCells().get(0).getValue().get());
         assertEquals(2, cells.getCells().get(1).getValue().get());
@@ -74,7 +74,7 @@ class CellsTest {
     void solveTwoCells_4() {
         Cells cells = new Cells(List.of(cellWithValue(0, 0, 2), emptyCell(0, 1)));
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(2, cells.getCells().get(0).getValue().get());
         assertEquals(1, cells.getCells().get(1).getValue().get());
@@ -89,7 +89,7 @@ class CellsTest {
                                          emptyCell(0, 4))));
 
 
-        cells.solve();
+        cells.addOneNumber();
 
         assertEquals(1, cells.getCells().get(0).getValue().get());
         assertEquals(2, cells.getCells().get(1).getValue().get());
