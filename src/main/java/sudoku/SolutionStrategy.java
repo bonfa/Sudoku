@@ -1,6 +1,6 @@
 package sudoku;
 
 public interface SolutionStrategy {
-    boolean canSolve(Grid grid);
-    void execute(Grid grid);
+    boolean canAddOneNumber(Grid grid);
+    Grid addOneNumber(Grid grid);
 }

@@ -9,10 +9,11 @@ public class Sudoku {
         this.strategies = strategies;
     }
 
-    public void setOneNumber(Grid grid) {
-        strategies.stream()
-                  .filter(s -> s.canSolve(grid))
-                  .findFirst()
-                  .ifPresent(s -> s.execute(grid));
+    public Grid addOneNumber(Grid grid) {
+        return strategies.stream()
+                         .filter(s -> s.canAddOneNumber(grid))
+                         .findFirst()
+                         .map(s -> s.addOneNumber(grid))
+                         .orElse(grid);
     }
 }
