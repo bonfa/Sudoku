@@ -2,21 +2,25 @@ package sudoku;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+@Deprecated
 public class SudokuV2 {
     private final List<Cells> rows;
     private final List<Cells> columns;
+    private final List<Cells> squares;
 
-    public SudokuV2(List<Cells> rows) {
+    public SudokuV2(List<Cells> rows, List<Cells> columns, List<Cells> squares) {
         this.rows = rows;
-        this.columns = toColumn(rows);
+        this.columns = columns;
+        this.squares = squares;
     }
 
-    private List<Cells> toColumn(List<Cells> rows) {
-        return IntStream.range(0, rows.get(0).size())
-                        .mapToObj(i -> new Cells(rows.stream().map(l -> l.getCells().get(i)).collect(Collectors.toList())))
-                        .collect(Collectors.toList());
+    public List<Cells> getSquares() {
+        return squares;
+    }
+
+    public List<Cells> getColumns() {
+        return columns;
     }
 
     public List<List<CellV2>> getCells() {
