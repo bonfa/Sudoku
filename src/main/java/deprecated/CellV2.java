@@ -1,4 +1,4 @@
-package sudoku;
+package deprecated;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -1,12 +1,16 @@
-package sudoku;
+package deprecated;
 
+import deprecated.CellV2;
+import deprecated.Cells;
+import deprecated.SudokuFactory;
+import deprecated.SudokuV2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static sudoku.CellV2.cellWithValue;
+import static deprecated.CellV2.cellWithValue;
 
 class SudokuFactoryTest {
 
