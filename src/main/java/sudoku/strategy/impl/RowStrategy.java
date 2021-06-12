@@ -5,7 +5,7 @@ import sudoku.Grid;
 import sudoku.strategy.SolutionStrategy;
 
 public class RowStrategy implements SolutionStrategy {
-    //todo this class (and its test) is a bit duplicated with tow class. check if this can be improved
+    //todo this class (and its test) is a bit duplicated with Row class. check if this can be improved
 
     @Override
     public boolean canAddOneNumber(Grid grid) {
