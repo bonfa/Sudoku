@@ -2,6 +2,7 @@ package sudoku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -114,5 +115,9 @@ public class Grid {
         else if ((i >= 6 && i < 9) && (j >= 3 && j < 6)) n = 7;
         else if ((i >= 6 && i < 9) && (j >= 6 && j < 9)) n = 8;
         return n;
+    }
+
+    public Set<Integer> allPossibleValues() {
+        return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
     }
 }

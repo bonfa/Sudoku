@@ -25,6 +25,14 @@ public class Cell {
         this.value = value;
     }
 
+    public int getRowIndex() {
+        return rowIndex;
+    }
+
+    public int getColumnIndex() {
+        return columnIndex;
+    }
+
     public Optional<Integer> getValue() {
         return Optional.ofNullable(value);
     }

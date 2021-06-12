@@ -34,7 +34,7 @@ public class Cells {
         return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
     }
 
-    private Set<Integer> valuesAlreadyPresent() {
+    public Set<Integer> valuesAlreadyPresent() {
         return cells.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
     }
 
@@ -42,7 +42,8 @@ public class Cells {
         return cells.stream().filter(cell -> cell.getValue().isEmpty()).collect(Collectors.toList());
     }
 
-    private static Set<Integer> difference(Set<Integer> first, Set<Integer> second) {
+    //TODO move
+    public static Set<Integer> difference(Set<Integer> first, Set<Integer> second) {
         Set<Integer> difference = new HashSet<>(first);
         difference.removeAll(second);
         return difference;
