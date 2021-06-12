@@ -30,11 +30,6 @@ public class SudokuFactory {
     }
 
     public static List<Cells> toSquares(List<Cells> rows) {
-        var grid = rows.stream()
-                       .map(Cells::getCells)
-                       .flatMap(Collection::stream)
-                       .collect(Collectors.toList());
-
         List<List<CellV2>> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             squares.add(new ArrayList<>());
