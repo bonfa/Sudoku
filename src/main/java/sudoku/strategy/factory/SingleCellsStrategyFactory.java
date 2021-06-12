@@ -1,7 +1,8 @@
-package sudoku.strategy.impl;
+package sudoku.strategy.factory;
 
 import sudoku.Grid;
 import sudoku.strategy.SolutionStrategy;
+import sudoku.strategy.impl.SingleCellStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

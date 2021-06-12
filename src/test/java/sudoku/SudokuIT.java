@@ -2,9 +2,8 @@ package sudoku;
 
 import org.junit.jupiter.api.Test;
 import sudoku.strategy.SolutionStrategy;
-import sudoku.strategy.impl.*;
+import sudoku.strategy.factory.SingleCellsStrategyFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
