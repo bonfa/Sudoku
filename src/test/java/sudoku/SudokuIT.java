@@ -5,7 +5,6 @@ import sudoku.strategy.SolutionStrategy;
 import sudoku.strategy.factory.SingleCellsStrategyFactory;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +14,7 @@ import static sudoku.Cell.emptyCell;
 class SudokuIT {
 
     @Test
-    void works() {
+    void solve_4x4() {
         Grid iteration_0 = new Grid(List.of(
                 List.of(cellWithValue(0, 0, 3), emptyCell(0, 1), cellWithValue(0, 2, 4), emptyCell(0, 3)),
                 List.of(emptyCell(1, 0), cellWithValue(1, 1, 1), emptyCell(1, 2), cellWithValue(1, 3, 2)),
@@ -50,15 +49,60 @@ class SudokuIT {
         Grid iteration_8 = sudoku.addOneNumber(iteration_7);
         assertEquals(4, iteration_8.getCells().get(3).get(3).getValue().get());
 
-        assertCellContainsValues(iteration_0.getSquares().get(0), Set.of(3, 2, 4, 1));
-        assertCellContainsValues(iteration_0.getSquares().get(1), Set.of(4, 1, 3, 2));
-        assertCellContainsValues(iteration_0.getSquares().get(2), Set.of(1, 4, 2, 3));
-        assertCellContainsValues(iteration_0.getSquares().get(3), Set.of(2, 3, 1, 4));
+        assertCellsContainsValues(iteration_0.getSquares().get(0), List.of(3, 2, 4, 1));
+        assertCellsContainsValues(iteration_0.getSquares().get(1), List.of(4, 1, 3, 2));
+        assertCellsContainsValues(iteration_0.getSquares().get(2), List.of(1, 4, 2, 3));
+        assertCellsContainsValues(iteration_0.getSquares().get(3), List.of(2, 3, 1, 4));
     }
 
-    private void assertCellContainsValues(Cells cells, Set<Integer> values) {
-        var expected = cells.getCells().stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
+    @Test
+    void solve_6x6() {
+        Grid iteration_0 = new Grid(List.of(
+                List.of(emptyCell(0, 0), cellWithValue(0, 1, 2), emptyCell(0, 2), cellWithValue(0, 3, 1), emptyCell(0, 4), emptyCell(0, 5)),
+                List.of(emptyCell(1, 0), emptyCell(1, 1), emptyCell(1, 2), emptyCell(1, 3), cellWithValue(1, 4, 3), emptyCell(1, 5)),
+                List.of(cellWithValue(2, 0, 6), emptyCell(2, 1), emptyCell(2, 2), emptyCell(2, 3), emptyCell(2, 4), cellWithValue(2, 5, 4)),
+                List.of(cellWithValue(3, 0, 3), emptyCell(3, 1), emptyCell(3, 2), emptyCell(3, 3), emptyCell(3, 4), cellWithValue(3, 5, 5)),
+                List.of(emptyCell(4, 0), cellWithValue(4, 1, 3), emptyCell(4, 2), emptyCell(4, 3), emptyCell(4, 4), emptyCell(4, 5)),
+                List.of(emptyCell(5, 0), emptyCell(5, 1), cellWithValue(5, 2, 1), emptyCell(5, 3), cellWithValue(5, 4, 2), emptyCell(5, 5))));
 
-        assertEquals(expected, values);
+        List<SolutionStrategy> allStrategies = new SingleCellsStrategyFactory().createStrategiesFor(iteration_0);
+
+        Sudoku sudoku = new Sudoku(allStrategies);
+
+        printGrid(iteration_0);
+        Grid iteration = iteration_0;
+        long numberOfFreeCells = iteration.getCells()
+                                         .stream()
+                                         .flatMap(c -> c.stream())
+                                          .filter(c -> c.getValue().isEmpty())
+                                         .count();
+
+        for (int i = 0; i < numberOfFreeCells; i++) {
+            iteration = sudoku.addOneNumber(iteration);
+            printGrid(iteration);
+        }
+    }
+
+    private void printGrid(Grid grid) {
+        List<Cells> rows = grid.getRows();
+        for (int i = 0; i < rows.size(); i++) {
+            Cells row = rows.get(i);
+            List<Cell> cells = row.getCells();
+            for (int j = 0; j < cells.size(); j++) {
+                System.out.print(cells.get(j).getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
+            }
+            System.out.print("\n");
+        }
+
+        System.out.println("\n\n\n");
+    }
+
+    private void assertCellsContainsValues(Cells first, List<Integer> values) {
+        List<Integer> cellValues = first.getCells()
+                                                  .stream()
+                                                  .map(cell -> cell.getValue().orElse(null))
+                                                  .collect(Collectors.toList());
+
+        assertEquals(cellValues, values);
     }
 }
