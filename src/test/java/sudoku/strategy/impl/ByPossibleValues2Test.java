@@ -1,15 +1,13 @@
 package sudoku.strategy.impl;
 
 import org.junit.jupiter.api.Test;
-import sudoku.Cell;
 import sudoku.Grid;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static sudoku.strategy.TestUtilities.*;
 import static sudoku.strategy.impl.ByPossibleValues2.SolutionStep;
 
 class ByPossibleValues2Test {
@@ -78,27 +76,5 @@ class ByPossibleValues2Test {
         Optional<SolutionStep> solutionStepFor = strategy.findSolutionStepFor(grid, 0, 1);
 
         assertFalse(solutionStepFor.isPresent());
-    }
-
-    private Grid gridWith(List<String>... rows) {
-        List<List<Cell>> collect = IntStream.range(0, rows.length)
-                                            .mapToObj(i -> this.parseRow(rows[i], i))
-                                            .collect(Collectors.toList());
-
-        return new Grid(collect);
-    }
-
-    private List<Cell> parseRow(List<String> cells, int rowIndex) {
-        return IntStream.range(0, cells.size())
-                        .mapToObj(j -> this.parseCell(cells.get(j), rowIndex, j))
-                        .collect(Collectors.toList());
-    }
-
-    private Cell parseCell(String rawValue, int rowIndex, int columnIndex) {
-        if ("-".equals(rawValue)) {
-            return Cell.emptyCell(rowIndex, columnIndex);
-        } else {
-            return Cell.cellWithValue(rowIndex, columnIndex, Integer.parseInt(rawValue));
-        }
     }
 }
