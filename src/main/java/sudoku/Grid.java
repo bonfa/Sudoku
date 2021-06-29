@@ -23,43 +23,25 @@ public class Grid {
         return cells;
     }
 
-    public List<Cells> getRows() {
-        return cells.stream()
-                    .map(Cells::new)
-                    .collect(Collectors.toList());
-    }
-
-    public List<Cells> getColumns() {
-        return IntStream.range(0, getRows().size())
-                        .mapToObj(i -> new Cells(getRows().stream().map(l -> l.getCells().get(i)).collect(Collectors.toList())))
-                        .collect(Collectors.toList());
-    }
-
-    /*
-    INVARIANT: number of squares = number of rows = number of columns
-    TODO: test for length != 9
-     */
-
-    public List<Cells> getSquares() {
-        List<List<Cell>> squares = new ArrayList<>();
-        for (int i = 0; i < cells.size(); i++) {
-            squares.add(new ArrayList<>());
-        }
-
-        for (int i = 0; i < cells.size(); i++) {
-            for (int j = 0; j < cells.get(i).size(); j++) {
-                int n = getSquareNumber(i, j);
-
-                squares.get(n).add(getRows().get(i).getCells().get(j));
-            }
-        }
-
-        return squares.stream()
-                      .map(Cells::new)
-                      .collect(Collectors.toList());
-    }
     public Cells squareBy(int rowIndex, int columnIndex) {
         return getSquares().get(getSquareNumber(rowIndex, columnIndex));
+    }
+
+    public PossibleValues getPossibleValuesFor(Cell cell) {
+        if (cell.getValue().isPresent()) {
+            return new PossibleValues(cell, Collections.emptySet());
+        }
+
+        Set<Integer> valuesAlreadyPresentByRow = getRows().get(cell.getRowIndex()).valuesAlreadyPresent();
+        Set<Integer> valuesAlreadyPresentByColumn = getColumns().get(cell.getColumnIndex()).valuesAlreadyPresent();
+        Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
+
+        Set<Integer> possibleValues = difference(allPossibleValues(),
+                                                 sum(valuesAlreadyPresentByRow,
+                                                     valuesAlreadyPresentByColumn,
+                                                     valuesAlreadyPresentBySquare));
+
+        return new PossibleValues(cell, possibleValues);
     }
 
     private int getSquareNumber(int i, int j) {
@@ -130,25 +112,43 @@ public class Grid {
         return n;
     }
 
-    public Set<Integer> allPossibleValues() {
-        return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
+    private List<Cells> getRows() {
+        return cells.stream()
+                    .map(Cells::new)
+                    .collect(Collectors.toList());
     }
+    private List<Cells> getColumns() {
+        return IntStream.range(0, getRows().size())
+                        .mapToObj(i -> new Cells(getRows().stream().map(l -> l.getCells().get(i)).collect(Collectors.toList())))
+                        .collect(Collectors.toList());
+    }
+    /*
+    INVARIANT: number of squares = number of rows = number of columns
+    TODO: test for length != 9
+     */
 
-    public PossibleValues getPossibleValuesFor(Cell cell) {
-        if (cell.getValue().isPresent()) {
-            return new PossibleValues(cell, Collections.emptySet());
+    //TODO make private and handle the test of the creation somehow
+    List<Cells> getSquares() {
+        List<List<Cell>> squares = new ArrayList<>();
+        for (int i = 0; i < cells.size(); i++) {
+            squares.add(new ArrayList<>());
         }
 
-        Set<Integer> valuesAlreadyPresentByRow = getRows().get(cell.getRowIndex()).valuesAlreadyPresent();
-        Set<Integer> valuesAlreadyPresentByColumn = getColumns().get(cell.getColumnIndex()).valuesAlreadyPresent();
-        Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
+        for (int i = 0; i < cells.size(); i++) {
+            for (int j = 0; j < cells.get(i).size(); j++) {
+                int n = getSquareNumber(i, j);
 
-        Set<Integer> possibleValues = difference(allPossibleValues(),
-                                                 sum(valuesAlreadyPresentByRow,
-                                                     valuesAlreadyPresentByColumn,
-                                                     valuesAlreadyPresentBySquare));
+                squares.get(n).add(getRows().get(i).getCells().get(j));
+            }
+        }
 
-        return new PossibleValues(cell, possibleValues);
+        return squares.stream()
+                      .map(Cells::new)
+                      .collect(Collectors.toList());
+    }
+
+    private Set<Integer> allPossibleValues() {
+        return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
     }
 
     private static Set<Integer> sum(Set<Integer>... sets) {

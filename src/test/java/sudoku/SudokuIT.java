@@ -122,12 +122,10 @@ class SudokuIT {
     }
 
     private void printGrid(Grid grid) {
-        List<Cells> rows = grid.getRows();
-        for (int i = 0; i < rows.size(); i++) {
-            Cells row = rows.get(i);
-            List<Cell> cells = row.getCells();
-            for (int j = 0; j < cells.size(); j++) {
-                System.out.print(cells.get(j).getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
+        List<List<Cell>> rows = grid.getCells();
+        for (List<Cell> cells : rows) {
+            for (Cell cell : cells) {
+                System.out.print(cell.getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
             }
             System.out.print("\n");
         }
