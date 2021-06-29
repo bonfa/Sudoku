@@ -188,5 +188,18 @@ public class Grid {
             this.rows = rows;
             this.columns = columns;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Dimensions that = (Dimensions) o;
+            return rows == that.rows && columns == that.columns;
+        }
+
+        @Override
+        public int hashCode() {
+            return 0;
+        }
     }
 }
