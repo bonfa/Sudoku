@@ -1,0 +1,3 @@
+- ByPossibleValues2 
+    - extract rules by row, column, square
+    - rename
