@@ -11,7 +11,7 @@ import static sudoku.Cell.emptyCell;
 
 class SingleCellStrategyTest {
 
-    private final SingleCellStrategy strategy = new SingleCellStrategy(0, 1);
+    private final SingleCellStrategy strategy = new SingleCellStrategy();
 
     @Test
     void canAddOneNumber() {
@@ -27,9 +27,9 @@ class SingleCellStrategyTest {
     @Test
     void canNotAddOneNumber() {
         Grid grid = new Grid(List.of(
-                List.of(emptyCell(0, 0), emptyCell(0, 1), cellWithValue(0, 2, 4), emptyCell(0, 3)),
+                List.of(emptyCell(0, 0), emptyCell(0, 1), emptyCell(0, 2), emptyCell(0, 3)),
                 List.of(emptyCell(1, 0), cellWithValue(1, 1, 1), emptyCell(1, 2), cellWithValue(1, 3, 2)),
-                List.of(emptyCell(2, 0), cellWithValue(2, 1, 4), emptyCell(2, 2), cellWithValue(2, 3, 3)),
+                List.of(emptyCell(2, 0), emptyCell(2, 1), emptyCell(2, 2), emptyCell(2, 3)),
                 List.of(cellWithValue(3, 0, 2), emptyCell(3, 1), cellWithValue(3, 2, 1), emptyCell(3, 3))));
 
         assertFalse(strategy.canAddOneNumber(grid));

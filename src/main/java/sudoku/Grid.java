@@ -15,11 +15,14 @@ public class Grid {
         this.cells = cells;
     }
 
-    public static Set<Integer> sum(Set<Integer>... sets)
-    {
+    public static Set<Integer> sum(Set<Integer>... sets) {
         Set<Integer> addition = new HashSet<>();
         Arrays.stream(sets).forEach(addition::addAll);
         return addition;
+    }
+
+    public Dimensions getDimensions() {
+        return new Dimensions(cells.size(), cells.get(0).size());
     }
 
     public List<List<Cell>> getCells() {
@@ -151,9 +154,9 @@ public class Grid {
         Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
 
         Set<Integer> possibleValues = difference(allPossibleValues(),
-                                             sum(valuesAlreadyPresentByRow,
-                                                 valuesAlreadyPresentByColumn,
-                                                 valuesAlreadyPresentBySquare));
+                                                 sum(valuesAlreadyPresentByRow,
+                                                     valuesAlreadyPresentByColumn,
+                                                     valuesAlreadyPresentBySquare));
 
         return new PossibleValues(cell, possibleValues);
     }
@@ -174,6 +177,16 @@ public class Grid {
 
         public Set<Integer> getPossibleValues() {
             return possibleValues;
+        }
+    }
+
+    public static class Dimensions {
+        public final int rows;
+        public final int columns;
+
+        private Dimensions(int rows, int columns) {
+            this.rows = rows;
+            this.columns = columns;
         }
     }
 }
