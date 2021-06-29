@@ -1,6 +1,7 @@
-package sudoku.strategy.impl.strategy.impl;
+package sudoku.strategy.impl.strategy.grid.impl;
 
 import sudoku.Grid;
+import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.CellStrategy;
 
 import java.util.Optional;

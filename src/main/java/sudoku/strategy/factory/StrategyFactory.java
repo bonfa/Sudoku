@@ -1,18 +1,24 @@
 package sudoku.strategy.factory;
 
-import sudoku.strategy.impl.StepByStepGridStrategy;
-import sudoku.strategy.impl.strategy.impl.ByPossibleValues2;
-import sudoku.strategy.impl.strategy.impl.SquareStrategyByCell;
+import sudoku.Grid;
+import sudoku.strategy.factory.grid.GridStrategyFactory;
+import sudoku.strategy.factory.sector.SectorStrategyFactory;
+import sudoku.strategy.impl.SolutionStep;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class StrategyFactory {
-    public List<StepByStepGridStrategy> createStrategiesFor() { //TODO test
-        List<StepByStepGridStrategy> strategies = new ArrayList<>();
+    private final SectorStrategyFactory sectorStrategyFactory = new SectorStrategyFactory();
+    private final GridStrategyFactory gridStrategyFactory = new GridStrategyFactory();
 
-        strategies.add(new StepByStepGridStrategy(new ByPossibleValues2()));
-        strategies.add(new StepByStepGridStrategy(new SquareStrategyByCell()));
+    public List<Function<Grid, Optional<SolutionStep>>> createStrategies() { //TODO test
+        List<Function<Grid, Optional<SolutionStep>>> strategies = new ArrayList<>();
+
+        strategies.addAll(sectorStrategyFactory.createStrategies());
+        strategies.addAll(gridStrategyFactory.createStrategies());
 
         return strategies;
     }

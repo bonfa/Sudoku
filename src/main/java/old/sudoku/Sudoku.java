@@ -279,7 +279,7 @@ public final class Sudoku {
     }
 
     /**
-     * Updates the possible values of the cells of the old.sudoku
+     * Updates the possible values of the sector of the old.sudoku
      */
     private void updateCellsPossibleValues() {
 
@@ -322,7 +322,7 @@ public final class Sudoku {
 
 
     /**
-     * Updates the possible values of the cells on the same row of the input cell
+     * Updates the possible values of the sector on the same row of the input cell
      *
      * @Precondition cell.hasValue()
      */
@@ -342,7 +342,7 @@ public final class Sudoku {
     }
 
     /**
-     * Updates the possible values of the cells on the same column of the input cell
+     * Updates the possible values of the sector on the same column of the input cell
      *
      * @Precondition cell.hasValue()
      */
@@ -361,7 +361,7 @@ public final class Sudoku {
     }
 
     /**
-     * Updates the possible values of the cells on the same square of the input cell
+     * Updates the possible values of the sector on the same square of the input cell
      *
      * @Precondition cell.hasValue()
      */
@@ -430,7 +430,7 @@ public final class Sudoku {
     }
 
     /**
-     * Sets the value a cell of the old.sudoku.
+     * sudoku.utilities.Sets the value a cell of the old.sudoku.
      * <p>
      * The method can work in two ways: the first one throws an {@see OperationNotAllowedException} if the value of the
      * cell is already present; the second one overrides the value and re-calculates the possible values of the whole matrix
@@ -462,7 +462,7 @@ public final class Sudoku {
 
     /**
      * Resets the matrix possible values and re-calculates each array of possible values starting from the values
-     * of the cells of the old.sudoku
+     * of the sector of the old.sudoku
      */
     private void resetMatrixPossibleValues() {
 

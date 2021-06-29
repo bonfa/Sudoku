@@ -169,7 +169,7 @@ public final class Cell {
     //--------------------------------- SETTER ------------------------------------------------------------
 
     /**
-     * Sets the value of the cell.
+     * sudoku.utilities.Sets the value of the cell.
      * <p>
      * If the value of the cell has already been set, it is necessary to call the method {@see #reset()} before
      * attempting to call this method, otherwise the method throws an {@see OperationNotAllowedException}

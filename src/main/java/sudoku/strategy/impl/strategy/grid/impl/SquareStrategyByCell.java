@@ -1,8 +1,9 @@
-package sudoku.strategy.impl.strategy.impl;
+package sudoku.strategy.impl.strategy.grid.impl;
 
 import sudoku.Cell;
-import sudoku.Cells;
+import sudoku.Sector;
 import sudoku.Grid;
+import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.CellStrategy;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class SquareStrategyByCell implements CellStrategy {
         if (grid.getCells().get(rowIndex).get(columnIndex).getValue().isPresent())
             return Optional.empty();
 
-        Cells square = grid.squareBy(rowIndex, columnIndex);
-        List<Cell> emptyCells = square.getCells()
+        Sector square = grid.squareBy(rowIndex, columnIndex);
+        List<Cell> emptyCells = square.cells
                                       .stream()
                                       .filter(c -> c.getValue().isEmpty())
                                       .collect(Collectors.toList());

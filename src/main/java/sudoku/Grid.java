@@ -4,26 +4,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static sudoku.Cells.difference;
+import static sudoku.utilities.Sets.*;
 
 public class Grid {
-    private final List<List<Cell>> cells;
+    private final List<List<Cell>> sector;
 
     //TODO check invariant: number of rows = number of columns
     //TODO check invariant: number of rows in {1, 4, 6, 8, 9}
-    public Grid(List<List<Cell>> cells) {
-        this.cells = cells;
+    public Grid(List<List<Cell>> sector) {
+        this.sector = sector;
+    }
+
+    //TODO remove
+    public static Set<Integer> valuesAlreadyPresent(List<Cell> sector) {
+        return sector.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
     }
 
     public Dimensions getDimensions() {
-        return new Dimensions(cells.size(), cells.get(0).size());
+        return new Dimensions(sector.size(), sector.get(0).size());
     }
 
     public List<List<Cell>> getCells() {
-        return cells;
+        return sector;
     }
 
-    public Cells squareBy(int rowIndex, int columnIndex) {
+    public Sector squareBy(int rowIndex, int columnIndex) {
         return getSquares().get(getSquareNumber(rowIndex, columnIndex));
     }
 
@@ -32,9 +37,9 @@ public class Grid {
             return new PossibleValues(cell, Collections.emptySet());
         }
 
-        Set<Integer> valuesAlreadyPresentByRow = getRows().get(cell.getRowIndex()).valuesAlreadyPresent();
-        Set<Integer> valuesAlreadyPresentByColumn = getColumns().get(cell.getColumnIndex()).valuesAlreadyPresent();
-        Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
+        Set<Integer> valuesAlreadyPresentByRow = valuesAlreadyPresent(getRows().get(cell.getRowIndex()).cells);
+        Set<Integer> valuesAlreadyPresentByColumn = valuesAlreadyPresent(getColumns().get(cell.getColumnIndex()).cells);
+        Set<Integer> valuesAlreadyPresentBySquare = valuesAlreadyPresent(squareBy(cell.getRowIndex(), cell.getColumnIndex()).cells);
 
         Set<Integer> possibleValues = difference(allPossibleValues(),
                                                  sum(valuesAlreadyPresentByRow,
@@ -45,7 +50,7 @@ public class Grid {
     }
 
     private int getSquareNumber(int i, int j) {
-        switch (cells.size()) {
+        switch (sector.size()) {
             case 1:
                 return squareNumberForGridOfSizeOne();
             case 4:
@@ -112,52 +117,56 @@ public class Grid {
         return n;
     }
 
-    private List<Cells> getRows() {
-        return cells.stream()
-                    .map(Cells::new)
+    public List<Sector> getRows() {
+        return sector.stream()
+                    .map(Sector::new)
                     .collect(Collectors.toList());
     }
-    private List<Cells> getColumns() {
+
+    public List<Sector> getColumns() {
         return IntStream.range(0, getRows().size())
-                        .mapToObj(i -> new Cells(getRows().stream().map(l -> l.getCells().get(i)).collect(Collectors.toList())))
+                        .mapToObj(i -> new Sector(getRows().stream().map(l -> l.cells.get(i)).collect(Collectors.toList())))
                         .collect(Collectors.toList());
     }
+
+    public Sector rowAt(Integer rowIndex) {
+        return getRows().get(rowIndex);
+    }
+
+    public Sector columnAt(Integer columnIndex) {
+        return getRows().get(columnIndex);
+    }
+
     /*
     INVARIANT: number of squares = number of rows = number of columns
     TODO: test for length != 9
      */
-
     //TODO make private and handle the test of the creation somehow
-    List<Cells> getSquares() {
+    public List<Sector> getSquares() {
         List<List<Cell>> squares = new ArrayList<>();
-        for (int i = 0; i < cells.size(); i++) {
+        for (int i = 0; i < sector.size(); i++) {
             squares.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < cells.size(); i++) {
-            for (int j = 0; j < cells.get(i).size(); j++) {
+        for (int i = 0; i < sector.size(); i++) {
+            for (int j = 0; j < sector.get(i).size(); j++) {
                 int n = getSquareNumber(i, j);
 
-                squares.get(n).add(getRows().get(i).getCells().get(j));
+                squares.get(n).add(getRows().get(i).cells.get(j));
             }
         }
 
         return squares.stream()
-                      .map(Cells::new)
+                      .map(Sector::new)
                       .collect(Collectors.toList());
     }
 
-    private Set<Integer> allPossibleValues() {
-        return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
-    }
-
-    private static Set<Integer> sum(Set<Integer>... sets) {
-        Set<Integer> addition = new HashSet<>();
-        Arrays.stream(sets).forEach(addition::addAll);
-        return addition;
+    public Set<Integer> allPossibleValues() {
+        return IntStream.rangeClosed(1, sector.size()).boxed().collect(Collectors.toSet());
     }
 
     public static class PossibleValues {
+
 
         private final Cell cell;
         private final Set<Integer> possibleValues;

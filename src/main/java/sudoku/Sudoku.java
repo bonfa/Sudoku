@@ -1,22 +1,35 @@
 package sudoku;
 
-import sudoku.strategy.impl.StepByStepGridStrategy;
+import sudoku.strategy.impl.SolutionStep;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Sudoku {
-    private final List<StepByStepGridStrategy> strategies;
+    private final List<Function<Grid, Optional<SolutionStep>>> strategies;
+    private final SolutionStepApplier solutionStepApplier;
 
-    public Sudoku(List<StepByStepGridStrategy> strategies) {
+    public Sudoku(List<Function<Grid, Optional<SolutionStep>>> strategies, SolutionStepApplier solutionStepApplier) {
         this.strategies = strategies;
+        this.solutionStepApplier = solutionStepApplier;
     }
 
     public Grid addOneNumber(Grid grid) {
-        //todo for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
         return strategies.stream()
-                         .filter(s -> s.canAddOneNumber(grid))
+                         .map(s -> s.apply(grid))
+                         .flatMap(Optional::stream)
                          .findFirst()
-                         .map(s -> s.addOneNumber(grid))
-                         .orElse(grid);
+                         .map(s -> solutionStepApplier.apply(grid, s))
+                         .orElse(grid); //TODO for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
+    }
+
+    public static class SolutionStepApplier implements BiFunction<Grid, SolutionStep, Grid> {
+        @Override
+        public Grid apply(Grid grid, SolutionStep solutionStep) {
+            grid.getCells().get(solutionStep.rowIndex).get(solutionStep.columnIndex).setValue(solutionStep.value);
+            return grid;
+        }
     }
 }
