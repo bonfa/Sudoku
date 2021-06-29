@@ -26,25 +26,25 @@ class SudokuIT {
                                     List.of("-", "4", "-", "3"),
                                     List.of("2", "-", "1", "-"));
 
-        Grid iteration_1 = sudoku.addOneNumber(iteration_0);
+        Grid iteration_1 = sudoku.apply(iteration_0);
         assertEquals(2, iteration_1.getCells().get(0).get(1).getValue().get());
 
-        Grid iteration_2 = sudoku.addOneNumber(iteration_1);
+        Grid iteration_2 = sudoku.apply(iteration_1);
         assertEquals(1, iteration_2.getCells().get(0).get(3).getValue().get());
 
         printGrid(iteration_2);
 
-        Grid iteration_3 = sudoku.addOneNumber(iteration_2);
+        Grid iteration_3 = sudoku.apply(iteration_2);
 
-        Grid iteration_4 = sudoku.addOneNumber(iteration_3);
+        Grid iteration_4 = sudoku.apply(iteration_3);
 
-        Grid iteration_5 = sudoku.addOneNumber(iteration_4);
+        Grid iteration_5 = sudoku.apply(iteration_4);
 
-        Grid iteration_6 = sudoku.addOneNumber(iteration_5);
+        Grid iteration_6 = sudoku.apply(iteration_5);
 
-        Grid iteration_7 = sudoku.addOneNumber(iteration_6);
+        Grid iteration_7 = sudoku.apply(iteration_6);
 
-        Grid iteration_8 = sudoku.addOneNumber(iteration_7);
+        Grid iteration_8 = sudoku.apply(iteration_7);
 
         assertCellsContainsValues(iteration_8.getSquares().get(0), List.of(3, 2, 4, 1));
         assertCellsContainsValues(iteration_8.getSquares().get(1), List.of(4, 1, 3, 2));
@@ -71,7 +71,7 @@ class SudokuIT {
                                           .count();
 
         for (int i = 0; i < numberOfFreeCells; i++) {
-            iteration = sudoku.addOneNumber(iteration);
+            iteration = sudoku.apply(iteration);
             printGrid(iteration);
         }
     }
@@ -96,7 +96,7 @@ class SudokuIT {
                                           .count();
 
         for (int i = 0; i < numberOfFreeCells; i++) {
-            iteration = sudoku.addOneNumber(iteration);
+            iteration = sudoku.apply(iteration);
         }
 
         assertGridEquals(iteration, gridWith(List.of("4", "3", "8", "5", "1", "7", "9", "6", "2"),

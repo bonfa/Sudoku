@@ -30,7 +30,7 @@ class SudokuTest {
         when(strategy_2.apply(A_GRID)).thenReturn(Optional.empty());
         when(solutionStepApplier.apply(A_GRID, A_SOLUTION_STEP)).thenReturn(ANOTHER_GRID);
 
-        Grid grid = sudoku.addOneNumber(A_GRID);
+        Grid grid = sudoku.apply(A_GRID);
 
         assertEquals(ANOTHER_GRID, grid);
     }
@@ -41,7 +41,7 @@ class SudokuTest {
         when(strategy_2.apply(A_GRID)).thenReturn(Optional.of(A_SOLUTION_STEP));
         when(solutionStepApplier.apply(A_GRID, A_SOLUTION_STEP)).thenReturn(ANOTHER_GRID);
 
-        Grid grid = sudoku.addOneNumber(A_GRID);
+        Grid grid = sudoku.apply(A_GRID);
 
         assertEquals(ANOTHER_GRID, grid);
     }
@@ -51,7 +51,7 @@ class SudokuTest {
         when(strategy_1.apply(A_GRID)).thenReturn(Optional.empty());
         when(strategy_2.apply(A_GRID)).thenReturn(Optional.empty());
 
-        Grid grid = sudoku.addOneNumber(A_GRID);
+        Grid grid = sudoku.apply(A_GRID);
 
         assertEquals(A_GRID, grid);
         verifyNoInteractions(solutionStepApplier);

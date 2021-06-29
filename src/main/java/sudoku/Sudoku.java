@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
-public class Sudoku {
+public class Sudoku implements UnaryOperator<Grid> {
     private final List<Function<Grid, Optional<SolutionStep>>> strategies;
-    private final SolutionStepApplier solutionStepApplier;
+    private final BiFunction<Grid, SolutionStep, Grid> solutionStepApplier;
 
-    public Sudoku(List<Function<Grid, Optional<SolutionStep>>> strategies, SolutionStepApplier solutionStepApplier) {
+    public Sudoku(List<Function<Grid, Optional<SolutionStep>>> strategies, BiFunction<Grid, SolutionStep, Grid> solutionStepApplier) {
         this.strategies = strategies;
         this.solutionStepApplier = solutionStepApplier;
     }
 
-    public Grid addOneNumber(Grid grid) {
+    public Grid apply(Grid grid) {
         return strategies.stream()
                          .map(s -> s.apply(grid))
                          .flatMap(Optional::stream)
