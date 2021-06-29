@@ -2,7 +2,8 @@ package sudoku.strategy.factory;
 
 import sudoku.Grid;
 import sudoku.strategy.SolutionStrategy;
-import sudoku.strategy.impl.SingleCellStrategy;
+import sudoku.strategy.impl.ByPossibleValues;
+import sudoku.strategy.impl.ByPossibleValues2;
 import sudoku.strategy.impl.SquareStrategy;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class StrategyFactory {
         List<Integer> indexes = IntStream.range(0, grid.size()).boxed().collect(Collectors.toList());
 
         //TODO invece di creare una strategia per cella si potrebbe fare una strategia per tipologia (che cicla su tutte le celle applicando la stessa logica)
-        strategies.add(new SingleCellStrategy());
+        strategies.add(new ByPossibleValues(new ByPossibleValues2()));
         addSquareStrategies(strategies, indexes);
 
         return strategies;

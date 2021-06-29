@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static sudoku.Cell.cellWithValue;
 import static sudoku.Cell.emptyCell;
 
-class SingleCellStrategyTest {
+class ByPossibleValuesTest {
 
-    private final SingleCellStrategy strategy = new SingleCellStrategy();
+    private final ByPossibleValues strategy = new ByPossibleValues(new ByPossibleValues2());
 
     @Test
     void canAddOneNumber() {
