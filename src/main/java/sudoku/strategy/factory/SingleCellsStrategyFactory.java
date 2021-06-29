@@ -3,6 +3,7 @@ package sudoku.strategy.factory;
 import sudoku.Grid;
 import sudoku.strategy.SolutionStrategy;
 import sudoku.strategy.impl.SingleCellStrategy;
+import sudoku.strategy.impl.SquareStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,12 @@ public class SingleCellsStrategyFactory {
         for (Integer rowIndex : indexes) {
             for (Integer columnIndex : indexes) {
                 strategies.add(new SingleCellStrategy(rowIndex, columnIndex));
+            }
+        }
+
+        for (Integer rowIndex : indexes) {
+            for (Integer columnIndex : indexes) {
+                strategies.add(new SquareStrategy(rowIndex, columnIndex));
             }
         }
 

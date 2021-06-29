@@ -1,10 +1,10 @@
 package sudoku;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static sudoku.Cells.difference;
 
 public class Grid {
     private final List<List<Cell>> cells;
@@ -13,6 +13,13 @@ public class Grid {
     //TODO check invariant: number of rows in {1, 4, 6, 8, 9}
     public Grid(List<List<Cell>> cells) {
         this.cells = cells;
+    }
+
+    public static Set<Integer> sum(Set<Integer>... sets)
+    {
+        Set<Integer> addition = new HashSet<>();
+        Arrays.stream(sets).forEach(addition::addAll);
+        return addition;
     }
 
     public List<List<Cell>> getCells() {
@@ -58,13 +65,22 @@ public class Grid {
                       .collect(Collectors.toList());
     }
 
+    public Cells squareBy(int rowIndex, int columnIndex) {
+        return getSquares().get(getSquareNumber(rowIndex, columnIndex));
+    }
+
     private int getSquareNumber(int i, int j) {
         switch (cells.size()) {
-            case 1: return squareNumberForGridOfSizeOne();
-            case 4: return squareNumberForGridOfSizeFour(i, j);
-            case 6: return squareNumberForGridOfSizeSix(i, j);
-            case 8: return squareNumberForGridOfSizeEight(i, j);
-            case 9: return squareNumberForNineSizeNine(i, j);
+            case 1:
+                return squareNumberForGridOfSizeOne();
+            case 4:
+                return squareNumberForGridOfSizeFour(i, j);
+            case 6:
+                return squareNumberForGridOfSizeSix(i, j);
+            case 8:
+                return squareNumberForGridOfSizeEight(i, j);
+            case 9:
+                return squareNumberForNineSizeNine(i, j);
         }
         return -1; //TODO
     }
@@ -75,7 +91,7 @@ public class Grid {
 
     private int squareNumberForGridOfSizeFour(int i, int j) {
         int n = 0;
-        if      ((i >= 0 && i < 2) && (j >= 0 && j < 2)) n = 0;
+        if ((i >= 0 && i < 2) && (j >= 0 && j < 2)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 2 && j < 4)) n = 1;
         else if ((i >= 2 && i < 4) && (j >= 0 && j < 2)) n = 2;
         else if ((i >= 2 && i < 4) && (j >= 2 && j < 4)) n = 3;
@@ -84,7 +100,7 @@ public class Grid {
 
     private int squareNumberForGridOfSizeSix(int i, int j) {
         int n = 0;
-        if      ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
+        if ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 3 && j < 6)) n = 1;
         else if ((i >= 2 && i < 4) && (j >= 0 && j < 3)) n = 2;
         else if ((i >= 2 && i < 4) && (j >= 3 && j < 6)) n = 3;
@@ -95,7 +111,7 @@ public class Grid {
 
     private int squareNumberForGridOfSizeEight(int i, int j) {
         int n = 0;
-        if      ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
+        if ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 3 && j < 6)) n = 1;
         else if ((i >= 0 && i < 2) && (j >= 6 && j < 8)) n = 2;
         else if ((i >= 2 && i < 4) && (j >= 0 && j < 3)) n = 3;
@@ -109,7 +125,7 @@ public class Grid {
 
     private int squareNumberForNineSizeNine(int i, int j) {
         int n = 0;
-        if      ((i >= 0 && i < 3) && (j >= 0 && j < 3)) n = 0;
+        if ((i >= 0 && i < 3) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 3) && (j >= 3 && j < 6)) n = 1;
         else if ((i >= 0 && i < 3) && (j >= 6 && j < 9)) n = 2;
         else if ((i >= 3 && i < 6) && (j >= 0 && j < 3)) n = 3;
@@ -123,5 +139,41 @@ public class Grid {
 
     public Set<Integer> allPossibleValues() {
         return IntStream.rangeClosed(1, cells.size()).boxed().collect(Collectors.toSet());
+    }
+
+    public PossibleValues getPossibleValuesFor(Cell cell) {
+        if (cell.getValue().isPresent()) {
+            return new PossibleValues(cell, Collections.emptySet());
+        }
+
+        Set<Integer> valuesAlreadyPresentByRow = getRows().get(cell.getRowIndex()).valuesAlreadyPresent();
+        Set<Integer> valuesAlreadyPresentByColumn = getColumns().get(cell.getColumnIndex()).valuesAlreadyPresent();
+        Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
+
+        Set<Integer> difference = difference(allPossibleValues(),
+                                             sum(valuesAlreadyPresentByRow,
+                                                 valuesAlreadyPresentByColumn,
+                                                 valuesAlreadyPresentBySquare));
+
+        return new PossibleValues(cell, difference);
+    }
+
+    public static class PossibleValues {
+        private final Cell cell;
+        private final Set<Integer> possibleValues;
+
+        public PossibleValues(Cell cell, Set<Integer> possibleValues) {
+            this.cell = cell;
+            this.possibleValues = possibleValues;
+        }
+
+
+        public Cell getCell() {
+            return cell;
+        }
+
+        public Set<Integer> getPossibleValues() {
+            return possibleValues;
+        }
     }
 }

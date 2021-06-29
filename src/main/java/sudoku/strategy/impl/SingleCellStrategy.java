@@ -1,17 +1,10 @@
 package sudoku.strategy.impl;
 
-import sudoku.Cell;
-import sudoku.Cells;
 import sudoku.Grid;
 import sudoku.strategy.SolutionStrategy;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
-
-import static sudoku.Cells.difference;
 
 public class SingleCellStrategy implements SolutionStrategy {
     private final Integer rowIndex;
@@ -24,44 +17,26 @@ public class SingleCellStrategy implements SolutionStrategy {
 
     @Override
     public boolean canAddOneNumber(Grid grid) {
-        Set<Integer> freeValues = getFreeValuesForCell(grid);
-
-        return freeValues.size() == 1;
+        return getFreeValuesForCell(grid).isPresent();
     }
 
     @Override
     public Grid addOneNumber(Grid grid) {
-        Set<Integer> freeValues = getFreeValuesForCell(grid);
+        Integer value = getFreeValuesForCell(grid).get();
 
-        grid.getRows().get(rowIndex).getCells().get(columnIndex).setValue(freeValues.stream().findFirst().get());
+        grid.getRows().get(rowIndex).getCells().get(columnIndex).setValue(value);
 
         return grid;
     }
 
-    private Set<Integer> getFreeValuesForCell(Grid grid) {
-        Predicate<Cell> sameCoordinates = cell -> cell.getRowIndex() == rowIndex && cell.getColumnIndex() == columnIndex;
+    private Optional<Integer> getFreeValuesForCell(Grid grid) {
+        Grid.PossibleValues possibleValuesFor = grid.getPossibleValuesFor(grid.getCells().get(rowIndex).get(columnIndex));
 
-        Set<Integer> allPossibleValues = grid.allPossibleValues();
-        Set<Integer> valuesAlreadyPresentInRow = grid.getRows().get(rowIndex).valuesAlreadyPresent();
-        Set<Integer> valuesAlreadyPresentInColumns = grid.getColumns().get(columnIndex).valuesAlreadyPresent();
+        Set<Integer> possibleValues = possibleValuesFor.getPossibleValues();
 
-        Set<Integer> valuesAlreadyPresentInSquares = grid.getSquares() //TODO get(rowIndex, columnIndex)
-                                                         .stream()
-                                                         .filter(r -> r.getCells().stream().anyMatch(sameCoordinates))
-                                                         .findFirst()
-                                                         .get()
-                                                         .valuesAlreadyPresent();
+        if (possibleValues.size() == 1)
+            return possibleValues.stream().findFirst();
 
-        return difference(allPossibleValues,
-                          sum(valuesAlreadyPresentInRow,
-                              valuesAlreadyPresentInColumns,
-                              valuesAlreadyPresentInSquares));
-    }
-
-    private static Set<Integer> sum(Set<Integer>... sets)
-    {
-        Set<Integer> addition = new HashSet<>();
-        Arrays.stream(sets).forEach(addition::addAll);
-        return addition;
+        return Optional.empty();
     }
 }
