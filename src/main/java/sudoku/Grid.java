@@ -23,10 +23,6 @@ public class Grid {
         return cells;
     }
 
-    public int size() {
-        return cells.size();
-    }
-
     public List<Cells> getRows() {
         return cells.stream()
                     .map(Cells::new)
