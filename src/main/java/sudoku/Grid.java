@@ -150,12 +150,12 @@ public class Grid {
         Set<Integer> valuesAlreadyPresentByColumn = getColumns().get(cell.getColumnIndex()).valuesAlreadyPresent();
         Set<Integer> valuesAlreadyPresentBySquare = squareBy(cell.getRowIndex(), cell.getColumnIndex()).valuesAlreadyPresent();
 
-        Set<Integer> difference = difference(allPossibleValues(),
+        Set<Integer> possibleValues = difference(allPossibleValues(),
                                              sum(valuesAlreadyPresentByRow,
                                                  valuesAlreadyPresentByColumn,
                                                  valuesAlreadyPresentBySquare));
 
-        return new PossibleValues(cell, difference);
+        return new PossibleValues(cell, possibleValues);
     }
 
     public static class PossibleValues {

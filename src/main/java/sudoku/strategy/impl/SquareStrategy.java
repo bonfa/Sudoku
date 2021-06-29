@@ -29,7 +29,9 @@ public class SquareStrategy implements SolutionStrategy {
     @Override
     public Grid addOneNumber(Grid grid) {
         Optional<Integer> theSinglePossibleValue = getFreeValuesForCell(grid);
+
         grid.getCells().get(rowIndex).get(columnIndex).setValue(theSinglePossibleValue.get());
+
         return grid;
     }
 

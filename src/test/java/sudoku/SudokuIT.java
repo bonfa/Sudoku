@@ -2,7 +2,7 @@ package sudoku;
 
 import org.junit.jupiter.api.Test;
 import sudoku.strategy.SolutionStrategy;
-import sudoku.strategy.factory.SingleCellsStrategyFactory;
+import sudoku.strategy.factory.StrategyFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ class SudokuIT {
                 List.of(emptyCell(2, 0), cellWithValue(2, 1, 4), emptyCell(2, 2), cellWithValue(2, 3, 3)),
                 List.of(cellWithValue(3, 0, 2), emptyCell(3, 1), cellWithValue(3, 2, 1), emptyCell(3, 3))));
 
-        List<SolutionStrategy> allStrategies = new SingleCellsStrategyFactory().createStrategiesFor(iteration_0);
+        List<SolutionStrategy> allStrategies = new StrategyFactory().createStrategiesFor(iteration_0);
 
         Sudoku sudoku = new Sudoku(allStrategies);
 
@@ -65,7 +65,7 @@ class SudokuIT {
                 List.of(emptyCell(4, 0), cellWithValue(4, 1, 3), emptyCell(4, 2), emptyCell(4, 3), emptyCell(4, 4), emptyCell(4, 5)),
                 List.of(emptyCell(5, 0), emptyCell(5, 1), cellWithValue(5, 2, 1), emptyCell(5, 3), cellWithValue(5, 4, 2), emptyCell(5, 5))));
 
-        List<SolutionStrategy> allStrategies = new SingleCellsStrategyFactory().createStrategiesFor(iteration_0);
+        List<SolutionStrategy> allStrategies = new StrategyFactory().createStrategiesFor(iteration_0);
 
         Sudoku sudoku = new Sudoku(allStrategies);
 
