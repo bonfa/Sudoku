@@ -15,12 +15,6 @@ public class Grid {
         this.cells = cells;
     }
 
-    public static Set<Integer> sum(Set<Integer>... sets) {
-        Set<Integer> addition = new HashSet<>();
-        Arrays.stream(sets).forEach(addition::addAll);
-        return addition;
-    }
-
     public Dimensions getDimensions() {
         return new Dimensions(cells.size(), cells.get(0).size());
     }
@@ -49,6 +43,7 @@ public class Grid {
     INVARIANT: number of squares = number of rows = number of columns
     TODO: test for length != 9
      */
+
     public List<Cells> getSquares() {
         List<List<Cell>> squares = new ArrayList<>();
         for (int i = 0; i < cells.size(); i++) {
@@ -67,7 +62,6 @@ public class Grid {
                       .map(Cells::new)
                       .collect(Collectors.toList());
     }
-
     public Cells squareBy(int rowIndex, int columnIndex) {
         return getSquares().get(getSquareNumber(rowIndex, columnIndex));
     }
@@ -161,7 +155,14 @@ public class Grid {
         return new PossibleValues(cell, possibleValues);
     }
 
+    private static Set<Integer> sum(Set<Integer>... sets) {
+        Set<Integer> addition = new HashSet<>();
+        Arrays.stream(sets).forEach(addition::addAll);
+        return addition;
+    }
+
     public static class PossibleValues {
+
         private final Cell cell;
         private final Set<Integer> possibleValues;
 

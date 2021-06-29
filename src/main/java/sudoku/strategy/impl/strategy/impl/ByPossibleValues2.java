@@ -1,11 +1,14 @@
-package sudoku.strategy.impl;
+package sudoku.strategy.impl.strategy.impl;
 
 import sudoku.Grid;
+import sudoku.strategy.impl.strategy.CellStrategy;
 
 import java.util.Optional;
 import java.util.Set;
 
-public class ByPossibleValues2 {
+public class ByPossibleValues2 implements CellStrategy {
+
+    @Override
     public Optional<SolutionStep> findSolutionStepFor(Grid grid, Integer rowIndex, Integer columnIndex) {
         Set<Integer> possibleValues = grid.getPossibleValuesFor(grid.getCells().get(rowIndex).get(columnIndex)).getPossibleValues();
 
@@ -13,18 +16,5 @@ public class ByPossibleValues2 {
             return possibleValues.stream().findFirst().map(value -> new SolutionStep(rowIndex, columnIndex, value));
 
         return Optional.empty();
-    }
-
-    //TODO use something else - rename it or change it
-    public static class SolutionStep {
-        public final Integer rowIndex;
-        public final Integer columnIndex;
-        public final Integer value;
-
-        public SolutionStep(Integer rowIndex, Integer columnIndex, Integer value) {
-            this.rowIndex = rowIndex;
-            this.columnIndex = columnIndex;
-            this.value = value;
-        }
     }
 }

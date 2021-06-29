@@ -2,8 +2,8 @@ package sudoku;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import sudoku.strategy.SolutionStrategy;
 import sudoku.strategy.factory.StrategyFactory;
+import sudoku.strategy.impl.StepByStepGridStrategy;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +21,7 @@ class SudokuIT {
                                     List.of("-", "4", "-", "3"),
                                     List.of("2", "-", "1", "-"));
 
-        List<SolutionStrategy> allStrategies = new StrategyFactory().createStrategiesFor(iteration_0);
+        List<StepByStepGridStrategy> allStrategies = new StrategyFactory().createStrategiesFor();
 
         Sudoku sudoku = new Sudoku(allStrategies);
 
@@ -65,7 +65,7 @@ class SudokuIT {
                                     List.of("-", "3", "-", "-", "-", "-"),
                                     List.of("-", "-", "1", "-", "2", "-"));
 
-        List<SolutionStrategy> allStrategies = new StrategyFactory().createStrategiesFor(iteration_0);
+        List<StepByStepGridStrategy> allStrategies = new StrategyFactory().createStrategiesFor();
 
         Sudoku sudoku = new Sudoku(allStrategies);
 
@@ -95,7 +95,7 @@ class SudokuIT {
                                     List.of("6", "8", "-", "-", "9", "-", "-", "1", "5"),
                                     List.of("-", "9", "-", "-", "4", "-", "-", "3", "-"));
 
-        List<SolutionStrategy> allStrategies = new StrategyFactory().createStrategiesFor(iteration_0);
+        List<StepByStepGridStrategy> allStrategies = new StrategyFactory().createStrategiesFor();
 
         Sudoku sudoku = new Sudoku(allStrategies);
 

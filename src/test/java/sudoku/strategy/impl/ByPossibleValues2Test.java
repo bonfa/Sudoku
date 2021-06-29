@@ -2,13 +2,14 @@ package sudoku.strategy.impl;
 
 import org.junit.jupiter.api.Test;
 import sudoku.Grid;
+import sudoku.strategy.impl.strategy.impl.ByPossibleValues2;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static sudoku.strategy.TestUtilities.*;
-import static sudoku.strategy.impl.ByPossibleValues2.SolutionStep;
+import static sudoku.strategy.impl.strategy.impl.ByPossibleValues2.SolutionStep;
 
 class ByPossibleValues2Test {
 

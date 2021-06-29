@@ -1,7 +1,7 @@
 package sudoku;
 
 import org.junit.jupiter.api.Test;
-import sudoku.strategy.SolutionStrategy;
+import sudoku.strategy.impl.StepByStepGridStrategy;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ class SudokuTest {
     private static final Grid A_GRID = new Grid(emptyList());
     private static final Grid ANOTHER_GRID = new Grid(emptyList());
 
-    private final SolutionStrategy strategy_1 = mock(SolutionStrategy.class);
-    private final SolutionStrategy strategy_2 = mock(SolutionStrategy.class);
+    private final StepByStepGridStrategy strategy_1 = mock(StepByStepGridStrategy.class);
+    private final StepByStepGridStrategy strategy_2 = mock(StepByStepGridStrategy.class);
 
     private final Sudoku sudoku = new Sudoku(List.of(strategy_1, strategy_2));
 

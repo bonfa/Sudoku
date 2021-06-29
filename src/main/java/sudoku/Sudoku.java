@@ -1,13 +1,13 @@
 package sudoku;
 
-import sudoku.strategy.SolutionStrategy;
+import sudoku.strategy.impl.StepByStepGridStrategy;
 
 import java.util.List;
 
 public class Sudoku {
-    private final List<SolutionStrategy> strategies;
+    private final List<StepByStepGridStrategy> strategies;
 
-    public Sudoku(List<SolutionStrategy> strategies) {
+    public Sudoku(List<StepByStepGridStrategy> strategies) {
         this.strategies = strategies;
     }
 

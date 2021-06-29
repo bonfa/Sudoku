@@ -2,6 +2,10 @@
     - extract rules by row, column, square
     - rename
   
+grid --> candidates --> rules
+             |
+             |
+        these can be calcualated in a smarter way than the current
 
 - Investigare regola per risolvere questo:
   /**
