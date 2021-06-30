@@ -11,7 +11,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static sudoku.strategy.TestUtilities.gridWith;
 
-class SectorWithOneEmptyCellSolutionTest {
+class ZoneWithOneEmptyCellSolutionTest {
 
     private final SectorWithOneEmptyCellSolution strategy = new SectorWithOneEmptyCellSolution();
 

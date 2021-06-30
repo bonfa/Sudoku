@@ -1,7 +1,7 @@
 package sudoku.strategy.factory.sector;
 
 import sudoku.Grid;
-import sudoku.Sector;
+import sudoku.Zone;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.sector.SectorWithOneEmptyCellSolution;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class SectorStrategyFactory {
-    private final Function<Grid, List<Sector>> rowsExtractor = Grid::getRows;
-    private final Function<Grid, List<Sector>> columnsExtractor = Grid::getColumns;
-    private final Function<Grid, List<Sector>> squaresExtractor = Grid::getSquares;
+    private final Function<Grid, List<Zone>> rowsExtractor = Grid::getRows;
+    private final Function<Grid, List<Zone>> columnsExtractor = Grid::getColumns;
+    private final Function<Grid, List<Zone>> squaresExtractor = Grid::getSquares;
     private final SectorWithOneEmptyCellSolution sectorWithOneEmptyCellSolution = new SectorWithOneEmptyCellSolution();
 
     public List<Function<Grid, Optional<SolutionStep>>> createStrategies() {

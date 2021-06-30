@@ -1,7 +1,7 @@
 package sudoku.strategy.impl.strategy.sector;
 
 import sudoku.Cell;
-import sudoku.Sector;
+import sudoku.Zone;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.utilities.Sets;
 
@@ -13,39 +13,39 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SectorWithOneEmptyCellSolution implements Function<List<Sector>, Optional<SolutionStep>> {
+public class SectorWithOneEmptyCellSolution implements Function<List<Zone>, Optional<SolutionStep>> {
     private final Predicate<Cell> isEmpty = c -> c.getValue().isEmpty();
     private final Predicate<Cell> hasValue = isEmpty.negate();
-    private final Predicate<Sector> hasOneEmptyCell = r -> r.cells.stream().filter(isEmpty).count() == 1;
+    private final Predicate<Zone> hasOneEmptyCell = r -> r.cells.stream().filter(isEmpty).count() == 1;
 
     @Override
-    public Optional<SolutionStep> apply(List<Sector> sectors) {
-        return sectors.stream()
-                      .filter(hasOneEmptyCell)
-                      .findFirst()
-                      .map(this::findSolutionStepFor);
+    public Optional<SolutionStep> apply(List<Zone> zones) {
+        return zones.stream()
+                    .filter(hasOneEmptyCell)
+                    .findFirst()
+                    .map(this::findSolutionStepFor);
     }
 
-    private SolutionStep findSolutionStepFor(Sector sector) {
-        Cell cell = sector.cells.stream().filter(isEmpty).collect(Collectors.toList()).get(0);
+    private SolutionStep findSolutionStepFor(Zone zone) {
+        Cell cell = zone.cells.stream().filter(isEmpty).collect(Collectors.toList()).get(0);
 
         return new SolutionStep(cell.getRowIndex(),
                                 cell.getColumnIndex(),
-                                getValue(sector));
+                                getValue(zone));
     }
 
-    private Integer getValue(Sector sector) {
-        Set<Integer> valuesAlreadyPresent = sector.cells.stream()
-                                                        .filter(hasValue)
-                                                        .map(Cell::getValue)
-                                                        .flatMap(Optional::stream)
-                                                        .collect(Collectors.toSet());
+    private Integer getValue(Zone zone) {
+        Set<Integer> valuesAlreadyPresent = zone.cells.stream()
+                                                      .filter(hasValue)
+                                                      .map(Cell::getValue)
+                                                      .flatMap(Optional::stream)
+                                                      .collect(Collectors.toSet());
 
-        return Sets.difference(allPossibleValues(sector), valuesAlreadyPresent).stream().findFirst().get();
+        return Sets.difference(allPossibleValues(zone), valuesAlreadyPresent).stream().findFirst().get();
     }
 
     //TODO duplicated in Grid
-    private Set<Integer> allPossibleValues(Sector sector) {
-        return IntStream.rangeClosed(1, sector.cells.size()).boxed().collect(Collectors.toSet());
+    private Set<Integer> allPossibleValues(Zone zone) {
+        return IntStream.rangeClosed(1, zone.cells.size()).boxed().collect(Collectors.toSet());
     }
 }

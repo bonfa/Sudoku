@@ -17,7 +17,8 @@ import static sudoku.strategy.TestUtilities.gridWith;
 class SudokuIT {
 
     private final List<Function<Grid, Optional<SolutionStep>>> solutionStrategies = new StrategyFactory().createStrategies();
-    private final Sudoku sudoku = new Sudoku(solutionStrategies, new Sudoku.SolutionStepApplier());
+    private final Sudoku.SolutionStepApplier solutionStepApplier = new Sudoku.SolutionStepApplier();
+    private final Sudoku sudoku = new Sudoku(solutionStrategies, solutionStepApplier);
 
     @Test
     void solve_4x4() {
@@ -138,7 +139,7 @@ class SudokuIT {
         assertEquals(first.getValue(), second.getValue());
     }
 
-    private void assertCellsContainsValues(Sector first, List<Integer> values) {
+    private void assertCellsContainsValues(Zone first, List<Integer> values) {
         List<Integer> cellValues = first.cells
                 .stream()
                 .map(cell -> cell.getValue().orElse(null))

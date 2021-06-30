@@ -28,7 +28,7 @@ public class Grid {
         return sector;
     }
 
-    public Sector squareBy(int rowIndex, int columnIndex) {
+    public Zone squareBy(int rowIndex, int columnIndex) {
         return getSquares().get(getSquareNumber(rowIndex, columnIndex));
     }
 
@@ -117,23 +117,23 @@ public class Grid {
         return n;
     }
 
-    public List<Sector> getRows() {
+    public List<Zone> getRows() {
         return sector.stream()
-                    .map(Sector::new)
+                    .map(Zone::new)
                     .collect(Collectors.toList());
     }
 
-    public List<Sector> getColumns() {
+    public List<Zone> getColumns() {
         return IntStream.range(0, getRows().size())
-                        .mapToObj(i -> new Sector(getRows().stream().map(l -> l.cells.get(i)).collect(Collectors.toList())))
+                        .mapToObj(i -> new Zone(getRows().stream().map(l -> l.cells.get(i)).collect(Collectors.toList())))
                         .collect(Collectors.toList());
     }
 
-    public Sector rowAt(Integer rowIndex) {
+    public Zone rowAt(Integer rowIndex) {
         return getRows().get(rowIndex);
     }
 
-    public Sector columnAt(Integer columnIndex) {
+    public Zone columnAt(Integer columnIndex) {
         return getRows().get(columnIndex);
     }
 
@@ -142,7 +142,7 @@ public class Grid {
     TODO: test for length != 9
      */
     //TODO make private and handle the test of the creation somehow
-    public List<Sector> getSquares() {
+    public List<Zone> getSquares() {
         List<List<Cell>> squares = new ArrayList<>();
         for (int i = 0; i < sector.size(); i++) {
             squares.add(new ArrayList<>());
@@ -157,7 +157,7 @@ public class Grid {
         }
 
         return squares.stream()
-                      .map(Sector::new)
+                      .map(Zone::new)
                       .collect(Collectors.toList());
     }
 

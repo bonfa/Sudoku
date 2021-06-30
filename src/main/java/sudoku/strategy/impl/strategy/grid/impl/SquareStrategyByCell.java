@@ -1,7 +1,7 @@
 package sudoku.strategy.impl.strategy.grid.impl;
 
 import sudoku.Cell;
-import sudoku.Sector;
+import sudoku.Zone;
 import sudoku.Grid;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.CellStrategy;
@@ -18,7 +18,7 @@ public class SquareStrategyByCell implements CellStrategy {
         if (grid.getCells().get(rowIndex).get(columnIndex).getValue().isPresent())
             return Optional.empty();
 
-        Sector square = grid.squareBy(rowIndex, columnIndex);
+        Zone square = grid.squareBy(rowIndex, columnIndex);
         List<Cell> emptyCells = square.cells
                                       .stream()
                                       .filter(c -> c.getValue().isEmpty())

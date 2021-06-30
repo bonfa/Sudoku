@@ -39,8 +39,8 @@ class GridTest {
         return Cell.cellWithValue(0, 0, value);
     }
 
-    private void assertCellContainsValues(Sector sector, Set<Integer> values) {
-        var expected = sector.cells.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
+    private void assertCellContainsValues(Zone zone, Set<Integer> values) {
+        var expected = zone.cells.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
 
         assertEquals(expected, values);
     }
