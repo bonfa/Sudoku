@@ -1,4 +1,4 @@
-package sudoku.strategy.impl.strategy.sector;
+package sudoku.strategy.impl.strategy.zone;
 
 import sudoku.Cell;
 import sudoku.Zone;
@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SectorWithOneEmptyCellSolution implements Function<List<Zone>, Optional<SolutionStep>> {
+public class ZoneWithOneEmptyCellSolution implements Function<List<Zone>, Optional<SolutionStep>> {
     private final Predicate<Cell> isEmpty = c -> c.getValue().isEmpty();
     private final Predicate<Cell> hasValue = isEmpty.negate();
     private final Predicate<Zone> hasOneEmptyCell = r -> r.cells.stream().filter(isEmpty).count() == 1;

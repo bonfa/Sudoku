@@ -16,9 +16,9 @@ public class TestUtilities {
         return new Grid(collect);
     }
 
-    private static List<Cell> parseRow(List<String> sector, int rowIndex) {
-        return IntStream.range(0, sector.size())
-                        .mapToObj(j -> parseCell(sector.get(j), rowIndex, j))
+    private static List<Cell> parseRow(List<String> zone, int rowIndex) {
+        return IntStream.range(0, zone.size())
+                        .mapToObj(j -> parseCell(zone.get(j), rowIndex, j))
                         .collect(Collectors.toList());
     }
 

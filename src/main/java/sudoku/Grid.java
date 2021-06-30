@@ -7,25 +7,25 @@ import java.util.stream.IntStream;
 import static sudoku.utilities.Sets.*;
 
 public class Grid {
-    private final List<List<Cell>> sector;
+    private final List<List<Cell>> zones;
 
     //TODO check invariant: number of rows = number of columns
     //TODO check invariant: number of rows in {1, 4, 6, 8, 9}
-    public Grid(List<List<Cell>> sector) {
-        this.sector = sector;
+    public Grid(List<List<Cell>> zones) {
+        this.zones = zones;
     }
 
     //TODO remove
-    public static Set<Integer> valuesAlreadyPresent(List<Cell> sector) {
-        return sector.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
+    public static Set<Integer> valuesAlreadyPresent(List<Cell> zone) {
+        return zone.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
     }
 
     public Dimensions getDimensions() {
-        return new Dimensions(sector.size(), sector.get(0).size());
+        return new Dimensions(zones.size(), zones.get(0).size());
     }
 
     public List<List<Cell>> getCells() {
-        return sector;
+        return zones;
     }
 
     public Zone squareBy(int rowIndex, int columnIndex) {
@@ -50,7 +50,7 @@ public class Grid {
     }
 
     private int getSquareNumber(int i, int j) {
-        switch (sector.size()) {
+        switch (zones.size()) {
             case 1:
                 return squareNumberForGridOfSizeOne();
             case 4:
@@ -118,7 +118,7 @@ public class Grid {
     }
 
     public List<Zone> getRows() {
-        return sector.stream()
+        return zones.stream()
                     .map(Zone::new)
                     .collect(Collectors.toList());
     }
@@ -144,12 +144,12 @@ public class Grid {
     //TODO make private and handle the test of the creation somehow
     public List<Zone> getSquares() {
         List<List<Cell>> squares = new ArrayList<>();
-        for (int i = 0; i < sector.size(); i++) {
+        for (int i = 0; i < zones.size(); i++) {
             squares.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < sector.size(); i++) {
-            for (int j = 0; j < sector.get(i).size(); j++) {
+        for (int i = 0; i < zones.size(); i++) {
+            for (int j = 0; j < zones.get(i).size(); j++) {
                 int n = getSquareNumber(i, j);
 
                 squares.get(n).add(getRows().get(i).cells.get(j));
@@ -162,7 +162,7 @@ public class Grid {
     }
 
     public Set<Integer> allPossibleValues() {
-        return IntStream.rangeClosed(1, sector.size()).boxed().collect(Collectors.toSet());
+        return IntStream.rangeClosed(1, zones.size()).boxed().collect(Collectors.toSet());
     }
 
     public static class PossibleValues {

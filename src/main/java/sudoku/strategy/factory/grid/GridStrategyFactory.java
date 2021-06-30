@@ -1,7 +1,6 @@
 package sudoku.strategy.factory.grid;
 
 import sudoku.Grid;
-import sudoku.strategy.factory.sector.SectorStrategyFactory;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.grid.SingleCellSolutionStrategy;
 import sudoku.strategy.impl.strategy.grid.impl.ByPossibleValues2;

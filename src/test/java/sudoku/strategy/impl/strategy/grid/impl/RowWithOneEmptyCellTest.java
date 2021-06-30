@@ -3,7 +3,7 @@ package sudoku.strategy.impl.strategy.grid.impl;
 import org.junit.jupiter.api.Test;
 import sudoku.Grid;
 import sudoku.strategy.impl.SolutionStep;
-import sudoku.strategy.impl.strategy.sector.SectorWithOneEmptyCellSolution;
+import sudoku.strategy.impl.strategy.zone.ZoneWithOneEmptyCellSolution;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import static sudoku.strategy.TestUtilities.gridWith;
 
 class ZoneWithOneEmptyCellSolutionTest {
 
-    private final SectorWithOneEmptyCellSolution strategy = new SectorWithOneEmptyCellSolution();
+    private final ZoneWithOneEmptyCellSolution strategy = new ZoneWithOneEmptyCellSolution();
 
     @Test
     void solutionStepFound() {

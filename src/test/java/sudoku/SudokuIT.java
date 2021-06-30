@@ -113,8 +113,8 @@ class SudokuIT {
 
     private void printGrid(Grid grid) {
         List<List<Cell>> rows = grid.getCells();
-        for (List<Cell> sector : rows) {
-            for (Cell cell : sector) {
+        for (List<Cell> zone : rows) {
+            for (Cell cell : zone) {
                 System.out.print(cell.getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
             }
             System.out.print("\n");
