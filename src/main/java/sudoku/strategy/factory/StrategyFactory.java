@@ -14,7 +14,7 @@ public class StrategyFactory {
     private final ZoneStrategyFactory zoneStrategyFactory = new ZoneStrategyFactory();
     private final GridStrategyFactory gridStrategyFactory = new GridStrategyFactory();
 
-    public List<Function<Grid, Optional<SolutionStep>>> createStrategies() { //TODO test
+    public List<Function<Grid, Optional<SolutionStep>>> createStrategies() {
         List<Function<Grid, Optional<SolutionStep>>> strategies = new ArrayList<>();
 
         strategies.addAll(zoneStrategyFactory.createStrategies());
