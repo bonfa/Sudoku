@@ -83,17 +83,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertFalse(cell.hasValue());
         assertEquals (cell.getValue(), (Integer) field.get(cell));
-        assertNotNull (cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertTrue(cell.getPossibleValues()[1]);
-        assertTrue(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertTrue(cell.getPossibleValues()[5]);
-        assertTrue(cell.getPossibleValues()[6]);
-        assertTrue(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertNotNull (cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertTrue(cell.getCandidates()[1]);
+        assertTrue(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertTrue(cell.getCandidates()[5]);
+        assertTrue(cell.getCandidates()[6]);
+        assertTrue(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 9);
     }
 
@@ -112,17 +112,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertFalse(cell.hasValue());
         assertEquals (cell.getValue(), (Integer) field.get(cell));
-        assertNotNull(cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertTrue(cell.getPossibleValues()[1]);
-        assertTrue(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertTrue(cell.getPossibleValues()[5]);
-        assertTrue(cell.getPossibleValues()[6]);
-        assertTrue(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertNotNull(cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertTrue(cell.getCandidates()[1]);
+        assertTrue(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertTrue(cell.getCandidates()[5]);
+        assertTrue(cell.getCandidates()[6]);
+        assertTrue(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 9);
     }
 
@@ -141,17 +141,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertFalse(cell.hasValue());
         assertEquals (cell.getValue(), (Integer) field.get(cell));
-        assertNotNull (cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertTrue(cell.getPossibleValues()[1]);
-        assertTrue(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertTrue(cell.getPossibleValues()[5]);
-        assertTrue(cell.getPossibleValues()[6]);
-        assertTrue(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertNotNull (cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertTrue(cell.getCandidates()[1]);
+        assertTrue(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertTrue(cell.getCandidates()[5]);
+        assertTrue(cell.getCandidates()[6]);
+        assertTrue(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 9);
     }
 
@@ -168,17 +168,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertTrue(cell.hasValue());
         assertEquals (cell.getValue(), value);
-        assertNotNull (cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertFalse(cell.getPossibleValues()[1]);
-        assertFalse(cell.getPossibleValues()[2]);
-        assertFalse(cell.getPossibleValues()[3]);
-        assertFalse(cell.getPossibleValues()[4]);
-        assertFalse(cell.getPossibleValues()[5]);
-        assertFalse(cell.getPossibleValues()[6]);
-        assertFalse(cell.getPossibleValues()[7]);
-        assertFalse(cell.getPossibleValues()[8]);
+        assertNotNull (cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertFalse(cell.getCandidates()[1]);
+        assertFalse(cell.getCandidates()[2]);
+        assertFalse(cell.getCandidates()[3]);
+        assertFalse(cell.getCandidates()[4]);
+        assertFalse(cell.getCandidates()[5]);
+        assertFalse(cell.getCandidates()[6]);
+        assertFalse(cell.getCandidates()[7]);
+        assertFalse(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 1);
     }
 
@@ -195,17 +195,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertTrue(cell.hasValue());
         assertEquals (cell.getValue(), value);
-        assertNotNull (cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertFalse(cell.getPossibleValues()[0]);
-        assertFalse(cell.getPossibleValues()[1]);
-        assertFalse(cell.getPossibleValues()[2]);
-        assertFalse(cell.getPossibleValues()[3]);
-        assertFalse(cell.getPossibleValues()[4]);
-        assertFalse(cell.getPossibleValues()[5]);
-        assertFalse(cell.getPossibleValues()[6]);
-        assertFalse(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertNotNull (cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertFalse(cell.getCandidates()[0]);
+        assertFalse(cell.getCandidates()[1]);
+        assertFalse(cell.getCandidates()[2]);
+        assertFalse(cell.getCandidates()[3]);
+        assertFalse(cell.getCandidates()[4]);
+        assertFalse(cell.getCandidates()[5]);
+        assertFalse(cell.getCandidates()[6]);
+        assertFalse(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 1);
     }
 
@@ -222,17 +222,17 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), columnIndex);
         assertTrue(cell.hasValue());
         assertEquals (cell.getValue(), value);
-        assertNotNull (cell.getPossibleValues());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertFalse(cell.getPossibleValues()[0]);
-        assertFalse(cell.getPossibleValues()[1]);
-        assertFalse(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertFalse(cell.getPossibleValues()[4]);
-        assertFalse(cell.getPossibleValues()[5]);
-        assertFalse(cell.getPossibleValues()[6]);
-        assertFalse(cell.getPossibleValues()[7]);
-        assertFalse(cell.getPossibleValues()[8]);
+        assertNotNull (cell.getCandidates());
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertFalse(cell.getCandidates()[0]);
+        assertFalse(cell.getCandidates()[1]);
+        assertFalse(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertFalse(cell.getCandidates()[4]);
+        assertFalse(cell.getCandidates()[5]);
+        assertFalse(cell.getCandidates()[6]);
+        assertFalse(cell.getCandidates()[7]);
+        assertFalse(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 1);
     }
 
@@ -261,16 +261,16 @@ public class CellTest {
         cell.reset();
 
         assertFalse(cell.hasValue());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertTrue(cell.getPossibleValues()[1]);
-        assertTrue(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertTrue(cell.getPossibleValues()[5]);
-        assertTrue(cell.getPossibleValues()[6]);
-        assertTrue(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertTrue(cell.getCandidates()[1]);
+        assertTrue(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertTrue(cell.getCandidates()[5]);
+        assertTrue(cell.getCandidates()[6]);
+        assertTrue(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 9);
     }
 
@@ -286,16 +286,16 @@ public class CellTest {
         cell.setValue(5);
 
         assertTrue(cell.hasValue());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertFalse(cell.getPossibleValues()[0]);
-        assertFalse(cell.getPossibleValues()[1]);
-        assertFalse(cell.getPossibleValues()[2]);
-        assertFalse(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertFalse(cell.getPossibleValues()[5]);
-        assertFalse(cell.getPossibleValues()[6]);
-        assertFalse(cell.getPossibleValues()[7]);
-        assertFalse(cell.getPossibleValues()[8]);
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertFalse(cell.getCandidates()[0]);
+        assertFalse(cell.getCandidates()[1]);
+        assertFalse(cell.getCandidates()[2]);
+        assertFalse(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertFalse(cell.getCandidates()[5]);
+        assertFalse(cell.getCandidates()[6]);
+        assertFalse(cell.getCandidates()[7]);
+        assertFalse(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 1);
     }
 
@@ -310,16 +310,16 @@ public class CellTest {
         cell.setPossibleValue(3, false);
 
         assertFalse(cell.hasValue());
-        assertEquals (cell.getPossibleValues().length, Sudoku.MAX_VALUE);
-        assertTrue(cell.getPossibleValues()[0]);
-        assertFalse(cell.getPossibleValues()[1]);
-        assertFalse(cell.getPossibleValues()[2]);
-        assertTrue(cell.getPossibleValues()[3]);
-        assertTrue(cell.getPossibleValues()[4]);
-        assertTrue(cell.getPossibleValues()[5]);
-        assertTrue(cell.getPossibleValues()[6]);
-        assertTrue(cell.getPossibleValues()[7]);
-        assertTrue(cell.getPossibleValues()[8]);
+        assertEquals (cell.getCandidates().length, Sudoku.MAX_VALUE);
+        assertTrue(cell.getCandidates()[0]);
+        assertFalse(cell.getCandidates()[1]);
+        assertFalse(cell.getCandidates()[2]);
+        assertTrue(cell.getCandidates()[3]);
+        assertTrue(cell.getCandidates()[4]);
+        assertTrue(cell.getCandidates()[5]);
+        assertTrue(cell.getCandidates()[6]);
+        assertTrue(cell.getCandidates()[7]);
+        assertTrue(cell.getCandidates()[8]);
         assertEquals (cell.getNumberOfPossibleValues(), 7);
     }
 
@@ -398,18 +398,18 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), copy.getColumnIndex());
         assertEquals (cell.getRowIndex(), copy.getRowIndex());
         assertEquals (cell.getValue(), copy.getValue());
-        assertNotEquals (cell.getPossibleValues(), copy.getPossibleValues());
-        assertTrue (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertNotEquals (cell.getCandidates(), copy.getCandidates());
+        assertTrue (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
 
         cell.setValue(5);
 
         assertNotEquals (cell.getValue(), copy.getValue());
-        assertNotEquals (cell.getPossibleValues(), copy.getPossibleValues());
-        assertFalse (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertNotEquals (cell.getCandidates(), copy.getCandidates());
+        assertFalse (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
 
         copy.setValue(5);
-        assertNotEquals (cell.getPossibleValues(), copy.getPossibleValues());
-        assertTrue (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertNotEquals (cell.getCandidates(), copy.getCandidates());
+        assertTrue (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
     }
 
     @Test()
@@ -425,20 +425,20 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), copy.getColumnIndex());
         assertEquals (cell.getRowIndex(), copy.getRowIndex());
         assertEquals (cell.getValue(), copy.getValue());
-        assertTrue (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertTrue (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
 
         cell.reset();
 
         assertEquals (cell.getColumnIndex(), copy.getColumnIndex());
         assertEquals (cell.getRowIndex(), copy.getRowIndex());
         assertNotEquals (cell.getValue(), copy.getValue());
-        assertNotEquals (cell.getPossibleValues(), copy.getPossibleValues());
-        assertFalse (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertNotEquals (cell.getCandidates(), copy.getCandidates());
+        assertFalse (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
 
         cell.setValue(5);
 
         assertNotEquals (cell.getValue(), copy.getValue());
-        assertFalse (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertFalse (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
 
         cell.reset();
         cell.setValue(4);
@@ -446,7 +446,7 @@ public class CellTest {
         assertEquals (cell.getColumnIndex(), copy.getColumnIndex());
         assertEquals (cell.getRowIndex(), copy.getRowIndex());
         assertEquals (cell.getValue(), copy.getValue());
-        assertNotEquals (cell.getPossibleValues(), copy.getPossibleValues());
-        assertTrue (Objects.deepEquals(cell.getPossibleValues(), copy.getPossibleValues()));
+        assertNotEquals (cell.getCandidates(), copy.getCandidates());
+        assertTrue (Objects.deepEquals(cell.getCandidates(), copy.getCandidates()));
     }
 }

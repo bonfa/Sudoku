@@ -89,7 +89,7 @@ public final class Cell {
         mColumnIndex = cell.getColumnIndex();
         mValue = cell.getValue();
         mPossibleValues = getInitializedPossibleValues();
-        System.arraycopy(cell.getPossibleValues(), 0, mPossibleValues, 0, cell.getPossibleValues().length);
+        System.arraycopy(cell.getCandidates(), 0, mPossibleValues, 0, cell.getCandidates().length);
 
     }
 
@@ -158,7 +158,7 @@ public final class Cell {
         return mValue;
     }
 
-    public boolean[] getPossibleValues() {
+    public boolean[] getCandidates() {
         return mPossibleValues;
     }
 

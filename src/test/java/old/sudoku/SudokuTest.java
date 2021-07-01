@@ -1268,61 +1268,61 @@ public class SudokuTest {
 
                 } else if (i == rowIndex) { //row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == 4) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (j == columnIndex) { //column
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == 4) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex - 2 && (j == columnIndex - 1 || j == columnIndex + 1)) { // square first row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == 4) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex - 1 && (j == columnIndex - 1 || j == columnIndex + 1)) { // square second row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == 4) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else {
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
-                        assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                        assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                     }
                 }
             }
@@ -1417,73 +1417,73 @@ public class SudokuTest {
 
                 if (i == rowIndex && j == columnIndex) {
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
                 } else if (i == rowIndex) { //row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (j == columnIndex) { //column
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex + 1 && (j == columnIndex - 1 || j == columnIndex - 2)) { // square first row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex + 2 && (j == columnIndex - 1 || j == columnIndex - 2)) { // square second row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else {
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
-                        assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                        assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                     }
                 }
             }
@@ -1532,73 +1532,73 @@ public class SudokuTest {
 
                 if (i == rowIndex && j == columnIndex) {
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
                 } else if (i == rowIndex) { //row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (j == columnIndex) { //column
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex + 1 && (j == columnIndex - 1 || j == columnIndex - 2)) { // square first row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else if (i == rowIndex + 2 && (j == columnIndex - 1 || j == columnIndex - 2)) { // square second row
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
                         if (k == newValue - 1) {
 
-                            assertFalse(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertFalse(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         } else {
 
-                            assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                            assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                         }
                     }
 
                 } else {
 
-                    for (int k = 0; k < sudoku.getMatrix()[i][j].getPossibleValues().length; k++) {
+                    for (int k = 0; k < sudoku.getMatrix()[i][j].getCandidates().length; k++) {
 
-                        assertTrue(sudoku.getMatrix()[i][j].getPossibleValues()[k]);
+                        assertTrue(sudoku.getMatrix()[i][j].getCandidates()[k]);
                     }
                 }
             }
@@ -1642,7 +1642,7 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
-        assertTrue(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertTrue(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNotNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
         assertEquals(0, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex());
         assertEquals(8, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex());
@@ -1664,20 +1664,20 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
-        assertTrue(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertTrue(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNotNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
         assertEquals(0, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex());
         assertEquals(8, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex());
 
         sudoku.setCellValue(new Cell(0, 8, 9), false);
 
-        assertTrue(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertTrue(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNotNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
         assertEquals(8, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex());
         assertEquals(0, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex());
 
         sudoku.setCellValue(new Cell(8, 0, 9), false);
-        assertFalse(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertFalse(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
     }
 
     @Test()
@@ -1696,21 +1696,21 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
-        assertTrue(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertTrue(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNotNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
         assertEquals(0, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex());
         assertEquals(8, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex());
 
-        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOneCandidate();
 
-        assertTrue(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertTrue(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNotNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
         assertEquals(8, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getRowIndex());
         assertEquals(0, sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue().getColumnIndex());
 
-        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+        sudoku.setProperValueToFirstCellWithoutValueAndOnlyOneCandidate();
 
-        assertFalse(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertFalse(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
     }
 
     @Test
@@ -1729,10 +1729,10 @@ public class SudokuTest {
         };
 
         final Sudoku sudoku = new Sudoku(matrix);
-        assertFalse(sudoku.hasCellWithoutValueAndOnlyOnePossibleValue());
+        assertFalse(sudoku.hasCellWithoutValueAndOnlyOneCandidate());
         assertNull(sudoku.getFirstCellWithoutValueAndOnlyOnePossibleValue());
 
-        assertThrows(OperationNotAllowedException.class, sudoku::setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue);
+        assertThrows(OperationNotAllowedException.class, sudoku::setProperValueToFirstCellWithoutValueAndOnlyOneCandidate);
     }
 
     //-------------------------- Constructor for cloning -----------------------------------
@@ -1766,8 +1766,8 @@ public class SudokuTest {
                 assertEquals (sudokuCell.getRowIndex(), copyCell.getRowIndex());
                 assertEquals (sudokuCell.getColumnIndex(), copyCell.getColumnIndex());
                 assertEquals (sudokuCell.getValue(), copyCell.getValue());
-                assertNotEquals (sudokuCell.getPossibleValues(), copyCell.getPossibleValues());
-                assertTrue (Objects.deepEquals(sudokuCell.getPossibleValues(), copyCell.getPossibleValues()));
+                assertNotEquals (sudokuCell.getCandidates(), copyCell.getCandidates());
+                assertTrue (Objects.deepEquals(sudokuCell.getCandidates(), copyCell.getCandidates()));
             }
         }
     }

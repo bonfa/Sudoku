@@ -1,4 +1,4 @@
-- ByPossibleValues2 
+- CellWithSingleCandidate 
     - extract rules by row, column, square
     - rename
   

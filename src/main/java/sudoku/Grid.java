@@ -32,21 +32,21 @@ public class Grid {
         return getSquares().get(getSquareNumber(rowIndex, columnIndex));
     }
 
-    public PossibleValues getPossibleValuesFor(Cell cell) {
+    public Candidates getCandidates(Cell cell) {
         if (cell.getValue().isPresent()) {
-            return new PossibleValues(cell, Collections.emptySet());
+            return new Candidates(cell, Collections.emptySet());
         }
 
         Set<Integer> valuesAlreadyPresentByRow = valuesAlreadyPresent(getRows().get(cell.getRowIndex()).cells);
         Set<Integer> valuesAlreadyPresentByColumn = valuesAlreadyPresent(getColumns().get(cell.getColumnIndex()).cells);
         Set<Integer> valuesAlreadyPresentBySquare = valuesAlreadyPresent(squareBy(cell.getRowIndex(), cell.getColumnIndex()).cells);
 
-        Set<Integer> possibleValues = difference(allPossibleValues(),
-                                                 sum(valuesAlreadyPresentByRow,
-                                                     valuesAlreadyPresentByColumn,
-                                                     valuesAlreadyPresentBySquare));
+        Set<Integer> candidates = difference(allPossibleValues(),
+                                             sum(valuesAlreadyPresentByRow,
+                                                 valuesAlreadyPresentByColumn,
+                                                 valuesAlreadyPresentBySquare));
 
-        return new PossibleValues(cell, possibleValues);
+        return new Candidates(cell, candidates);
     }
 
     private int getSquareNumber(int i, int j) {
@@ -165,24 +165,26 @@ public class Grid {
         return IntStream.rangeClosed(1, zones.size()).boxed().collect(Collectors.toSet());
     }
 
-    public static class PossibleValues {
-
+    public static class Candidates {
 
         private final Cell cell;
-        private final Set<Integer> possibleValues;
+        private final Set<Integer> candidates;
 
-        public PossibleValues(Cell cell, Set<Integer> possibleValues) {
+        public Candidates(Cell cell, Set<Integer> candidates) {
             this.cell = cell;
-            this.possibleValues = possibleValues;
+            this.candidates = candidates;
         }
 
-
-        public Cell getCell() {
-            return cell;
+        public Integer getRowIndex() {
+            return cell.getRowIndex();
         }
 
-        public Set<Integer> getPossibleValues() {
-            return possibleValues;
+        public Integer getColumnIndex() {
+            return cell.getColumnIndex();
+        }
+
+        public Set<Integer> getCandidates() {
+            return candidates;
         }
     }
 

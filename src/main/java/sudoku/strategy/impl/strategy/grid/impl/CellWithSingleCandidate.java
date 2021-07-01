@@ -7,14 +7,14 @@ import sudoku.strategy.impl.strategy.CellStrategy;
 import java.util.Optional;
 import java.util.Set;
 
-public class ByPossibleValues2 implements CellStrategy {
+public class CellWithSingleCandidate implements CellStrategy {
 
     @Override
     public Optional<SolutionStep> findSolutionStepFor(Grid grid, Integer rowIndex, Integer columnIndex) {
-        Set<Integer> possibleValues = grid.getPossibleValuesFor(grid.getCells().get(rowIndex).get(columnIndex)).getPossibleValues();
+        Set<Integer> candidates = grid.getCandidates(grid.getCells().get(rowIndex).get(columnIndex)).getCandidates();
 
-        if (possibleValues.size() == 1)
-            return possibleValues.stream().findFirst().map(value -> new SolutionStep(rowIndex, columnIndex, value));
+        if (candidates.size() == 1)
+            return candidates.stream().findFirst().map(value -> new SolutionStep(rowIndex, columnIndex, value));
 
         return Optional.empty();
     }

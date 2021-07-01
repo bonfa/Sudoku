@@ -57,9 +57,9 @@ public class SudokuSolver {
 
         solutionStack.add(new Sudoku(mSudoku));
 
-        while (!mSudoku.isComplete() && mSudoku.hasCellWithoutValueAndOnlyOnePossibleValue()) {
+        while (!mSudoku.isComplete() && mSudoku.hasCellWithoutValueAndOnlyOneCandidate()) {
 
-            mSudoku.setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue();
+            mSudoku.setProperValueToFirstCellWithoutValueAndOnlyOneCandidate();
 
             solutionStack.add(new Sudoku(mSudoku));
         }

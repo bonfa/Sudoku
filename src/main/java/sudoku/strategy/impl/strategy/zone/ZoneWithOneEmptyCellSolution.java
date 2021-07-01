@@ -41,11 +41,11 @@ public class ZoneWithOneEmptyCellSolution implements Function<List<Zone>, Option
                                                       .flatMap(Optional::stream)
                                                       .collect(Collectors.toSet());
 
-        return Sets.difference(allPossibleValues(zone), valuesAlreadyPresent).stream().findFirst().get();
+        return Sets.difference(candidates(zone), valuesAlreadyPresent).stream().findFirst().get();
     }
 
     //TODO duplicated in Grid
-    private Set<Integer> allPossibleValues(Zone zone) {
+    private Set<Integer> candidates(Zone zone) {
         return IntStream.rangeClosed(1, zone.cells.size()).boxed().collect(Collectors.toSet());
     }
 }

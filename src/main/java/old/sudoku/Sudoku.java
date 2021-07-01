@@ -38,7 +38,7 @@ public final class Sudoku {
 
         this.mMatrix = sudoku;
 
-        updateCellsPossibleValues();
+        updateCellsCandidates();
     }
 
     /**
@@ -54,7 +54,7 @@ public final class Sudoku {
 
         this.mMatrix = sudoku;
 
-        updateCellsPossibleValues();
+        updateCellsCandidates();
     }
 
     /**
@@ -74,7 +74,7 @@ public final class Sudoku {
             }
         }
 
-        updateCellsPossibleValues();
+        updateCellsCandidates();
     }
 
     /**
@@ -281,7 +281,7 @@ public final class Sudoku {
     /**
      * Updates the possible values of the sector of the old.sudoku
      */
-    private void updateCellsPossibleValues() {
+    private void updateCellsCandidates() {
 
         for (int rowCount = 0; rowCount < MAX_VALUE; rowCount++) {
             for (int columnCount = 0; columnCount < MAX_VALUE; columnCount++) {
@@ -478,7 +478,7 @@ public final class Sudoku {
             }
         }
 
-        updateCellsPossibleValues();
+        updateCellsCandidates();
     }
 
     /**
@@ -486,7 +486,7 @@ public final class Sudoku {
      *
      * @return true if the old.sudoku has at least one cell without value and with only one possible value, false otherwise;
      */
-    public boolean hasCellWithoutValueAndOnlyOnePossibleValue() {
+    public boolean hasCellWithoutValueAndOnlyOneCandidate() {
 
         return getFirstCellWithoutValueAndOnlyOnePossibleValue() != null;
     }
@@ -519,7 +519,7 @@ public final class Sudoku {
      * @throws OperationNotAllowedException
      * @throws ValueOutOfBoundsException
      */
-    public void setProperValueToFirstCellWithoutValueAndOnlyOnePossibleValue() throws OperationNotAllowedException, ValueOutOfBoundsException {
+    public void setProperValueToFirstCellWithoutValueAndOnlyOneCandidate() throws OperationNotAllowedException, ValueOutOfBoundsException {
 
         final Cell cell = getFirstCellWithoutValueAndOnlyOnePossibleValue();
 
