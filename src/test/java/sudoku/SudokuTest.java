@@ -2,6 +2,7 @@ package sudoku;
 
 import org.junit.jupiter.api.Test;
 import sudoku.models.Grid;
+import sudoku.models.Position;
 import sudoku.strategy.impl.SolutionStep;
 
 import java.util.List;
@@ -17,7 +18,7 @@ class SudokuTest {
 
     private static final Grid A_GRID = new Grid(emptyList());
     private static final Grid ANOTHER_GRID = new Grid(emptyList());
-    private static final SolutionStep A_SOLUTION_STEP = new SolutionStep(new Grid.Position(0, 0), 1);
+    private static final SolutionStep A_SOLUTION_STEP = new SolutionStep(new Position(0, 0), 1);
 
     private final Function<Grid, Optional<SolutionStep>> strategy_1 = mock(Function.class);
     private final Function<Grid, Optional<SolutionStep>> strategy_2 = mock(Function.class);

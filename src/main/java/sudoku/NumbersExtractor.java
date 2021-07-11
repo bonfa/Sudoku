@@ -5,15 +5,15 @@ import sudoku.models.Numbers;
 import sudoku.models.Zone;
 
 import java.util.function.Function;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toSet;
+import static sudoku.GridExtractors.*;
+import static sudoku.utilities.Ranges.*;
 
-public class ValuesExtractor {
+public class NumbersExtractor {
     public static Function<Zone, Numbers> valuesAlreadyPresent =
             (Zone zone) -> Numbers.of(zone.cells.stream().flatMap(c -> c.getValue().stream()).collect(toSet()));
 
-    public static Function<Grid, Numbers> allPossibleValues =
-            (Grid grid) -> Numbers.of(IntStream.rangeClosed(1, grid.getDimensions().rows).boxed().collect(toSet()));
+    public static Function<Grid, Numbers> allPossibleValues = sizeExtractor.andThen(rangeClosedOfSize);
 
 }

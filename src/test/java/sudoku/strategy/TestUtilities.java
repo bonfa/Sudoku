@@ -2,6 +2,7 @@ package sudoku.strategy;
 
 import sudoku.models.Cell;
 import sudoku.models.Grid;
+import sudoku.models.Position;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,9 +25,9 @@ public class TestUtilities {
 
     private static Cell parseCell(String rawValue, int rowIndex, int columnIndex) {
         if ("-".equals(rawValue)) {
-            return Cell.emptyCell(new Grid.Position(rowIndex, columnIndex));
+            return Cell.emptyCell(new Position(rowIndex, columnIndex));
         } else {
-            return Cell.cellWithValue(Integer.parseInt(rawValue), new Grid.Position(rowIndex, columnIndex));
+            return Cell.cellWithValue(Integer.parseInt(rawValue), new Position(rowIndex, columnIndex));
         }
     }
 }

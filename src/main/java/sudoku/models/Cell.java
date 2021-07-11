@@ -3,23 +3,23 @@ package sudoku.models;
 import java.util.Optional;
 
 public class Cell {
-    private final Grid.Position position;
+    private final Position position;
     private Integer value;
 
-    private Cell(Grid.Position position, Integer value) {
+    private Cell(Position position, Integer value) {
         this.position = position;
         this.value = value;
     }
 
-    public static Cell emptyCell(Grid.Position position) {
+    public static Cell emptyCell(Position position) {
         return new Cell(position, null);
     }
 
-    public static Cell cellWithValue(int value, Grid.Position position) {
+    public static Cell cellWithValue(int value, Position position) {
         return new Cell(position, value);
     }
 
-    public Grid.Position getPosition() {
+    public Position getPosition() {
         return position;
     }
 

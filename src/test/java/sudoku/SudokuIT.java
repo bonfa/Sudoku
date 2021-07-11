@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import sudoku.models.Cell;
 import sudoku.models.Grid;
-import sudoku.models.Zone;
 import sudoku.strategy.factory.StrategyFactory;
 import sudoku.strategy.impl.SolutionStep;
 
@@ -50,10 +49,12 @@ class SudokuIT {
 
         Grid iteration_8 = sudoku.apply(iteration_7);
 
-        assertCellsContainsValues(iteration_8.getSquares().get(0), List.of(3, 2, 4, 1));
-        assertCellsContainsValues(iteration_8.getSquares().get(1), List.of(4, 1, 3, 2));
-        assertCellsContainsValues(iteration_8.getSquares().get(2), List.of(1, 4, 2, 3));
-        assertCellsContainsValues(iteration_8.getSquares().get(3), List.of(2, 3, 1, 4));
+        var cells = iteration_8.getCells();
+
+        assertCellsContainsValues(cells.get(0), List.of(3, 2, 4, 1));
+        assertCellsContainsValues(cells.get(1), List.of(4, 1, 3, 2));
+        assertCellsContainsValues(cells.get(2), List.of(1, 4, 2, 3));
+        assertCellsContainsValues(cells.get(3), List.of(2, 3, 1, 4));
     }
 
     @Test
@@ -127,27 +128,27 @@ class SudokuIT {
     }
 
     private void assertGridEquals(Grid first, Grid second) {
-        assertEquals(first.getDimensions(), second.getDimensions());
+        assertEquals(GridExtractors.sizeExtractor.apply(first), GridExtractors.sizeExtractor.apply(second));
         assertCellsEquals(first.getCells(), second.getCells());
     }
 
     private void assertCellsEquals(List<List<Cell>> first, List<List<Cell>> second) {
         first.stream().forEach(row -> row.stream()
-                                         .forEach(cell -> assertCellEquals(cell, second.get(cell.getPosition().getRowIndex()).get(cell.getPosition().getColumnIndex()))));
+                                         .forEach(cell -> assertCellEquals(cell, second.get(cell.getPosition().rowIndex).get(cell.getPosition().columnIndex))));
     }
 
     private void assertCellEquals(Cell first, Cell second) {
-        assertEquals(first.getPosition().getRowIndex(), second.getPosition().getRowIndex());
-        assertEquals(first.getPosition().getColumnIndex(), second.getPosition().getColumnIndex());
+        assertEquals(first.getPosition().rowIndex, second.getPosition().rowIndex);
+        assertEquals(first.getPosition().columnIndex, second.getPosition().columnIndex);
         assertEquals(first.getValue(), second.getValue());
     }
 
-    private void assertCellsContainsValues(Zone first, List<Integer> values) {
-        List<Integer> cellValues = first.cells
+    private void assertCellsContainsValues(List<Cell> actual, List<Integer> expected) {
+        List<Integer> cellValues = actual
                 .stream()
                 .map(cell -> cell.getValue().orElse(null))
                 .collect(Collectors.toList());
 
-        assertEquals(cellValues, values);
+        assertEquals(cellValues, expected);
     }
 }

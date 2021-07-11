@@ -3,15 +3,19 @@ package sudoku;
 import org.junit.jupiter.api.Test;
 import sudoku.models.Cell;
 import sudoku.models.Grid;
+import sudoku.models.Position;
 import sudoku.models.Zone;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GridTest {
+class GetSquaresTest {
+
+    private final Function<Grid, List<Zone>> getSquares = GridExtractors.getSquares;
 
     @Test
     void getSquares() {
@@ -27,19 +31,21 @@ class GridTest {
                 List.of(cellWithValue(73), cellWithValue(74), cellWithValue(75), cellWithValue(76), cellWithValue(77), cellWithValue(78), cellWithValue(79), cellWithValue(80), cellWithValue(81))
         ));
 
-        assertCellContainsValues(grid.getSquares().get(0), Set.of(1, 2, 3, 10, 11, 12, 19, 20, 21));
-        assertCellContainsValues(grid.getSquares().get(1), Set.of(4, 5, 6, 13, 14, 15, 22, 23, 24));
-        assertCellContainsValues(grid.getSquares().get(2), Set.of(7, 8, 9, 16, 17, 18, 25, 26, 27));
-        assertCellContainsValues(grid.getSquares().get(3), Set.of(28, 29, 30, 37, 38, 39, 46, 47, 48));
-        assertCellContainsValues(grid.getSquares().get(4), Set.of(31, 32, 33, 40, 41, 42, 49, 50, 51));
-        assertCellContainsValues(grid.getSquares().get(5), Set.of(34, 35, 36, 43, 44, 45, 52, 53, 54));
-        assertCellContainsValues(grid.getSquares().get(6), Set.of(55, 56, 57, 64, 65, 66, 73, 74, 75));
-        assertCellContainsValues(grid.getSquares().get(7), Set.of(58, 59, 60, 67, 68, 69, 76, 77, 78));
-        assertCellContainsValues(grid.getSquares().get(8), Set.of(61, 62, 63, 70, 71, 72, 79, 80, 81));
+        var squares = getSquares.apply(grid);
+
+        assertCellContainsValues(squares.get(0), Set.of(1, 2, 3, 10, 11, 12, 19, 20, 21));
+        assertCellContainsValues(squares.get(1), Set.of(4, 5, 6, 13, 14, 15, 22, 23, 24));
+        assertCellContainsValues(squares.get(2), Set.of(7, 8, 9, 16, 17, 18, 25, 26, 27));
+        assertCellContainsValues(squares.get(3), Set.of(28, 29, 30, 37, 38, 39, 46, 47, 48));
+        assertCellContainsValues(squares.get(4), Set.of(31, 32, 33, 40, 41, 42, 49, 50, 51));
+        assertCellContainsValues(squares.get(5), Set.of(34, 35, 36, 43, 44, 45, 52, 53, 54));
+        assertCellContainsValues(squares.get(6), Set.of(55, 56, 57, 64, 65, 66, 73, 74, 75));
+        assertCellContainsValues(squares.get(7), Set.of(58, 59, 60, 67, 68, 69, 76, 77, 78));
+        assertCellContainsValues(squares.get(8), Set.of(61, 62, 63, 70, 71, 72, 79, 80, 81));
     }
 
     private Cell cellWithValue(int value) {
-        return Cell.cellWithValue(value, new Grid.Position(0, 0));
+        return Cell.cellWithValue(value, new Position(0, 0));
     }
 
     private void assertCellContainsValues(Zone zone, Set<Integer> values) {

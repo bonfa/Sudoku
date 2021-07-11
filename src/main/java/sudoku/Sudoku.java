@@ -30,7 +30,7 @@ public class Sudoku implements UnaryOperator<Grid> {
     public static class SolutionStepApplier implements BiFunction<Grid, SolutionStep, Grid> {
         @Override
         public Grid apply(Grid grid, SolutionStep solutionStep) {
-            grid.getCells().get(solutionStep.position.getRowIndex()).get(solutionStep.position.getColumnIndex()).setValue(solutionStep.value);
+            grid.getCells().get(solutionStep.position.rowIndex).get(solutionStep.position.columnIndex).setValue(solutionStep.value);
             return grid;
         }
     }

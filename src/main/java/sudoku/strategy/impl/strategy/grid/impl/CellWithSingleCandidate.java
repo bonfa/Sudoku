@@ -2,6 +2,7 @@ package sudoku.strategy.impl.strategy.grid.impl;
 
 import sudoku.CandidatesFinder;
 import sudoku.models.Grid;
+import sudoku.models.Position;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.CellStrategy;
 
@@ -17,7 +18,7 @@ public class CellWithSingleCandidate implements CellStrategy {
     }
 
     @Override
-    public Optional<SolutionStep> findSolutionStepFor(Grid grid, Grid.Position position) {
+    public Optional<SolutionStep> findSolutionStepFor(Grid grid, Position position) {
         Set<Integer> candidates = candidatesFinder.apply(grid, position).getValues();
 
         if (candidates.size() == 1)
