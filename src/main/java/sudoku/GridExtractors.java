@@ -23,7 +23,7 @@ public class GridExtractors {
                      .collect(toList());
 
     //TODO improve
-    private static UnaryOperator<List<List<Cell>>> rowsToSquares = cells -> {
+    private static final UnaryOperator<List<List<Cell>>> rowsToSquares = cells -> {
         List<List<Cell>> squares = new ArrayList<>();
         for (int i = 0; i < cells.size(); i++) {
             squares.add(new ArrayList<>());
@@ -40,16 +40,16 @@ public class GridExtractors {
     };
 
 
-    public static Function<Grid, Integer> sizeExtractor = grid -> grid.getCells().size();
+    public static final Function<Grid, Integer> sizeExtractor = grid -> grid.getCells().size();
 
-    public static Function<Grid, List<Zone>> rowsExtractor = cellsExtractor.andThen(identity()).andThen(cellsToZone);
-    public static Function<Grid, List<Zone>> columnsExtractor = cellsExtractor.andThen(rowsToColumns).andThen(cellsToZone);
-    public static Function<Grid, List<Zone>> getSquares = cellsExtractor.andThen(rowsToSquares).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> rowsExtractor = cellsExtractor.andThen(identity()).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> columnsExtractor = cellsExtractor.andThen(rowsToColumns).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> getSquares = cellsExtractor.andThen(rowsToSquares).andThen(cellsToZone);
 
-    public static BiFunction<Grid, Position, Zone> rowExtractor = (grid, position) -> rowsExtractor.apply(grid).get(position.rowIndex);
-    public static BiFunction<Grid, Position, Zone> columnExtractor = (grid, position) -> columnsExtractor.apply(grid).get(position.columnIndex);
-    public static BiFunction<Grid, Position, Zone> squareExtractor = (grid, position) -> getSquares.apply(grid).get(SquareNumberMap.getSquareNumber(grid.getCells(), position.rowIndex, position.columnIndex));
+    public static final BiFunction<Grid, Position, Zone> rowExtractor = (grid, position) -> rowsExtractor.apply(grid).get(position.rowIndex);
+    public static final BiFunction<Grid, Position, Zone> columnExtractor = (grid, position) -> columnsExtractor.apply(grid).get(position.columnIndex);
+    public static final BiFunction<Grid, Position, Zone> squareExtractor = (grid, position) -> getSquares.apply(grid).get(SquareNumberMap.getSquareNumber(grid.getCells(), position.rowIndex, position.columnIndex));
 
     //TODO i don't like the fact that position is passed completely in rowExtractor and, then, rowExtractor is using only the rowIndex
-    public static BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
+    public static final BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
 }
