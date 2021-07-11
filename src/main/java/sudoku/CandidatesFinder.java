@@ -1,9 +1,11 @@
 package sudoku;
 
+import sudoku.models.Grid;
+import sudoku.models.Numbers;
+
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
-import static sudoku.ConditionalOperations.iff;
 import static sudoku.NumbersOperators.difference;
 import static sudoku.NumbersOperators.sum;
 import static sudoku.ValuesExtractor.allPossibleValues;
@@ -18,13 +20,9 @@ public class CandidatesFinder implements BiFunction<Grid, Grid.Position, Numbers
 
     @Override
     public Numbers apply(Grid grid, Grid.Position position) {
-        return createFunction().apply(grid, position);
-    }
-
-    private BiFunction<Grid, Grid.Position, Numbers> createFunction() {
-        return iff.apply((grid, position) -> grid.cellAt(position).getValue().isPresent(),
-                         (grid, position) -> Numbers.empty(),
-                         (grid, position) -> difference(allPossibleValues(), valuesAlreadyPresent()).apply(grid, position));
+        return (grid.cellAt(position).getValue().isPresent()) ?
+                Numbers.empty() :
+                difference(allPossibleValues(), valuesAlreadyPresent()).apply(grid, position);
     }
 
     private BiFunction<Grid, Grid.Position, Numbers> difference(BiFunction<Grid, Grid.Position, Numbers> allPossibleValues, BiFunction<Grid, Grid.Position, Numbers> valuesAlreadyPresent) {

@@ -1,6 +1,9 @@
 package sudoku;
 
 import org.junit.jupiter.api.Test;
+import sudoku.models.Cell;
+import sudoku.models.Grid;
+import sudoku.models.Zone;
 
 import java.util.List;
 import java.util.Set;

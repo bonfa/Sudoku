@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.models;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,10 +23,6 @@ public class Grid {
 
     public Zone squareBy(Position position) {
         return getSquares().get(getSquareNumber(zones, position.rowIndex, position.columnIndex));
-    }
-
-    public Numbers getCandidates(Cell cell) {
-        return new CandidatesFinder().apply(this, cell.getPosition());
     }
 
     public static int getSquareNumber(List<List<Cell>> zones, int i, int j) {
@@ -136,10 +132,6 @@ public class Grid {
         return squares.stream()
                       .map(Zone::new)
                       .collect(Collectors.toList());
-    }
-
-    public Set<Integer> allPossibleValues() {
-        return IntStream.rangeClosed(1, zones.size()).boxed().collect(Collectors.toSet());
     }
 
     public static class Dimensions {

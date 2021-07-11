@@ -1,5 +1,7 @@
 package sudoku;
 
+import sudoku.models.Numbers;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BinaryOperator;

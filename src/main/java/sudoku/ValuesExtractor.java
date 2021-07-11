@@ -1,5 +1,9 @@
 package sudoku;
 
+import sudoku.models.Grid;
+import sudoku.models.Numbers;
+import sudoku.models.Zone;
+
 import java.util.function.Function;
 import java.util.stream.IntStream;
 

@@ -1,6 +1,6 @@
 package sudoku.strategy.impl.strategy.grid;
 
-import sudoku.Grid;
+import sudoku.models.Grid;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.strategy.impl.strategy.CellStrategy;
 
@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-import static sudoku.Grid.Dimensions;
+import static sudoku.models.Grid.Dimensions;
 
 public class SingleCellSolutionStrategy implements Function<Grid, Optional<SolutionStep>> {
 
@@ -24,7 +24,7 @@ public class SingleCellSolutionStrategy implements Function<Grid, Optional<Solut
 
         return IntStream.range(0, dimensions.rows).boxed()
                         .flatMap(rowIndex -> IntStream.range(0, dimensions.columns).boxed()
-                                                      .flatMap(columnIndex -> cellStrategy.findSolutionStepFor(grid, rowIndex, columnIndex).stream()))
+                                                      .flatMap(columnIndex -> cellStrategy.findSolutionStepFor(grid, new Grid.Position(rowIndex, columnIndex)).stream()))
                         .findFirst();
     }
 }

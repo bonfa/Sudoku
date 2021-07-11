@@ -1,6 +1,6 @@
 package sudoku.strategy.impl.strategy.grid.impl;
 
-import sudoku.Zone;
+import sudoku.models.Zone;
 import sudoku.strategy.impl.SolutionStep;
 
 import java.util.List;

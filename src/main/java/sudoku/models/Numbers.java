@@ -1,4 +1,4 @@
-package sudoku;
+package sudoku.models;
 
 import java.util.Collections;
 import java.util.HashSet;

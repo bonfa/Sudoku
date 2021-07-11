@@ -1,5 +1,8 @@
 package sudoku;
 
+import sudoku.models.Grid;
+import sudoku.models.Zone;
+
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;

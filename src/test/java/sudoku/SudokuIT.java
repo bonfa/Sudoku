@@ -2,6 +2,9 @@ package sudoku;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import sudoku.models.Cell;
+import sudoku.models.Grid;
+import sudoku.models.Zone;
 import sudoku.strategy.factory.StrategyFactory;
 import sudoku.strategy.impl.SolutionStep;
 

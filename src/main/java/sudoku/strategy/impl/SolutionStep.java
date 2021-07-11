@@ -1,6 +1,6 @@
 package sudoku.strategy.impl;
 
-import sudoku.Grid;
+import sudoku.models.Grid;
 
 //TODO improve this one
 public class SolutionStep {

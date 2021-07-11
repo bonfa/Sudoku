@@ -1,5 +1,6 @@
 package sudoku;
 
+import sudoku.models.Grid;
 import sudoku.strategy.impl.SolutionStep;
 
 import java.util.List;

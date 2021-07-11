@@ -1,6 +1,7 @@
 package sudoku;
 
 import org.junit.jupiter.api.Test;
+import sudoku.models.Grid;
 import sudoku.strategy.impl.SolutionStep;
 
 import java.util.List;

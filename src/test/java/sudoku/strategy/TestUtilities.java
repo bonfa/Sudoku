@@ -1,7 +1,7 @@
 package sudoku.strategy;
 
-import sudoku.Cell;
-import sudoku.Grid;
+import sudoku.models.Cell;
+import sudoku.models.Grid;
 
 import java.util.List;
 import java.util.stream.Collectors;
