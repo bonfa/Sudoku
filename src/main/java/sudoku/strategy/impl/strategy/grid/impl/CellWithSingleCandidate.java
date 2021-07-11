@@ -11,10 +11,10 @@ public class CellWithSingleCandidate implements CellStrategy {
 
     @Override
     public Optional<SolutionStep> findSolutionStepFor(Grid grid, Integer rowIndex, Integer columnIndex) {
-        Set<Integer> candidates = grid.getCandidates(grid.getCells().get(rowIndex).get(columnIndex)).getCandidates();
+        Set<Integer> candidates = grid.getCandidates(grid.getCells().get(rowIndex).get(columnIndex)).getValues();
 
         if (candidates.size() == 1)
-            return candidates.stream().findFirst().map(value -> new SolutionStep(rowIndex, columnIndex, value));
+            return candidates.stream().findFirst().map(value -> new SolutionStep(new Grid.Position(rowIndex, columnIndex), value));
 
         return Optional.empty();
     }

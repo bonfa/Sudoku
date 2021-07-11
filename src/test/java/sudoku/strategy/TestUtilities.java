@@ -24,9 +24,9 @@ public class TestUtilities {
 
     private static Cell parseCell(String rawValue, int rowIndex, int columnIndex) {
         if ("-".equals(rawValue)) {
-            return Cell.emptyCell(rowIndex, columnIndex);
+            return Cell.emptyCell(new Grid.Position(rowIndex, columnIndex));
         } else {
-            return Cell.cellWithValue(rowIndex, columnIndex, Integer.parseInt(rawValue));
+            return Cell.cellWithValue(Integer.parseInt(rawValue), new Grid.Position(rowIndex, columnIndex));
         }
     }
 }

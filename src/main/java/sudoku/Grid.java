@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static sudoku.utilities.Sets.*;
-
 public class Grid {
     private final List<List<Cell>> zones;
 
@@ -13,11 +11,6 @@ public class Grid {
     //TODO check invariant: number of rows in {1, 4, 6, 8, 9}
     public Grid(List<List<Cell>> zones) {
         this.zones = zones;
-    }
-
-    //TODO remove
-    public static Set<Integer> valuesAlreadyPresent(List<Cell> zone) {
-        return zone.stream().flatMap(c -> c.getValue().stream()).collect(Collectors.toSet());
     }
 
     public Dimensions getDimensions() {
@@ -28,28 +21,15 @@ public class Grid {
         return zones;
     }
 
-    public Zone squareBy(int rowIndex, int columnIndex) {
-        return getSquares().get(getSquareNumber(rowIndex, columnIndex));
+    public Zone squareBy(Position position) {
+        return getSquares().get(getSquareNumber(zones, position.rowIndex, position.columnIndex));
     }
 
-    public Candidates getCandidates(Cell cell) {
-        if (cell.getValue().isPresent()) {
-            return new Candidates(cell, Collections.emptySet());
-        }
-
-        Set<Integer> valuesAlreadyPresentByRow = valuesAlreadyPresent(getRows().get(cell.getRowIndex()).cells);
-        Set<Integer> valuesAlreadyPresentByColumn = valuesAlreadyPresent(getColumns().get(cell.getColumnIndex()).cells);
-        Set<Integer> valuesAlreadyPresentBySquare = valuesAlreadyPresent(squareBy(cell.getRowIndex(), cell.getColumnIndex()).cells);
-
-        Set<Integer> candidates = difference(allPossibleValues(),
-                                             sum(valuesAlreadyPresentByRow,
-                                                 valuesAlreadyPresentByColumn,
-                                                 valuesAlreadyPresentBySquare));
-
-        return new Candidates(cell, candidates);
+    public Numbers getCandidates(Cell cell) {
+        return new CandidatesFinder().apply(this, cell.getPosition());
     }
 
-    private int getSquareNumber(int i, int j) {
+    public static int getSquareNumber(List<List<Cell>> zones, int i, int j) {
         switch (zones.size()) {
             case 1:
                 return squareNumberForGridOfSizeOne();
@@ -65,11 +45,11 @@ public class Grid {
         return -1; //TODO
     }
 
-    private int squareNumberForGridOfSizeOne() {
+    private static int squareNumberForGridOfSizeOne() {
         return 0;
     }
 
-    private int squareNumberForGridOfSizeFour(int i, int j) {
+    private static int squareNumberForGridOfSizeFour(int i, int j) {
         int n = 0;
         if ((i >= 0 && i < 2) && (j >= 0 && j < 2)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 2 && j < 4)) n = 1;
@@ -78,7 +58,7 @@ public class Grid {
         return n;
     }
 
-    private int squareNumberForGridOfSizeSix(int i, int j) {
+    private static int squareNumberForGridOfSizeSix(int i, int j) {
         int n = 0;
         if ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 3 && j < 6)) n = 1;
@@ -89,7 +69,7 @@ public class Grid {
         return n;
     }
 
-    private int squareNumberForGridOfSizeEight(int i, int j) {
+    private static int squareNumberForGridOfSizeEight(int i, int j) {
         int n = 0;
         if ((i >= 0 && i < 2) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 2) && (j >= 3 && j < 6)) n = 1;
@@ -103,7 +83,7 @@ public class Grid {
         return n;
     }
 
-    private int squareNumberForNineSizeNine(int i, int j) {
+    private static int squareNumberForNineSizeNine(int i, int j) {
         int n = 0;
         if ((i >= 0 && i < 3) && (j >= 0 && j < 3)) n = 0;
         else if ((i >= 0 && i < 3) && (j >= 3 && j < 6)) n = 1;
@@ -129,12 +109,8 @@ public class Grid {
                         .collect(Collectors.toList());
     }
 
-    public Zone rowAt(Integer rowIndex) {
-        return getRows().get(rowIndex);
-    }
-
-    public Zone columnAt(Integer columnIndex) {
-        return getRows().get(columnIndex);
+    public Cell cellAt(Position position) {
+        return getRows().get(position.rowIndex).cells.get(position.columnIndex);
     }
 
     /*
@@ -142,6 +118,7 @@ public class Grid {
     TODO: test for length != 9
      */
     //TODO make private and handle the test of the creation somehow
+
     public List<Zone> getSquares() {
         List<List<Cell>> squares = new ArrayList<>();
         for (int i = 0; i < zones.size(); i++) {
@@ -150,7 +127,7 @@ public class Grid {
 
         for (int i = 0; i < zones.size(); i++) {
             for (int j = 0; j < zones.get(i).size(); j++) {
-                int n = getSquareNumber(i, j);
+                int n = getSquareNumber(zones, i, j);
 
                 squares.get(n).add(getRows().get(i).cells.get(j));
             }
@@ -163,29 +140,6 @@ public class Grid {
 
     public Set<Integer> allPossibleValues() {
         return IntStream.rangeClosed(1, zones.size()).boxed().collect(Collectors.toSet());
-    }
-
-    public static class Candidates {
-
-        private final Cell cell;
-        private final Set<Integer> candidates;
-
-        public Candidates(Cell cell, Set<Integer> candidates) {
-            this.cell = cell;
-            this.candidates = candidates;
-        }
-
-        public Integer getRowIndex() {
-            return cell.getRowIndex();
-        }
-
-        public Integer getColumnIndex() {
-            return cell.getColumnIndex();
-        }
-
-        public Set<Integer> getCandidates() {
-            return candidates;
-        }
     }
 
     public static class Dimensions {
@@ -208,6 +162,24 @@ public class Grid {
         @Override
         public int hashCode() {
             return 0;
+        }
+    }
+
+    public static class Position {
+        private final int rowIndex;
+        private final int columnIndex;
+
+        public Position(int rowIndex, int columnIndex) {
+            this.rowIndex = rowIndex;
+            this.columnIndex = columnIndex;
+        }
+
+        public int getRowIndex() {
+            return rowIndex;
+        }
+
+        public int getColumnIndex() {
+            return columnIndex;
         }
     }
 }

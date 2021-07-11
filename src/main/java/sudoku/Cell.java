@@ -3,37 +3,32 @@ package sudoku;
 import java.util.Optional;
 
 public class Cell {
-    private final int rowIndex;
-    private final int columnIndex;
+    private final Grid.Position position;
     private Integer value;
 
-    private Cell(int rowIndex, int columnIndex, Integer value) {
-        this.rowIndex = rowIndex;
-        this.columnIndex = columnIndex;
+    private Cell(Grid.Position position, Integer value) {
+        this.position = position;
         this.value = value;
     }
 
-    public static Cell emptyCell(int rowIndex, int columnIndex) {
-        return new Cell(rowIndex, columnIndex, null);
+    public static Cell emptyCell(Grid.Position position) {
+        return new Cell(position, null);
     }
 
-    public static Cell cellWithValue(int rowIndex, int columnIndex, int value) {
-        return new Cell(rowIndex, columnIndex, value);
+    public static Cell cellWithValue(int value, Grid.Position position) {
+        return new Cell(position, value);
+    }
+
+    public Grid.Position getPosition() {
+        return position;
     }
 
     public void setValue(int value) {
         this.value = value;
     }
 
-    public int getRowIndex() {
-        return rowIndex;
-    }
-
-    public int getColumnIndex() {
-        return columnIndex;
-    }
-
     public Optional<Integer> getValue() {
         return Optional.ofNullable(value);
     }
+
 }

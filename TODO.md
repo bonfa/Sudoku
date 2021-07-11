@@ -16,3 +16,14 @@ grid --> candidates --> rules
   02	03	--	--	--	01
   --	--	01	--	02	03
   */
+
+
+strategies:
+- row with one empty cell --> ZoneWithOneEmptyCellSolution
+- column with one empty cell --> ZoneWithOneEmptyCellSolution
+- square with one empty cell --> ZoneWithOneEmptyCellSolution
+- usa i candidati del quadrato per calcolare i candidati della cella --> SquareStrategyByCell
+- cell with single candidate --> CellWithSingleCandidate
+
+
+Grid

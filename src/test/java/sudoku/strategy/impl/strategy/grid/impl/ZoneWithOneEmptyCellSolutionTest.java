@@ -25,8 +25,8 @@ class ZoneWithOneEmptyCellSolutionTest {
 
         assertTrue(solutionStep.isPresent());
         assertEquals(3, solutionStep.get().value);
-        assertEquals(0, solutionStep.get().rowIndex);
-        assertEquals(0, solutionStep.get().columnIndex);
+        assertEquals(0, solutionStep.get().position.getRowIndex());
+        assertEquals(0, solutionStep.get().position.getColumnIndex());
     }
 
     @Test

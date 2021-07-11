@@ -1,6 +1,7 @@
 package sudoku.strategy.impl.strategy.zone;
 
 import sudoku.Cell;
+import sudoku.Grid;
 import sudoku.Zone;
 import sudoku.strategy.impl.SolutionStep;
 import sudoku.utilities.Sets;
@@ -29,9 +30,8 @@ public class ZoneWithOneEmptyCellSolution implements Function<List<Zone>, Option
     private SolutionStep findSolutionStepFor(Zone zone) {
         Cell cell = zone.cells.stream().filter(isEmpty).collect(Collectors.toList()).get(0);
 
-        return new SolutionStep(cell.getRowIndex(),
-                                cell.getColumnIndex(),
-                                getValue(zone));
+        return new SolutionStep(
+                new Grid.Position(cell.getPosition().getRowIndex(), cell.getPosition().getColumnIndex()), getValue(zone));
     }
 
     private Integer getValue(Zone zone) {

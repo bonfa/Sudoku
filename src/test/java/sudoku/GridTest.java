@@ -36,7 +36,7 @@ class GridTest {
     }
 
     private Cell cellWithValue(int value) {
-        return Cell.cellWithValue(0, 0, value);
+        return Cell.cellWithValue(value, new Grid.Position(0, 0));
     }
 
     private void assertCellContainsValues(Zone zone, Set<Integer> values) {

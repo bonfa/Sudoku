@@ -130,12 +130,12 @@ class SudokuIT {
 
     private void assertCellsEquals(List<List<Cell>> first, List<List<Cell>> second) {
         first.stream().forEach(row -> row.stream()
-                                         .forEach(cell -> assertCellEquals(cell, second.get(cell.getRowIndex()).get(cell.getColumnIndex()))));
+                                         .forEach(cell -> assertCellEquals(cell, second.get(cell.getPosition().getRowIndex()).get(cell.getPosition().getColumnIndex()))));
     }
 
     private void assertCellEquals(Cell first, Cell second) {
-        assertEquals(first.getRowIndex(), second.getRowIndex());
-        assertEquals(first.getColumnIndex(), second.getColumnIndex());
+        assertEquals(first.getPosition().getRowIndex(), second.getPosition().getRowIndex());
+        assertEquals(first.getPosition().getColumnIndex(), second.getPosition().getColumnIndex());
         assertEquals(first.getValue(), second.getValue());
     }
 

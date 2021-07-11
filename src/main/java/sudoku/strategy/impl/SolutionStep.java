@@ -1,14 +1,14 @@
 package sudoku.strategy.impl;
 
+import sudoku.Grid;
+
 //TODO improve this one
 public class SolutionStep {
-    public final Integer rowIndex;
-    public final Integer columnIndex;
+    public final Grid.Position position;
     public final Integer value;
 
-    public SolutionStep(Integer rowIndex, Integer columnIndex, Integer value) {
-        this.rowIndex = rowIndex;
-        this.columnIndex = columnIndex;
+    public SolutionStep(Grid.Position position, Integer value) {
+        this.position = position;
         this.value = value;
     }
 }
