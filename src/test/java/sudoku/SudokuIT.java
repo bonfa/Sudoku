@@ -33,10 +33,10 @@ class SudokuIT {
                                     List.of("2", "-", "1", "-"));
 
         Grid iteration_1 = sudoku.apply(iteration_0);
-        assertEquals(2, iteration_1.zones.get(0).get(1).getValue().get());
+        assertEquals(2, iteration_1.cells.get(0).get(1).getValue().get());
 
         Grid iteration_2 = sudoku.apply(iteration_1);
-        assertEquals(1, iteration_2.zones.get(0).get(3).getValue().get());
+        assertEquals(1, iteration_2.cells.get(0).get(3).getValue().get());
 
         printGrid(iteration_2);
 
@@ -52,7 +52,7 @@ class SudokuIT {
 
         Grid iteration_8 = sudoku.apply(iteration_7);
 
-        var cells = iteration_8.zones;
+        var cells = iteration_8.cells;
 
         assertCellsContainsValues(cells.get(0), List.of(3, 2, 4, 1));
         assertCellsContainsValues(cells.get(1), List.of(4, 1, 3, 2));
@@ -72,7 +72,7 @@ class SudokuIT {
 
         printGrid(iteration_0);
         Grid iteration = iteration_0;
-        long numberOfFreeCells = iteration.zones
+        long numberOfFreeCells = iteration.cells
                                           .stream()
                                           .flatMap(c -> c.stream())
                                           .filter(c -> c.getValue().isEmpty())
@@ -97,7 +97,7 @@ class SudokuIT {
                                     List.of("-", "9", "-", "-", "4", "-", "-", "3", "-"));
 
         Grid iteration = iteration_0;
-        long numberOfFreeCells = iteration.zones
+        long numberOfFreeCells = iteration.cells
                                           .stream()
                                           .flatMap(Collection::stream)
                                           .filter(c -> c.getValue().isEmpty())
@@ -119,7 +119,7 @@ class SudokuIT {
     }
 
     private void printGrid(Grid grid) {
-        List<List<Cell>> rows = grid.zones;
+        List<List<Cell>> rows = grid.cells;
         for (List<Cell> zone : rows) {
             for (Cell cell : zone) {
                 System.out.print(cell.getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
@@ -132,7 +132,7 @@ class SudokuIT {
 
     private void assertGridEquals(Grid first, Grid second) {
         assertEquals(GridExtractors.sizeExtractor.apply(first), GridExtractors.sizeExtractor.apply(second));
-        assertCellsEquals(first.zones, second.zones);
+        assertCellsEquals(first.cells, second.cells);
     }
 
     private void assertCellsEquals(List<List<Cell>> first, List<List<Cell>> second) {

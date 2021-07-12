@@ -15,7 +15,7 @@ import static sudoku.impl.extractors.SquareNumberMap.squareMapping;
 
 public class GridExtractors {
     private static final Function<List<List<Cell>>, List<Zone>> cellsToZone = cells -> cells.stream().map(Zone::new).collect(toList());
-    private static final Function<Grid, List<List<Cell>>> cellsExtractor = grid -> grid.zones;
+    private static final Function<Grid, List<List<Cell>>> cellsExtractor = grid -> grid.cells;
     private static final Function<Zone, List<Cell>> zoneToCells = zone -> zone.cells;
     private static final Function<List<Zone>, List<List<Cell>>> zonesToCells = zones -> zones.stream().map(zoneToCells).collect(toList());
     private static final Function<List<List<Cell>>, Integer> cellsSizeExtractor = List::size;
