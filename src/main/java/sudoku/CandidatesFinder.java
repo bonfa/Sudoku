@@ -7,6 +7,8 @@ import sudoku.models.Position;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
+import static sudoku.CellExtractors.valueExtractor;
+import static sudoku.CellExtractors.valueIsPresent;
 import static sudoku.NumbersOperators.difference;
 import static sudoku.NumbersOperators.sum;
 import static sudoku.NumbersExtractor.allPossibleValues;
@@ -21,7 +23,7 @@ public class CandidatesFinder implements BiFunction<Grid, Position, Numbers> {
 
     @Override
     public Numbers apply(Grid grid, Position position) {
-        return (cellExtractor.apply(grid, position).getValue().isPresent()) ?
+        return valueIsPresent.test(cellExtractor.andThen(valueExtractor).apply(grid, position)) ?
                 Numbers.empty() :
                 difference(allPossibleValues(), valuesAlreadyPresent()).apply(grid, position);
     }
