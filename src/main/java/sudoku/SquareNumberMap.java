@@ -22,22 +22,6 @@ public class SquareNumberMap {
     };
 
 
-    public static int getSquareNumber(int gridSize, int i, int j) {
-        switch (gridSize) {
-            case 1:
-                return squareNumberForGridOfSizeOne();
-            case 4:
-                return squareNumberForGridOfSizeFour(i, j);
-            case 6:
-                return squareNumberForGridOfSizeSix(i, j);
-            case 8:
-                return squareNumberForGridOfSizeEight(i, j);
-            case 9:
-                return squareNumberForNineSizeNine(i, j);
-        }
-        return -1; //TODO
-    }
-
     private static int squareNumberForGridOfSizeOne() {
         return 0;
     }
