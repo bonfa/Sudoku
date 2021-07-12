@@ -7,8 +7,8 @@ import sudoku.impl.models.Zone;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toSet;
-import static sudoku.impl.extractors.GridExtractors.*;
-import static sudoku.impl.utilities.Ranges.*;
+import static sudoku.impl.extractors.GridExtractors.sizeExtractor;
+import static sudoku.impl.utilities.Ranges.rangeClosedOfSize;
 
 public class NumbersExtractor {
     public static Function<Zone, Numbers> valuesAlreadyPresent =

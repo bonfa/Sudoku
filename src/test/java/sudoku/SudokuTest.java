@@ -5,7 +5,7 @@ import sudoku.impl.SolutionStepApplier;
 import sudoku.impl.SolutionStepFinder;
 import sudoku.impl.models.Grid;
 import sudoku.impl.models.Position;
-import sudoku.impl.strategy.impl.SolutionStep;
+import sudoku.impl.models.SolutionStep;
 
 import java.util.List;
 import java.util.Optional;

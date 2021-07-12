@@ -1,4 +1,4 @@
-package sudoku.impl.strategy;
+package sudoku.impl.strategy.impl;
 
 import sudoku.impl.models.Grid;
 import sudoku.impl.models.Numbers;

@@ -1,7 +1,7 @@
 package sudoku.impl;
 
 import sudoku.impl.models.Grid;
-import sudoku.impl.strategy.impl.SolutionStep;
+import sudoku.impl.models.SolutionStep;
 
 import java.util.List;
 import java.util.Optional;

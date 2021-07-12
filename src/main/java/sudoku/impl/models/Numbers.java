@@ -1,7 +1,6 @@
 package sudoku.impl.models;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Numbers {
@@ -12,7 +11,7 @@ public class Numbers {
     }
 
     public static Numbers of(Set<Integer> values) {
-        return new Numbers(new HashSet<>(values));
+        return new Numbers(Collections.unmodifiableSet(values));
     }
 
     public static Numbers empty() {

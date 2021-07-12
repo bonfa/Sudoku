@@ -1,7 +1,7 @@
 package sudoku;
 
 import sudoku.impl.models.Grid;
-import sudoku.impl.strategy.impl.SolutionStep;
+import sudoku.impl.models.SolutionStep;
 
 import java.util.Optional;
 import java.util.function.BiFunction;

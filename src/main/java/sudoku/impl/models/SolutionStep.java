@@ -1,6 +1,4 @@
-package sudoku.impl.strategy.impl;
-
-import sudoku.impl.models.Position;
+package sudoku.impl.models;
 
 //TODO improve this one
 public class SolutionStep {

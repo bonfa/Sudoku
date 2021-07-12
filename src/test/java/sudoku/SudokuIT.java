@@ -8,7 +8,7 @@ import sudoku.impl.SolutionStepApplier;
 import sudoku.impl.models.Cell;
 import sudoku.impl.models.Grid;
 import sudoku.impl.strategy.factory.StrategyFactory;
-import sudoku.impl.strategy.impl.SolutionStep;
+import sudoku.impl.models.SolutionStep;
 
 import java.util.Collection;
 import java.util.List;

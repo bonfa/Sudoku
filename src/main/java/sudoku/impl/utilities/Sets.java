@@ -3,6 +3,8 @@ package sudoku.impl.utilities;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Sets {
     public static Set<Integer> sum(Set<Integer>... sets) {
@@ -16,4 +18,6 @@ public class Sets {
         difference.removeAll(second);
         return difference;
     }
+
+    public static Function<Integer, Predicate<Set>> hasSize = value -> set -> set.size() == value;
 }
