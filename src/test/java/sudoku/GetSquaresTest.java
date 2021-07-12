@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetSquaresTest {
 
-    private final Function<Grid, List<Zone>> getSquares = GridExtractors.getSquares;
+    private final Function<Grid, List<Zone>> getSquares = GridExtractors.squaresExtractor;
 
     @Test
     void getSquares() {

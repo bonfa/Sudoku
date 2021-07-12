@@ -1,12 +1,29 @@
 package sudoku;
 
-import sudoku.models.Cell;
+import sudoku.models.Position;
 
-import java.util.List;
+import java.util.function.BiFunction;
 
 public class SquareNumberMap {
-    public static int getSquareNumber(List<List<Cell>> cells, int i, int j) {
-        switch (cells.size()) {
+    public static final BiFunction<Integer, Position, Integer> squareMapping = (gridSize, position) -> {
+        switch (gridSize) {
+            case 1:
+                return squareNumberForGridOfSizeOne();
+            case 4:
+                return squareNumberForGridOfSizeFour(position.rowIndex, position.columnIndex);
+            case 6:
+                return squareNumberForGridOfSizeSix(position.rowIndex, position.columnIndex);
+            case 8:
+                return squareNumberForGridOfSizeEight(position.rowIndex, position.columnIndex);
+            case 9:
+                return squareNumberForNineSizeNine(position.rowIndex, position.columnIndex);
+        }
+        return -1; //TODO
+    };
+
+
+    public static int getSquareNumber(int gridSize, int i, int j) {
+        switch (gridSize) {
             case 1:
                 return squareNumberForGridOfSizeOne();
             case 4:
