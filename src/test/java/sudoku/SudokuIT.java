@@ -2,10 +2,13 @@ package sudoku;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import sudoku.models.Cell;
-import sudoku.models.Grid;
-import sudoku.strategy.factory.StrategyFactory;
-import sudoku.strategy.impl.SolutionStep;
+import sudoku.impl.SolutionStepFinder;
+import sudoku.impl.extractors.GridExtractors;
+import sudoku.impl.SolutionStepApplier;
+import sudoku.impl.models.Cell;
+import sudoku.impl.models.Grid;
+import sudoku.impl.strategy.factory.StrategyFactory;
+import sudoku.impl.strategy.impl.SolutionStep;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,13 +17,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static sudoku.strategy.TestUtilities.gridWith;
+import static sudoku.impl.strategy.TestUtilities.gridWith;
 
 class SudokuIT {
 
     private final List<Function<Grid, Optional<SolutionStep>>> solutionStrategies = new StrategyFactory().createStrategies();
     private final SolutionStepApplier solutionStepApplier = new SolutionStepApplier();
-    private final Sudoku sudoku = new Sudoku(solutionStrategies, solutionStepApplier);
+    private final Sudoku sudoku = new Sudoku(new SolutionStepFinder(solutionStrategies), solutionStepApplier);
 
     @Test
     void solve_4x4() {
@@ -30,10 +33,10 @@ class SudokuIT {
                                     List.of("2", "-", "1", "-"));
 
         Grid iteration_1 = sudoku.apply(iteration_0);
-        assertEquals(2, iteration_1.getCells().get(0).get(1).getValue().get());
+        assertEquals(2, iteration_1.zones.get(0).get(1).getValue().get());
 
         Grid iteration_2 = sudoku.apply(iteration_1);
-        assertEquals(1, iteration_2.getCells().get(0).get(3).getValue().get());
+        assertEquals(1, iteration_2.zones.get(0).get(3).getValue().get());
 
         printGrid(iteration_2);
 
@@ -49,7 +52,7 @@ class SudokuIT {
 
         Grid iteration_8 = sudoku.apply(iteration_7);
 
-        var cells = iteration_8.getCells();
+        var cells = iteration_8.zones;
 
         assertCellsContainsValues(cells.get(0), List.of(3, 2, 4, 1));
         assertCellsContainsValues(cells.get(1), List.of(4, 1, 3, 2));
@@ -69,7 +72,7 @@ class SudokuIT {
 
         printGrid(iteration_0);
         Grid iteration = iteration_0;
-        long numberOfFreeCells = iteration.getCells()
+        long numberOfFreeCells = iteration.zones
                                           .stream()
                                           .flatMap(c -> c.stream())
                                           .filter(c -> c.getValue().isEmpty())
@@ -94,7 +97,7 @@ class SudokuIT {
                                     List.of("-", "9", "-", "-", "4", "-", "-", "3", "-"));
 
         Grid iteration = iteration_0;
-        long numberOfFreeCells = iteration.getCells()
+        long numberOfFreeCells = iteration.zones
                                           .stream()
                                           .flatMap(Collection::stream)
                                           .filter(c -> c.getValue().isEmpty())
@@ -116,7 +119,7 @@ class SudokuIT {
     }
 
     private void printGrid(Grid grid) {
-        List<List<Cell>> rows = grid.getCells();
+        List<List<Cell>> rows = grid.zones;
         for (List<Cell> zone : rows) {
             for (Cell cell : zone) {
                 System.out.print(cell.getValue().map(v -> String.format("%02d\t", v)).orElse("--\t"));
@@ -129,7 +132,7 @@ class SudokuIT {
 
     private void assertGridEquals(Grid first, Grid second) {
         assertEquals(GridExtractors.sizeExtractor.apply(first), GridExtractors.sizeExtractor.apply(second));
-        assertCellsEquals(first.getCells(), second.getCells());
+        assertCellsEquals(first.zones, second.zones);
     }
 
     private void assertCellsEquals(List<List<Cell>> first, List<List<Cell>> second) {

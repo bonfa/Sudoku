@@ -1,9 +1,11 @@
 package sudoku;
 
 import org.junit.jupiter.api.Test;
-import sudoku.models.Grid;
-import sudoku.models.Position;
-import sudoku.strategy.impl.SolutionStep;
+import sudoku.impl.SolutionStepApplier;
+import sudoku.impl.SolutionStepFinder;
+import sudoku.impl.models.Grid;
+import sudoku.impl.models.Position;
+import sudoku.impl.strategy.impl.SolutionStep;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,7 @@ class SudokuTest {
     private final Function<Grid, Optional<SolutionStep>> strategy_2 = mock(Function.class);
     private final SolutionStepApplier solutionStepApplier = mock(SolutionStepApplier.class);
 
-    private final Sudoku sudoku = new Sudoku(List.of(strategy_1, strategy_2), solutionStepApplier);
+    private final Sudoku sudoku = new Sudoku(new SolutionStepFinder(List.of(strategy_1, strategy_2)), solutionStepApplier);
 
     @Test
     void canApplyFirstStrategy() {

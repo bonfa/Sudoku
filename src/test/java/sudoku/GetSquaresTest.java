@@ -1,10 +1,11 @@
 package sudoku;
 
 import org.junit.jupiter.api.Test;
-import sudoku.models.Cell;
-import sudoku.models.Grid;
-import sudoku.models.Position;
-import sudoku.models.Zone;
+import sudoku.impl.extractors.GridExtractors;
+import sudoku.impl.models.Cell;
+import sudoku.impl.models.Grid;
+import sudoku.impl.models.Position;
+import sudoku.impl.models.Zone;
 
 import java.util.List;
 import java.util.Set;

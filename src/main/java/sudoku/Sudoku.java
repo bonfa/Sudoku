@@ -1,30 +1,26 @@
 package sudoku;
 
-import sudoku.models.Grid;
-import sudoku.strategy.impl.SolutionStep;
+import sudoku.impl.models.Grid;
+import sudoku.impl.strategy.impl.SolutionStep;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class Sudoku implements UnaryOperator<Grid> {
-    private final List<Function<Grid, Optional<SolutionStep>>> strategies;
+    private final Function<Grid, Optional<SolutionStep>> solutionStepFinder;
     private final BiFunction<Grid, SolutionStep, Grid> solutionStepApplier;
 
-    public Sudoku(List<Function<Grid, Optional<SolutionStep>>> strategies, BiFunction<Grid, SolutionStep, Grid> solutionStepApplier) {
-        this.strategies = strategies;
+    public Sudoku(Function<Grid, Optional<SolutionStep>> solutionStepFinder,
+                  BiFunction<Grid, SolutionStep, Grid> solutionStepApplier) {
+        this.solutionStepFinder = solutionStepFinder;
         this.solutionStepApplier = solutionStepApplier;
     }
 
     public Grid apply(Grid grid) {
-        return strategies.stream()
-                         .map(s -> s.apply(grid))
-                         .flatMap(Optional::stream)
-                         .findFirst()
-                         .map(s -> solutionStepApplier.apply(grid, s))
-                         .orElse(grid); //TODO for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
+        return solutionStepFinder.apply(grid)
+                                 .map(s -> solutionStepApplier.apply(grid, s))
+                                 .orElse(grid); //TODO for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
     }
-
 }

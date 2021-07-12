@@ -430,7 +430,7 @@ public final class Sudoku {
     }
 
     /**
-     * sudoku.utilities.Sets the value a cell of the old.sudoku.
+     * sudoku.impl.utilities.Sets the value a cell of the old.sudoku.
      * <p>
      * The method can work in two ways: the first one throws an {@see OperationNotAllowedException} if the value of the
      * cell is already present; the second one overrides the value and re-calculates the possible values of the whole matrix
