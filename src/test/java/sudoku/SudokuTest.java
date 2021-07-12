@@ -12,7 +12,6 @@ import java.util.function.Function;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static sudoku.Sudoku.*;
 
 class SudokuTest {
 

@@ -19,7 +19,7 @@ import static sudoku.strategy.TestUtilities.gridWith;
 class SudokuIT {
 
     private final List<Function<Grid, Optional<SolutionStep>>> solutionStrategies = new StrategyFactory().createStrategies();
-    private final Sudoku.SolutionStepApplier solutionStepApplier = new Sudoku.SolutionStepApplier();
+    private final SolutionStepApplier solutionStepApplier = new SolutionStepApplier();
     private final Sudoku sudoku = new Sudoku(solutionStrategies, solutionStepApplier);
 
     @Test

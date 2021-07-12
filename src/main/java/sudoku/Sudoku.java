@@ -27,11 +27,4 @@ public class Sudoku implements UnaryOperator<Grid> {
                          .orElse(grid); //TODO for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
     }
 
-    public static class SolutionStepApplier implements BiFunction<Grid, SolutionStep, Grid> {
-        @Override
-        public Grid apply(Grid grid, SolutionStep solutionStep) {
-            grid.getCells().get(solutionStep.position.rowIndex).get(solutionStep.position.columnIndex).setValue(solutionStep.value);
-            return grid;
-        }
-    }
 }
