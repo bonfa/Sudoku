@@ -2,18 +2,13 @@ package sudoku;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import sudoku.impl.SolutionStepFinder;
-import sudoku.impl.extractors.GridExtractors;
 import sudoku.impl.SolutionStepApplier;
+import sudoku.impl.extractors.GridExtractors;
 import sudoku.models.Cell;
 import sudoku.models.Grid;
-import sudoku.impl.strategy.factory.StrategyFactory;
-import sudoku.models.SolutionStep;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,9 +16,8 @@ import static sudoku.impl.strategy.TestUtilities.gridWith;
 
 class SudokuIT {
 
-    private final List<Function<Grid, Optional<SolutionStep>>> solutionStrategies = new StrategyFactory().createStrategies();
     private final SolutionStepApplier solutionStepApplier = new SolutionStepApplier();
-    private final Sudoku sudoku = new Sudoku(new SolutionStepFinder(solutionStrategies), solutionStepApplier);
+    private final Sudoku sudoku = new Sudoku(solutionStepApplier);
 
     @Test
     void solve_4x4() {
