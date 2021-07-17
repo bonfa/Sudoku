@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 import static sudoku.impl.extractors.SquareNumberMap.squareMapping;
-import static sudoku.impl.utilities.Ranges.zeroBasedRangeClosed;
+import static sudoku.impl.utilities.Ranges.listZeroTo;
 
 public class GridExtractors {
     private static final Function<List<List<Cell>>, List<Zone>> cellsToZone = cells -> cells.stream().map(Zone::new).collect(toList());
@@ -62,7 +62,7 @@ public class GridExtractors {
                                               .flatMap(rowIndex -> numbers.stream().map(columnIndex -> new Position(rowIndex, columnIndex)))
                                               .collect(toList());
 
-    private static final Function<Integer, List<Position>> allPossiblePositions = zeroBasedRangeClosed.andThen(toPositions);
+    private static final Function<Integer, List<Position>> allPossiblePositions = listZeroTo.andThen(toPositions);
 
     public static final Function<Grid, List<Position>> extractAllPossiblePositions = extractSize.andThen(allPossiblePositions);
 }
