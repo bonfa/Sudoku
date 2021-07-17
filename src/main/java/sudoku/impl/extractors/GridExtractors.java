@@ -55,4 +55,13 @@ public class GridExtractors {
 
     //TODO i don't like the fact that position is passed completely in rowExtractor and, then, rowExtractor is using only the rowIndex
     public static final BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
+
+    private static final Function<Integer, List<Position>> allPossiblePositions =
+            (Integer dimension) -> IntStream.range(0, dimension).boxed()
+                                            .flatMap(rowIndex -> IntStream.range(0, dimension)
+                                                                          .boxed()
+                                                                          .map(columnIndex -> new Position(rowIndex,
+                                                                                                           columnIndex)))
+                                            .collect(toList());
+    public static final Function<Grid, List<Position>> extractAllPossiblePositions = extractSize.andThen(allPossiblePositions);
 }
