@@ -1,5 +1,6 @@
 package sudoku.impl.extractors;
 
+import sudoku.impl.utilities.Ranges;
 import sudoku.models.*;
 
 import java.util.ArrayList;
@@ -43,8 +44,15 @@ public class GridExtractors {
         return squares;
     };
 
+    private static final Function<List<Integer>, List<Position>> toPositions =
+            (List<Integer> numbers) -> numbers.stream()
+                                              .flatMap(rowIndex -> numbers.stream().map(columnIndex -> new Position(rowIndex, columnIndex)))
+                                              .collect(toList());
+
+    private static final Function<Integer, List<Position>> allPossiblePositions = listZeroTo.andThen(toPositions);
 
     public static final Function<Grid, Integer> extractSize = cellsExtractor.andThen(cellsSizeExtractor);
+    public static final Function<Grid, Numbers> allPossibleValues = extractSize.andThen(Ranges.setOneTo).andThen(Numbers::of);
 
     public static final Function<Grid, List<Zone>> rowsExtractor = cellsExtractor.andThen(identity()).andThen(cellsToZone);
     public static final Function<Grid, List<Zone>> columnsExtractor = cellsExtractor.andThen(rowsToColumns).andThen(cellsToZone);
@@ -56,13 +64,6 @@ public class GridExtractors {
 
     //TODO i don't like the fact that position is passed completely in rowExtractor and, then, rowExtractor is using only the rowIndex
     public static final BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
-
-    private static final Function<List<Integer>, List<Position>> toPositions =
-            (List<Integer> numbers) -> numbers.stream()
-                                              .flatMap(rowIndex -> numbers.stream().map(columnIndex -> new Position(rowIndex, columnIndex)))
-                                              .collect(toList());
-
-    private static final Function<Integer, List<Position>> allPossiblePositions = listZeroTo.andThen(toPositions);
 
     public static final Function<Grid, List<Position>> extractAllPossiblePositions = extractSize.andThen(allPossiblePositions);
 }

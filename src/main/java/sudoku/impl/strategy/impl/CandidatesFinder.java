@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 import static sudoku.impl.extractors.CellExtractors.valueExtractor;
 import static sudoku.impl.extractors.NumbersOperators.difference;
 import static sudoku.impl.extractors.NumbersOperators.sum;
-import static sudoku.impl.extractors.NumbersExtractor.allPossibleValues;
-import static sudoku.impl.extractors.NumbersExtractor.valuesAlreadyPresent;
+import static sudoku.impl.extractors.GridExtractors.allPossibleValues;
+import static sudoku.impl.extractors.ZoneExtractor.valuesAlreadyPresent;
 import static sudoku.impl.extractors.GridExtractors.*;
 import static sudoku.impl.utilities.Optionals.valueIsPresent;
 
