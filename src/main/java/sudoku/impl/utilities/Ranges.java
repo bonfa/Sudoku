@@ -1,7 +1,5 @@
 package sudoku.impl.utilities;
 
-import sudoku.models.Numbers;
-
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -26,5 +24,4 @@ public class Ranges {
 
     public static final Function<Integer, List<Integer>> listZeroTo = rangeOfSize.andThen(toList);
     public static final Function<Integer, Set<Integer>> setOneTo = rangeClosedStartingFromOne.andThen(toSet);
-
 }
