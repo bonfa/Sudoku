@@ -9,8 +9,7 @@ import java.util.function.Function;
 import static sudoku.impl.extractors.GridExtractors.extractAllPossiblePositions;
 import static sudoku.impl.strategy.impl.CellWithSingleCandidate.getSolutionStep;
 
-public class SingleCellSolutionStrategy {
-
+public class SolutionStrategy {
     public static final Function<Grid, Optional<SolutionStep>> getFirstSolutionStep =
             (Grid grid) -> extractAllPossiblePositions.apply(grid)
                                                       .stream()
