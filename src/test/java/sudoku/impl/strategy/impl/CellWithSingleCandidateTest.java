@@ -1,9 +1,9 @@
 package sudoku.impl.strategy.impl;
 
 import org.junit.jupiter.api.Test;
-import sudoku.impl.models.SolutionStep;
-import sudoku.impl.models.Grid;
-import sudoku.impl.models.Position;
+import sudoku.models.SolutionStep;
+import sudoku.models.Grid;
+import sudoku.models.Position;
 
 import java.util.List;
 import java.util.Optional;

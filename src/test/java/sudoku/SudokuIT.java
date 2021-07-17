@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import sudoku.impl.SolutionStepFinder;
 import sudoku.impl.extractors.GridExtractors;
 import sudoku.impl.SolutionStepApplier;
-import sudoku.impl.models.Cell;
-import sudoku.impl.models.Grid;
+import sudoku.models.Cell;
+import sudoku.models.Grid;
 import sudoku.impl.strategy.factory.StrategyFactory;
-import sudoku.impl.models.SolutionStep;
+import sudoku.models.SolutionStep;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,4 +1,4 @@
-package sudoku.impl.models;
+package sudoku.models;
 
 public class Position {
     public final int rowIndex;

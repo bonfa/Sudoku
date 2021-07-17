@@ -1,9 +1,9 @@
 package sudoku.impl.strategy.impl;
 
-import sudoku.impl.models.Grid;
-import sudoku.impl.models.Numbers;
-import sudoku.impl.models.Position;
-import sudoku.impl.models.SolutionStep;
+import sudoku.models.Grid;
+import sudoku.models.Numbers;
+import sudoku.models.Position;
+import sudoku.models.SolutionStep;
 
 import java.util.Optional;
 import java.util.Set;

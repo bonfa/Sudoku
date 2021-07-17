@@ -1,6 +1,6 @@
 package sudoku.impl.extractors;
 
-import sudoku.impl.models.*;
+import sudoku.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 import static sudoku.impl.extractors.SquareNumberMap.squareMapping;
+import static sudoku.impl.utilities.Ranges.zeroBasedRangeClosed;
 
 public class GridExtractors {
     private static final Function<List<List<Cell>>, List<Zone>> cellsToZone = cells -> cells.stream().map(Zone::new).collect(toList());
@@ -56,12 +57,12 @@ public class GridExtractors {
     //TODO i don't like the fact that position is passed completely in rowExtractor and, then, rowExtractor is using only the rowIndex
     public static final BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
 
-    private static final Function<Integer, List<Position>> allPossiblePositions =
-            (Integer dimension) -> IntStream.range(0, dimension).boxed()
-                                            .flatMap(rowIndex -> IntStream.range(0, dimension)
-                                                                          .boxed()
-                                                                          .map(columnIndex -> new Position(rowIndex,
-                                                                                                           columnIndex)))
-                                            .collect(toList());
+    private static final Function<List<Integer>, List<Position>> toPositions =
+            (List<Integer> numbers) -> numbers.stream()
+                                              .flatMap(rowIndex -> numbers.stream().map(columnIndex -> new Position(rowIndex, columnIndex)))
+                                              .collect(toList());
+
+    private static final Function<Integer, List<Position>> allPossiblePositions = zeroBasedRangeClosed.andThen(toPositions);
+
     public static final Function<Grid, List<Position>> extractAllPossiblePositions = extractSize.andThen(allPossiblePositions);
 }

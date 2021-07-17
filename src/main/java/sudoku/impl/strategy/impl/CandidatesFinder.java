@@ -1,8 +1,8 @@
 package sudoku.impl.strategy.impl;
 
-import sudoku.impl.models.Grid;
-import sudoku.impl.models.Numbers;
-import sudoku.impl.models.Position;
+import sudoku.models.Grid;
+import sudoku.models.Numbers;
+import sudoku.models.Position;
 
 import java.util.function.BiFunction;
 import java.util.stream.Stream;

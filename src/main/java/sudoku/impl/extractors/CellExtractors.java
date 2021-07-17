@@ -1,6 +1,6 @@
 package sudoku.impl.extractors;
 
-import sudoku.impl.models.Cell;
+import sudoku.models.Cell;
 
 import java.util.Optional;
 import java.util.function.Function;

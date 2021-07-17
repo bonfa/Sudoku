@@ -1,4 +1,4 @@
-package sudoku.impl.models;
+package sudoku.models;
 
 //TODO improve this one
 public class SolutionStep {

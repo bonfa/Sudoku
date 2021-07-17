@@ -1,6 +1,6 @@
 package sudoku.impl.extractors;
 
-import sudoku.impl.models.Numbers;
+import sudoku.models.Numbers;
 
 import java.util.HashSet;
 import java.util.Set;

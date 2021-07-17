@@ -1,6 +1,6 @@
 package sudoku.impl.extractors;
 
-import sudoku.impl.models.Position;
+import sudoku.models.Position;
 
 import java.util.function.BiFunction;
 

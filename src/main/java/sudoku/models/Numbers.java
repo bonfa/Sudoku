@@ -1,4 +1,4 @@
-package sudoku.impl.models;
+package sudoku.models;
 
 import java.util.Collections;
 import java.util.Set;

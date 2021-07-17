@@ -3,9 +3,9 @@ package sudoku;
 import org.junit.jupiter.api.Test;
 import sudoku.impl.SolutionStepApplier;
 import sudoku.impl.SolutionStepFinder;
-import sudoku.impl.models.Grid;
-import sudoku.impl.models.Position;
-import sudoku.impl.models.SolutionStep;
+import sudoku.models.Grid;
+import sudoku.models.Position;
+import sudoku.models.SolutionStep;
 
 import java.util.List;
 import java.util.Optional;
