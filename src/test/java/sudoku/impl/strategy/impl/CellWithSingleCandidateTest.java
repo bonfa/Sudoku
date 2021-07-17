@@ -10,10 +10,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static sudoku.impl.strategy.TestUtilities.*;
+import static sudoku.impl.strategy.impl.CellWithSingleCandidate.getSolutionStep;
 
 class CellWithSingleCandidateTest {
-
-    private final CellWithSingleCandidate strategy = new CellWithSingleCandidate(new CandidatesFinder());
 
     @Test
     void singleCellMissingInRow() {
@@ -22,7 +21,7 @@ class CellWithSingleCandidateTest {
                              List.of("-", "-", "-", "-"),
                              List.of("-", "-", "-", "-"));
 
-        Optional<SolutionStep> solutionStepFor = strategy.apply(grid, new Position(0, 2));
+        Optional<SolutionStep> solutionStepFor = getSolutionStep.apply(grid, new Position(0, 2));
 
         assertTrue(solutionStepFor.isPresent());
         assertEquals(3, solutionStepFor.get().value);
@@ -35,7 +34,7 @@ class CellWithSingleCandidateTest {
                              List.of("3", "-", "-", "-"),
                              List.of("4", "-", "-", "-"));
 
-        Optional<SolutionStep> solutionStepFor = strategy.apply(grid, new Position(1, 0));
+        Optional<SolutionStep> solutionStepFor = getSolutionStep.apply(grid, new Position(1, 0));
 
         assertTrue(solutionStepFor.isPresent());
         assertEquals(2, solutionStepFor.get().value);
@@ -48,7 +47,7 @@ class CellWithSingleCandidateTest {
                              List.of("-", "-", "-", "-"),
                              List.of("-", "-", "-", "-"));
 
-        Optional<SolutionStep> solutionStepFor = strategy.apply(grid, new Position(0, 0));
+        Optional<SolutionStep> solutionStepFor = getSolutionStep.apply(grid, new Position(0, 0));
 
         assertTrue(solutionStepFor.isPresent());
         assertEquals(1, solutionStepFor.get().value);
@@ -61,7 +60,7 @@ class CellWithSingleCandidateTest {
                              List.of("-", "4", "-", "3"),
                              List.of("2", "-", "1", "-"));
 
-        Optional<SolutionStep> solutionStepFor = strategy.apply(grid, new Position(0, 1));
+        Optional<SolutionStep> solutionStepFor = getSolutionStep.apply(grid, new Position(0, 1));
 
         assertTrue(solutionStepFor.isPresent());
         assertEquals(2, solutionStepFor.get().value);
@@ -74,7 +73,7 @@ class CellWithSingleCandidateTest {
                              List.of("-", "4", "-", "3"),
                              List.of("2", "-", "1", "-"));
 
-        Optional<SolutionStep> solutionStepFor = strategy.apply(grid, new Position(0, 1));
+        Optional<SolutionStep> solutionStepFor = getSolutionStep.apply(grid, new Position(0, 1));
 
         assertFalse(solutionStepFor.isPresent());
     }

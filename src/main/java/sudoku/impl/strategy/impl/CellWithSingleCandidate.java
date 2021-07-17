@@ -10,24 +10,24 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
+import static sudoku.impl.strategy.impl.CandidatesFinder.*;
 import static sudoku.impl.utilities.Sets.hasSize;
 
-public class CellWithSingleCandidate implements BiFunction<Grid, Position, Optional<SolutionStep>> {
+public class CellWithSingleCandidate {
 
     private static final Predicate<Set> HAS_SIZE_ONE = hasSize.apply(1);
 
-    private final BiFunction<Grid, Position, Numbers> candidatesFinder;
+    public static BiFunction<Grid, Position, Optional<SolutionStep>> getSolutionStep = (Grid grid, Position position) -> {
+        Numbers candidates = candidatesFinder.apply(grid, position);
 
-    public CellWithSingleCandidate(BiFunction<Grid, Position, Numbers> candidatesFinder) {
-        this.candidatesFinder = candidatesFinder;
-    }
+        return getSolutionStep(position, candidates);
+    };
 
-    @Override
-    public Optional<SolutionStep> apply(Grid grid, Position position) {
-        Set<Integer> candidates = candidatesFinder.andThen(Numbers::getValues).apply(grid, position);
+    private static Optional<SolutionStep> getSolutionStep(Position position, Numbers candidates) {
+        var numbers = candidates.getValues();
 
-        if (HAS_SIZE_ONE.test(candidates))
-            return candidates.stream().findFirst().map(value -> new SolutionStep(position, value));
+        if (HAS_SIZE_ONE.test(numbers))
+            return numbers.stream().findFirst().map(value -> new SolutionStep(position, value));
 
         return Optional.empty();
     }

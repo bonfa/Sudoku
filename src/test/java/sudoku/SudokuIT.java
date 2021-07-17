@@ -131,7 +131,7 @@ class SudokuIT {
     }
 
     private void assertGridEquals(Grid first, Grid second) {
-        assertEquals(GridExtractors.sizeExtractor.apply(first), GridExtractors.sizeExtractor.apply(second));
+        assertEquals(GridExtractors.extractSize.apply(first), GridExtractors.extractSize.apply(second));
         assertCellsEquals(first.cells, second.cells);
     }
 

@@ -15,29 +15,28 @@ import static sudoku.impl.extractors.NumbersExtractor.valuesAlreadyPresent;
 import static sudoku.impl.extractors.GridExtractors.*;
 import static sudoku.impl.utilities.Optionals.valueIsPresent;
 
-public class CandidatesFinder implements BiFunction<Grid, Position, Numbers> {
+public class CandidatesFinder {
 
-    private final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInRow = rowExtractor.andThen(valuesAlreadyPresent);
-    private final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInColumn = columnExtractor.andThen(valuesAlreadyPresent);
-    private final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInSquare = squareExtractor.andThen(valuesAlreadyPresent);
+    private static final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInRow = rowExtractor.andThen(valuesAlreadyPresent);
+    private static final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInColumn = columnExtractor.andThen(valuesAlreadyPresent);
+    private static final BiFunction<Grid, Position, Numbers> valuesAlreadyPresentInSquare = squareExtractor.andThen(valuesAlreadyPresent);
 
-    @Override
-    public Numbers apply(Grid grid, Position position) {
-        return valueIsPresent.test(cellExtractor.andThen(valueExtractor).apply(grid, position)) ?
-                Numbers.empty() :
-                difference(allPossibleValues(), valuesAlreadyPresent()).apply(grid, position);
-    }
+    public static BiFunction<Grid, Position, Numbers> candidatesFinder =
+            (Grid grid, Position position) ->
+                    valueIsPresent.test(cellExtractor.andThen(valueExtractor).apply(grid, position)) ?
+                            Numbers.empty() :
+                            difference(allPossibleValues(), valuesAlreadyPresent()).apply(grid, position);
 
-    private BiFunction<Grid, Position, Numbers> difference(BiFunction<Grid, Position, Numbers> allPossibleValues, BiFunction<Grid, Position, Numbers> valuesAlreadyPresent) {
+    private static BiFunction<Grid, Position, Numbers> difference(BiFunction<Grid, Position, Numbers> allPossibleValues, BiFunction<Grid, Position, Numbers> valuesAlreadyPresent) {
         return (grid, position) -> difference.apply(allPossibleValues.apply(grid, position),
                                                     valuesAlreadyPresent.apply(grid, position));
     }
 
-    private BiFunction<Grid, Position, Numbers> allPossibleValues() {
+    private static BiFunction<Grid, Position, Numbers> allPossibleValues() {
         return (grid, position) -> allPossibleValues.apply(grid);
     }
 
-    private BiFunction<Grid, Position, Numbers> valuesAlreadyPresent() {
+    private static BiFunction<Grid, Position, Numbers> valuesAlreadyPresent() {
         return Stream.of(valuesAlreadyPresentInRow,
                          valuesAlreadyPresentInColumn,
                          valuesAlreadyPresentInSquare)

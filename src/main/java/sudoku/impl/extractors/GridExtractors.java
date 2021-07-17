@@ -43,7 +43,7 @@ public class GridExtractors {
     };
 
 
-    public static final Function<Grid, Integer> sizeExtractor = cellsExtractor.andThen(cellsSizeExtractor);
+    public static final Function<Grid, Integer> extractSize = cellsExtractor.andThen(cellsSizeExtractor);
 
     public static final Function<Grid, List<Zone>> rowsExtractor = cellsExtractor.andThen(identity()).andThen(cellsToZone);
     public static final Function<Grid, List<Zone>> columnsExtractor = cellsExtractor.andThen(rowsToColumns).andThen(cellsToZone);
@@ -51,7 +51,7 @@ public class GridExtractors {
 
     public static final BiFunction<Grid, Position, Zone> rowExtractor = (grid, position) -> rowsExtractor.apply(grid).get(position.rowIndex);
     public static final BiFunction<Grid, Position, Zone> columnExtractor = (grid, position) -> columnsExtractor.apply(grid).get(position.columnIndex);
-    public static final BiFunction<Grid, Position, Zone> squareExtractor = (grid, position) -> squaresExtractor.apply(grid).get(squareMapping.apply(sizeExtractor.apply(grid), position));
+    public static final BiFunction<Grid, Position, Zone> squareExtractor = (grid, position) -> squaresExtractor.apply(grid).get(squareMapping.apply(extractSize.apply(grid), position));
 
     //TODO i don't like the fact that position is passed completely in rowExtractor and, then, rowExtractor is using only the rowIndex
     public static final BiFunction<Grid, Position, Cell> cellExtractor = (grid, position) -> rowExtractor.apply(grid, position).cells.get(position.columnIndex);
