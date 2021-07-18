@@ -5,14 +5,9 @@ import sudoku.models.SolutionStep;
 
 import java.util.function.BiFunction;
 
-import static sudoku.impl.extractors.GridExtractors.*;
+import static sudoku.impl.extractors.GridOperators.updateGrid2;
 
 public class SolutionStepApplier {
-    //FIXME remove the side effect
     public static final BiFunction<Grid, SolutionStep, Grid> solutionStepApplier =
-            (Grid grid, SolutionStep solutionStep) -> {
-                cellExtractor.apply(grid, solutionStep.position).setValue(solutionStep.value);
-
-                return grid;
-            };
+            (Grid grid, SolutionStep solutionStep) -> updateGrid2.apply(grid).apply(solutionStep);
 }

@@ -17,7 +17,7 @@ import static sudoku.impl.utilities.Ranges.listZeroTo;
 
 public class GridExtractors {
     private static final Function<List<List<Cell>>, List<Zone>> cellsToZone = cells -> cells.stream().map(Zone::new).collect(toList());
-    private static final Function<Grid, List<List<Cell>>> cellsExtractor = grid -> grid.cells;
+    public static final Function<Grid, List<List<Cell>>> extractCells = grid -> grid.cells;
     private static final Function<Zone, List<Cell>> zoneToCells = zone -> zone.cells;
     private static final Function<List<Zone>, List<List<Cell>>> zonesToCells = zones -> zones.stream().map(zoneToCells).collect(toList());
     private static final Function<List<List<Cell>>, Integer> cellsSizeExtractor = List::size;
@@ -51,12 +51,12 @@ public class GridExtractors {
 
     private static final Function<Integer, List<Position>> allPossiblePositions = listZeroTo.andThen(toPositions);
 
-    public static final Function<Grid, Integer> extractSize = cellsExtractor.andThen(cellsSizeExtractor);
+    public static final Function<Grid, Integer> extractSize = extractCells.andThen(cellsSizeExtractor);
     public static final Function<Grid, Numbers> allPossibleValues = extractSize.andThen(Ranges.setOneTo).andThen(Numbers::of);
 
-    public static final Function<Grid, List<Zone>> rowsExtractor = cellsExtractor.andThen(identity()).andThen(cellsToZone);
-    public static final Function<Grid, List<Zone>> columnsExtractor = cellsExtractor.andThen(rowsToColumns).andThen(cellsToZone);
-    public static final Function<Grid, List<Zone>> squaresExtractor = cellsExtractor.andThen(rowsToSquares).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> rowsExtractor = extractCells.andThen(identity()).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> columnsExtractor = extractCells.andThen(rowsToColumns).andThen(cellsToZone);
+    public static final Function<Grid, List<Zone>> squaresExtractor = extractCells.andThen(rowsToSquares).andThen(cellsToZone);
 
     public static final BiFunction<Grid, Position, Zone> rowExtractor = (grid, position) -> rowsExtractor.apply(grid).get(position.rowIndex);
     public static final BiFunction<Grid, Position, Zone> columnExtractor = (grid, position) -> columnsExtractor.apply(grid).get(position.columnIndex);
