@@ -7,11 +7,12 @@ import java.util.function.BiFunction;
 
 import static sudoku.impl.extractors.GridExtractors.*;
 
-public class SolutionStepApplier implements BiFunction<Grid, SolutionStep, Grid> {
-    @Override
-    public Grid apply(Grid grid, SolutionStep solutionStep) {
-        cellExtractor.apply(grid, solutionStep.position).setValue(solutionStep.value);
+public class SolutionStepApplier {
+    //FIXME remove the side effect
+    public static final BiFunction<Grid, SolutionStep, Grid> solutionStepApplier =
+            (Grid grid, SolutionStep solutionStep) -> {
+                cellExtractor.apply(grid, solutionStep.position).setValue(solutionStep.value);
 
-        return grid;
-    }
+                return grid;
+            };
 }

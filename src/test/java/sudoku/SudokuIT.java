@@ -2,22 +2,20 @@ package sudoku;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import sudoku.impl.SolutionStepApplier;
 import sudoku.impl.extractors.GridExtractors;
 import sudoku.models.Cell;
 import sudoku.models.Grid;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static sudoku.impl.strategy.TestUtilities.gridWith;
 
 class SudokuIT {
-
-    private final SolutionStepApplier solutionStepApplier = new SolutionStepApplier();
-    private final Sudoku sudoku = new Sudoku(solutionStepApplier);
+    private final UnaryOperator<Grid> sudoku = Sudoku.sudoku;
 
     @Test
     void solve_4x4() {
