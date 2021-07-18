@@ -10,6 +10,6 @@ import static sudoku.impl.strategy.SolutionStrategy.getFirstSolutionStep;
 public class Sudoku {
     public static final UnaryOperator<Grid> sudoku =
             (Grid grid) -> getFirstSolutionStep.apply(grid)
-                                               .map(s -> solutionStepApplier.apply(grid, s))
+                                               .map(solutionStep -> solutionStepApplier.apply(grid, solutionStep))
                                                .orElse(grid); //TODO for the moment, if no strategy can be applied, the same input grid is returned. Evaluate if it is necessary to change this behavior in the future
 }
