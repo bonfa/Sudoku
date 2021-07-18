@@ -29,16 +29,11 @@ public class GridOperators {
                 return copy;
             };
 
-    private static final Function<Function<Cell, List<List<Cell>>>, Function<Cell, Grid>> functionFunctionFunction = newCells -> newCells.andThen(Grid::new);
-
-    private static final Function<Grid, Function<Cell, Grid>> updateGrid =
-            extractCells.andThen(setCell)
-                        .andThen(functionFunctionFunction);
-
     private static final Function<SolutionStep, Cell> solutionStepToCell =
             (SolutionStep solutionStep) -> Cell.cellWithValue(solutionStep.value, solutionStep.position);
 
-    public static final Function<Grid, Function<SolutionStep, Grid>> updateGrid2 =
-            updateGrid.andThen(solutionStepToCell::andThen);
-
-    }
+    public static final Function<Grid, Function<SolutionStep, Grid>> updateGrid =
+            extractCells.andThen(setCell)
+                        .andThen(cellListFunction -> cellListFunction.andThen(Grid::new))
+                        .andThen(gridFunction -> gridFunction.compose(solutionStepToCell));
+}
